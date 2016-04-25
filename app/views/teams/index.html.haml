@@ -1,0 +1,8 @@
+- if @teams.nil?
+  Please teams
+- else
+  %ul
+  - @teams.each do |team|
+    %li= team.team
+
+= link_to "Create Teams", teams_path(), :method => :post
