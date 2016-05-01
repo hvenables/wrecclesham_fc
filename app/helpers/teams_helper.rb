@@ -16,10 +16,6 @@ module TeamsHelper
     end
   end
 
-  def shout
-    p "hello"
-  end
-
   def update_teams(table, current_league)
     table.each do |team|
       current_team = Team.find_by(team: team[0])

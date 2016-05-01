@@ -53,3 +53,4 @@
 
 = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_teams_path(@league_table), :method => :post
 
+= link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"

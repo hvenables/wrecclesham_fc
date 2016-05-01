@@ -22,10 +22,20 @@ class LeagueTablesController < ApplicationController
     @years = show_year(@league_table.year)
   end
 
+  def destroy
+    @league_table = LeagueTable.find(params[:id])
+    if @league_table.destroy
+      flash[:notice] = "League Table has been destroyed"
+    else
+      flash[:error] = "League cant be destroyed"
+    end
+    redirect_to league_tables_path
+  end
+
   private
 
   def league_table_params
-    params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url)
+    params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url, :fixture_url)
   end
 
   def show_year(year)

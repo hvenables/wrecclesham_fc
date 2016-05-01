@@ -4,8 +4,9 @@ require 'nokogiri'
 class Team < ApplicationRecord
   # has_many :players
   belongs_to :league_table
+  belongs_to :fixture
 
-  def self.get_table_data(url)
+  def self.get_team_data(url)
     doc = Nokogiri::HTML(open(url)) do |config|
         config.noblanks
     end

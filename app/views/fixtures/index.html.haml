@@ -1,0 +1,9 @@
+- if @fixtures.nil?
+  Please Add fixtures
+- else
+  %ul
+    - @fixtures.each do |fixture|
+      %li
+        = "#{fixture.date} - #{fixture.home} #{fixture.home_score} - #{fixture.away_score} #{fixture.away}"
+
+= link_to "Add Fixtures", league_table_fixtures_path(), method: :post

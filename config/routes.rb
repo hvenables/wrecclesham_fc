@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   # Serve websocket cable requests in-process
   # mount ActionCable.server => '/cable'
+
+  resource :welocome, only: :index
+
   resources :league_tables do
     resources :teams
+    resources :fixtures
   end
 end

@@ -12,10 +12,10 @@ class TeamsController < ApplicationController
   end
 
   def create
-    if @league_table.teams.nil?
-      create_teams(Team.get_table_data(@league_table.url), params[:league_table_id])
+    if @league_table.teams.empty?
+      create_teams(Team.get_team_data(@league_table.url), params[:league_table_id])
     else
-      update_teams(Team.get_table_data(@league_table.url), params[:league_table_id])
+      update_teams(Team.get_team_data(@league_table.url), params[:league_table_id])
     end
     redirect_to league_table_path(@league_table)
   end

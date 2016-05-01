@@ -11,19 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424220158) do
+ActiveRecord::Schema.define(version: 20160501203446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fixtures", force: :cascade do |t|
+    t.date     "date"
+    t.string   "home"
+    t.string   "away"
+    t.string   "home_score"
+    t.string   "away_score"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "league_table_id"
+  end
+
+  add_index "fixtures", ["league_table_id"], name: "index_fixtures_on_league_table_id", using: :btree
 
   create_table "league_tables", force: :cascade do |t|
     t.integer  "year"
     t.string   "name"
     t.integer  "promoted"
     t.integer  "relegated"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "url"
+    t.string   "fixture_url"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -43,5 +57,6 @@ ActiveRecord::Schema.define(version: 20160424220158) do
 
   add_index "teams", ["league_table_id"], name: "index_teams_on_league_table_id", using: :btree
 
+  add_foreign_key "fixtures", "league_tables"
   add_foreign_key "teams", "league_tables"
 end
