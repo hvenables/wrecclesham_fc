@@ -1,0 +1,22 @@
+.topbar {
+  height: 150px;
+  background-color: #000000;
+  .container ul li .nav-link {
+    padding-bottom: 0px;
+  }
+}
+
+.logo {
+  background-color: white;
+  border-radius: 100px;
+  padding: -10px;
+}
+.join {
+  padding-bottom: 2px;
+  margin-left: 10px;
+  border-bottom: 2px solid white;
+  &:hover {
+    padding-bottom: 0px;
+    border-bottom: 5px solid white;
+  }
+}

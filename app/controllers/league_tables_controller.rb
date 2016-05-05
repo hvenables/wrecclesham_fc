@@ -1,4 +1,6 @@
 class LeagueTablesController < ApplicationController
+  before_action :load_league
+
   def index
     @league_tables = LeagueTable.all
   end
@@ -35,7 +37,7 @@ class LeagueTablesController < ApplicationController
   private
 
   def league_table_params
-    params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url, :fixture_url)
+    params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url, :fixture_url, :number_of_teams)
   end
 
   def show_year(year)

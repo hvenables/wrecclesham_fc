@@ -1,0 +1,13 @@
+.topbar
+  %nav.navbar.navbar-dark.topbar
+    .container
+      = image_tag('transparent_logo.png', class: 'logo navbar-brand', size: '130')
+      %ul.nav.navbar-nav.pull-xs-right
+        - if user_signed_in?
+          %li.nav-item.join.log-in
+            = link_to "Sign out", destroy_user_session_path, {method: :delete, class: "nav-link"}
+        - else
+          %li.nav-item.join.log-in
+            = link_to "Log in", new_user_session_path, {class: "nav-link"}
+          %li.nav-item.join.sign-up
+            = link_to "Sign up", new_user_registration_path, {class: "nav-link"}

@@ -1,56 +1,57 @@
-%h2
-  = @league_table.name + " - " + @years
 
-- if @league_table.teams.any?
-  %table.table
-    %thead.thead-inverse
-      %tr
-        %th
-          Pos
-        %th
-          Team
-        %th
-          Played
-        %th
-          Won
-        %th
-          Drawn
-        %th
-          Lost
-        %th
-          For
-        %th
-          Against
-        %th
-          Difference
-        %th
-          Points
-    %tbody
-      - @teams.each_with_index do |team, index|
+.container
+  %h2
+    = @league_table.name + " - " + @years
+  - if @league_table.teams.any?
+    %table.table
+      %thead.thead-inverse
         %tr
-          %td{ scope: 'row' }
-            = index + 1
-          %td
-            = team.team
-          %td
-            = team.games
-          %td
-            = team.won
-          %td
-            = team.drawn
-          %td
-            = team.lost
-          %td
-            = team.goals_for
-          %td
-            = team.goals_against
-          %td
-            = team.goal_difference
-          %td
-            = team.points
-- else
-  Add teams to the league
+          %th
+            Pos
+          %th
+            Team
+          %th
+            Played
+          %th
+            Won
+          %th
+            Drawn
+          %th
+            Lost
+          %th
+            For
+          %th
+            Against
+          %th
+            Difference
+          %th
+            Points
+      %tbody
+        - @teams.each_with_index do |team, index|
+          %tr
+            %td{ scope: 'row' }
+              = index + 1
+            %td
+              = team.team
+            %td
+              = team.games
+            %td
+              = team.won
+            %td
+              = team.drawn
+            %td
+              = team.lost
+            %td
+              = team.goals_for
+            %td
+              = team.goals_against
+            %td
+              = team.goal_difference
+            %td
+              = team.points
+  - else
+    Add teams to the league
 
-= link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_teams_path(@league_table), :method => :post
+  = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_teams_path(@league_table), :method => :post
 
-= link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"
+  = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"

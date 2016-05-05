@@ -1,0 +1,27 @@
+%nav.navbar.navbar-light.main-menu{:role => "navigation", :style => "background-color: #FC6E0A;"}
+  %button.navbar-toggler.hidden-sm-up.pull-xs-right{"data-target" => "#collapsing-navbar", "data-toggle" => "collapse", :type => "button"}
+    \☰
+  .container
+    %a.navbar-brand{:href => "#"} Wrecclesham FC
+    .container.collapse.navbar-toggleable-xs#collapsing-navbar
+      %ul.nav.navbar-nav
+        %li.nav-item.pull-xs-right.pull-sm-left{:class => active_class(root_path())}
+          = link_to 'Home', root_path, {class: 'nav-link'}
+        %li.nav-item.pull-xs-right.pull-sm-left
+          %a.nav-link{:href => "#"} News
+        %li.nav-item.pull-xs-right.pull-sm-left
+          %a.nav-link{:href => "#"} About
+        %li.nav-item.pull-xs-right.pull-sm-left
+          %a.nav-link{:href => "#"} Videos
+        %li.nav-item{:class => "#{active_class(league_table_path(@first_team_table))} #{active_class(league_table_path(@reserve_team_table))} pull-xs-right pull-sm-left dropdown"}
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} League Tables
+          .dropdown-menu
+            = link_to 'First Team', league_table_path(@first_team_table), {class: 'dropdown-item'}
+            = link_to 'Reserve Team', league_table_path(@reserve_team_table), {class: 'dropdown-item'}
+            .dropdown-divider
+            = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
+        %li.nav-item.pull-xs-right.pull-sm-left
+          %a.nav-link{:href => "#"} Fixtures
+        %li.nav-item.pull-xs-right.pull-sm-left
+          %a.nav-link{:href => "#"} Players
+.container.top-ad

@@ -2,8 +2,8 @@ require 'open-uri'
 require 'nokogiri'
 
 class Fixture < ApplicationRecord
-  belongs_to :league_table
-  has_many :teams
+  # belongs_to :league_table
+  # has_many :teams
 
   MONTHS = ['9', '10', '11', '12', '1', '2', '3', '4']
 
@@ -24,7 +24,6 @@ class Fixture < ApplicationRecord
   private
 
   class << self
-
     def all_url(url)
       urls = []
       MONTHS.each do |month|
@@ -35,11 +34,9 @@ class Fixture < ApplicationRecord
 
     def raw_text(doc)
       scores = []
-
       doc.css('table.white').css('span').each do |score|
         scores << score.text
       end
-
       format_text(scores)
     end
 
@@ -91,12 +88,9 @@ class Fixture < ApplicationRecord
         second_counter += 1
         week.each_with_index do |score|
           if third_counter > 0
-            # require 'pry'; binding.pry
             @temp_score << score
             third_counter -= 1
           elsif /^[0-9]{1,45}$/.match(score) || /^[-]{1}$/.match(score) || /^[H]{1}$/.match(score)
-            # require 'pry'; binding.pry
-
             formatted_score[second_counter] << @temp_score if defined? @temp_score
             third_counter += 4
             @temp_score = []
@@ -104,7 +98,6 @@ class Fixture < ApplicationRecord
           end
         end
       end
-
       formatted_score
     end
   end

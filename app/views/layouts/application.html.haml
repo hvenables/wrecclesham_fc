@@ -8,5 +8,9 @@
     %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css", :integrity => "sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd", :rel => "stylesheet"}/
     %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity: "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin: "anonymous"}
   %body
-    .container
+    = render 'layouts/topbar'
+    = render 'layouts/navbar'
+    .container.center-panel
+      = alert
+      = notice
       = yield
