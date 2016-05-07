@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/hvenables/wrecclesham_fc.svg?branch=develop)](https://travis-ci.org/hvenables/wrecclesham_fc)
-
 [![Build Status](https://travis-ci.org/hvenables/wrecclesham_fc.svg?branch=master)](https://travis-ci.org/hvenables/wrecclesham_fc)
 
 
