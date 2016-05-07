@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resource :welocome, only: :index
 
+  resources :news
+
   resources :league_tables do
     resources :teams
     resources :fixtures

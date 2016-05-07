@@ -1,0 +1,7 @@
+.news
+  - if @news.any?
+    - @news.each do |news|
+      = news.title
+      = news.content
+  - else
+    = "No news has been add yet"
