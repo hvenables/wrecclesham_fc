@@ -23,10 +23,8 @@ describe TeamsHelper do
     let!(:farnham) { create :team, team: 'UFC Farnham' }
     scenario 'will update a team in the db' do
       table_data = [["UFC Farnham", "18", "13", "2", "3", "67", "31", "+36    ", "41"]]
-      binding.pry
       update_teams(table_data, league_table.id)
       ufc_farnham = Team.first
-      binding.pry
       expect(ufc_farnham.team).to eq 'UFC Farnham'
       expect(ufc_farnham.games).to eq 18
       expect(ufc_farnham.won).to eq 13
