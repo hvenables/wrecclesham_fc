@@ -10,11 +10,12 @@ GIT
       warden (~> 1.2.3)
 
 GIT
-  remote: git://github.com/thoughtbot/factory_girl.git
-  revision: f1ed05d4be99835a922cada3baed4a529a41f52c
+  remote: git://github.com/thoughtbot/factory_girl_rails.git
+  revision: 28746a7866ef5b2d04acedc67546abf69550c11e
   specs:
-    factory_girl (4.7.0)
-      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -82,6 +83,8 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.6.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -240,7 +243,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise!
   erb2haml (~> 0.1.5)
-  factory_girl!
+  factory_girl_rails!
   haml-rails (~> 0.9.0)
   jbuilder (~> 2.0)
   jquery-rails
