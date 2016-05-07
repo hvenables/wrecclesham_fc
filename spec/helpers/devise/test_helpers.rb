@@ -1,5 +1,5 @@
 
-module Devise::TestHelpers
+module DeviseTestHelpers
 
   def sign_up(user)
     visit('/')
