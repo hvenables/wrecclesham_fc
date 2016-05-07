@@ -13,13 +13,15 @@
           %a.nav-link{:href => "#"} About
         %li.nav-item.pull-xs-right.pull-sm-left
           %a.nav-link{:href => "#"} Videos
-        %li.nav-item{:class => "#{active_class(league_table_path(@first_team_table))} #{active_class(league_table_path(@reserve_team_table))} pull-xs-right pull-sm-left dropdown"}
-          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} League Tables
-          .dropdown-menu
-            = link_to 'First Team', league_table_path(@first_team_table), {class: 'dropdown-item'}
-            = link_to 'Reserve Team', league_table_path(@reserve_team_table), {class: 'dropdown-item'}
-            .dropdown-divider
-            = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
+        - if @first_team_table && @reserve_team_table
+          %li.nav-item{:class => "#{active_class(league_table_path(@first_team_table))} #{active_class(league_table_path(@reserve_team_table))} pull-xs-right pull-sm-left dropdown"}
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} League Tables
+            .dropdown-menu
+              = link_to 'First Team', league_table_path(@first_team_table), {class: 'dropdown-item'}
+              = link_to 'Reserve Team', league_table_path(@reserve_team_table), {class: 'dropdown-item'}
+              -if current_user&.admin?
+                .dropdown-divider
+                = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
         %li.nav-item.pull-xs-right.pull-sm-left
           %a.nav-link{:href => "#"} Fixtures
         %li.nav-item.pull-xs-right.pull-sm-left

@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   private
 
   def load_league
-    @first_team_table = LeagueTable.find(1)
-    @reserve_team_table = LeagueTable.find(2)
+    @first_team_table = LeagueTable.find_by(id: 1)
+    @reserve_team_table = LeagueTable.find_by(id: 2)
   end
 
 end

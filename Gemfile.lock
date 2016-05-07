@@ -9,6 +9,13 @@ GIT
       responders
       warden (~> 1.2.3)
 
+GIT
+  remote: git://github.com/thoughtbot/factory_girl.git
+  revision: f1ed05d4be99835a922cada3baed4a529a41f52c
+  specs:
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -233,6 +240,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise!
   erb2haml (~> 0.1.5)
+  factory_girl!
   haml-rails (~> 0.9.0)
   jbuilder (~> 2.0)
   jquery-rails

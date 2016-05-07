@@ -57,6 +57,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
   gem 'shoulda'
+  gem 'factory_girl', :github => 'thoughtbot/factory_girl'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
