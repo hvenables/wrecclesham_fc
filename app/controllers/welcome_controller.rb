@@ -3,7 +3,6 @@ class WelcomeController < ApplicationController
   before_action :load_fixtures, only: :index
 
   def index
-
   end
 
   private
