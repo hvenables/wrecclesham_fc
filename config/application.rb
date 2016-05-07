@@ -23,3 +23,7 @@ module WreccleshamFc
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+WreccleshamFc::Application.configure do
+  config.assets << Rails.root.join("app", "services")
+end

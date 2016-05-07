@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   before_action :load_fixtures, only: :index
 
   def index
+    LeagueTableScrapper.new.hello
   end
 
   private

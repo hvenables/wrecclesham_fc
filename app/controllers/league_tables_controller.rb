@@ -1,5 +1,4 @@
 class LeagueTablesController < ApplicationController
-  before_action :load_league
 
   def index
     @league_tables = LeagueTable.all
