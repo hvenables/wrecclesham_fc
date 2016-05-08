@@ -18,7 +18,7 @@ module TeamsHelper
 
   def update_teams(table, current_league)
     table.each do |team|
-      current_team = Team.find_by(team: team[0])
+      current_team = Team.where("team = ? AND league_table_id = ?", team[0], current_league).first
       current_team.update!(
         team: team[0],
         games: team[1],

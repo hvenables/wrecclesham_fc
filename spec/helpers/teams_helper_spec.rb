@@ -20,7 +20,7 @@ describe TeamsHelper do
     end
   end
   context '#update_teams' do
-    let!(:farnham) { create :team, team: 'UFC Farnham' }
+    let!(:farnham) { create :team, team: 'UFC Farnham', league_table: league_table }
     scenario 'will update a team in the db' do
       table_data = [["UFC Farnham", "18", "13", "2", "3", "67", "31", "+36    ", "41"]]
       update_teams(table_data, league_table.id)
