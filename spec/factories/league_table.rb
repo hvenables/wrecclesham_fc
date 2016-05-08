@@ -7,5 +7,7 @@ FactoryGirl.define do
     url "MyString"
     fixture_url "MyString"
     number_of_teams 10
+    active_first_team_table false
+    active_reserve_team_table false
   end
 end
