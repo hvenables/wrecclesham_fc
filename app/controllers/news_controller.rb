@@ -4,17 +4,17 @@ class NewsController < ApplicationController
     @news = News.all
   end
 
-  def new
-    @news = News.new
-  end
-
   def show
     @news = News.find(params[:id])
   end
 
+  def new
+    @news = News.new
+  end
+
   def create
     @news = News.new(news_params)
-    if @news.save!
+    if @news.save
       flash[:notice] = "News story successfully published"
       redirect_to news_path(@news)
     else

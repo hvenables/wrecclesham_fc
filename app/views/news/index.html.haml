@@ -1,9 +1,17 @@
-.news
+.news.container
   - if current_user&.admin?
     = link_to 'Add news', new_news_path()
   - if @news.any?
-    - @news.each do |news|
-      = news.title
-      = news.summary
+    .row
+      .card-group
+        - @news.each do |news|
+          .card.col-xs-4.float-left.news-article
+            = image_tag('transparent_logo.png', class: 'img-fluid card-img-top')
+            .card-block
+              %h4.card-title
+                = news.title
+              %p.card-text
+                = news.summary
+              = link_to 'Read More', news_path(news), class: 'btn btn-primary'
   - else
     = "No news has been add yet"

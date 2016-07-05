@@ -1,15 +1,17 @@
 .topbar {
-  height: 150px;
-  background-color: #000000;
+  height: 60px;
+  background-color: #2B7522;
   .container ul li .nav-link {
     padding-bottom: 0px;
   }
 }
 
 .logo {
-  background-color: white;
-  border-radius: 100px;
-  padding: -10px;
+  max-width: 200px;
+  margin-right: 0px !important;
+  max-height: 105px;
+  z-index:1;
+  position:relative;
 }
 .join {
   padding-bottom: 2px;
