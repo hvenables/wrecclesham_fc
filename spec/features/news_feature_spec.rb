@@ -25,15 +25,15 @@ feature 'news' do
       click_link 'News'
       click_link 'Add news'
       fill_in 'Title', with: 'Test Article'
+      fill_in 'Summary', with: 'Test Summary'
       fill_in 'Content', with: 'Test Content'
       click_button 'Create News Story'
-      expect(current_path).to eq news_index_path
       expect(page).to have_content 'Test Article'
       expect(page).to have_content 'Test Content'
       expect(page).to have_content "News story successfully published"
     end
   end
-  
+
   context "Editing an existing news story" do
 
   end

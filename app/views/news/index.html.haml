@@ -4,6 +4,6 @@
   - if @news.any?
     - @news.each do |news|
       = news.title
-      = news.content
+      = news.summary
   - else
     = "No news has been add yet"
