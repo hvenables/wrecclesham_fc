@@ -13,4 +13,14 @@ module ApplicationHelper
     }[flash_type.to_sym] || flash_type.to_s
   end
 
+  def gfm(string)
+    @markdown ||= Redcarpet::Markdown.new(
+      PygmentsHTML.new(escape_html: true),
+      tables: true,
+      fenced_code_blocks: true,
+      autolink: true,
+      no_intra_emphasis: true
+    )
+    @markdown.render(string).html_safe
+  end
 end

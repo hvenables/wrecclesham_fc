@@ -4,6 +4,6 @@
   - if @news.any?
     - @news.each do |news|
       = news.title
-      = news.summary
+      = preserve gfm(news.summary)
   - else
     = "No news has been add yet"
