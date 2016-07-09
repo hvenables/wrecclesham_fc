@@ -1,8 +1,12 @@
 = form_for @news do |f|
-  = f.label :title
-  = f.text_field :title
-  = f.label :summary
-  = f.text_area :summary
-  = f.label :content
-  = f.text_area :content
-  = f.submit 'Create News Story'
+  .form-group
+    = f.label :title
+    = f.text_field :title, { class: "form-control" }
+  .form-group
+    = f.label :summary
+    = f.label :Content_is_processed_using_markdown, { class: 'pull-right text-muted small' }
+    = f.text_area :summary, { class: 'form-control', rows: 10 }
+  .form-group
+    = f.label :content
+    = f.text_area :content
+  = f.submit 'Create News Story', class: 'btn btn-success'
