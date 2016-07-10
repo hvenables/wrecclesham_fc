@@ -13,17 +13,14 @@ feature 'news' do
 
     scenario 'should display add news if admin' do
       sign_in(admin)
-      click_link 'News'
-      expect(page).to have_css "div.news", text: 'No news has been add yet'
-      expect(page).to have_link 'Add news'
+      expect(page).to have_link 'New article'
     end
   end
 
   context 'Adding a new news story' do
     scenario 'prompts admin to fill in a form' do
       sign_in(admin)
-      click_link 'News'
-      click_link 'Add news'
+      click_link 'New article'
       fill_in 'Title', with: 'Test Article'
       fill_in 'Summary', with: 'Test Summary'
       fill_in 'Content', with: 'Test Content'
