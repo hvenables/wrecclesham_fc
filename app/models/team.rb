@@ -6,4 +6,7 @@ class Team < ApplicationRecord
     order(points: :desc, goal_difference: :desc)
   end
 
+  def position
+    self.league_table.teams.ordered_on_points.to_a.index(self) + 1
+  end
 end
