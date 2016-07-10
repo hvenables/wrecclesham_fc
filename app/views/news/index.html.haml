@@ -1,6 +1,4 @@
 .news.container
-  - if current_user&.admin?
-    = link_to 'Add news', new_news_path()
   - if @news.any?
     .row
       .card-group

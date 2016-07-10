@@ -10,9 +10,11 @@
   %body
     = render 'layouts/topbar'
     = render 'layouts/navbar'
-    - flash.each do |key, value|
-      .alert{ :class => bootstrap_class_for(key) }
-        %button.close{ :data => { :dismiss => "alert" } } x
-        = value
+    .container
+      .row
+        - flash.each do |key, value|
+          .alert{ :class => bootstrap_class_for(key) }
+            %button.close{ :data => { :dismiss => "alert" } } x
+            = value
     .container.center-panel
       = yield

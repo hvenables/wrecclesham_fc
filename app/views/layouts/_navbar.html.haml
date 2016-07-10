@@ -7,8 +7,16 @@
       %ul.nav.navbar-nav
         %li.nav-item.pull-xs-right.pull-sm-left{:class => active_class(root_path())}
           = link_to 'Home', root_path, {class: 'nav-link'}
-        %li.nav-item.pull-xs-right.pull-sm-left{:class => active_class(news_index_path())}
-          = link_to 'News', news_index_path, {class: 'nav-link'}
+        - if current_user&.admin?
+          %li.nav-item{:class => "#{active_class(news_index_path())} #{active_class(new_news_path())} pull-xs-right pull-sm-left dropdown"}
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} News
+            .dropdown-menu
+              = link_to 'News', news_index_path(), {class: 'dropdown-item'}
+              .dropdown-divider
+              = link_to 'New article', new_news_path(), {class: 'dropdown-item'}
+        - else
+          %li.nav-item.pull-xs-right.pull-sm-left{:class => active_class(news_index_path())}
+            = link_to 'News', news_index_path, {class: 'nav-link'}
         %li.nav-item.pull-xs-right.pull-sm-left
           %a.nav-link{:href => "#"} About
         %li.nav-item.pull-xs-right.pull-sm-left

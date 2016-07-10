@@ -1,8 +1,9 @@
 .container-fluid
   .row
     .container.col-xs-7
-      %h4
-        Latest News
+      .container
+        %h4.news-heading
+          Latest News
       - if @news
         .row
           - @news.each do |news|
@@ -16,6 +17,9 @@
                   = preserve gfm(news.summary)
                 = link_to 'Read More', news_path(news), class: 'news-button btn btn-primary pull-xs-right'
     .container.col-xs-4.pull-xs-right
+      %h4.newsheading
+        League Tables
+    .container.col-xs-4.pull-xs-right.welcome-tables
       - if @first_team_table
         %h6.title
           = @first_team_table.name + " - " + @years
@@ -48,6 +52,7 @@
         = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
       - else
         Add teams to the league
+    .container.col-xs-4.pull-xs-right.welcome-tables
       - if @reserve_team_table
         %h6.title
           = @reserve_team_table.name + " - " + @years

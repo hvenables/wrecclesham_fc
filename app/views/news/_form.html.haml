@@ -1,13 +1,16 @@
-= form_for @news do |f|
+= form_for @news, html: {multipart: true} do |f|
   .form-group
     = f.label :title
     = f.text_field :title, { class: "form-control" }
   .form-group
     = f.label :summary
-    = f.label :Content_is_processed_using_markdown, { class: 'pull-right text-muted small' }
+    = f.label :Content_is_processed_using_markdown, { class: 'pull-xs-right text-muted small' }
     = f.text_area :summary, { class: 'form-control', rows: 5 }
   .form-group
     = f.label :content
-    = f.label :Content_is_processed_using_markdown, { class: 'pull-right text-muted small' }
+    = f.label :Content_is_processed_using_markdown, { class: 'pull-xs-right text-muted small' }
     = f.text_area :content, { class: 'form-control', rows: 15 }
+  .form-group
+    = f.label :Add_an_image
+    = f.file_field :image
   = f.submit class: 'btn btn-success'
