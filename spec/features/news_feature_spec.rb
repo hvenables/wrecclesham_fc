@@ -32,6 +32,18 @@ feature 'news' do
   end
 
   context "Editing an existing news story" do
-
+    let(:news) { create(:news) }
+    scenario 'prompts user to fill in a form to edit story' do
+      sign_in(admin)
+      visit news_path(news)
+      click_link "Edit #{news.title}"
+      fill_in 'Title', with: 'Test Title'
+      fill_in 'Summary', with: 'Test Summary'
+      fill_in 'Content', with: 'Test Content'
+      click_button 'Update News'
+      expect(page).to have_content 'Test Title'
+      expect(page).to have_content 'Test Content'
+      expect(page).to have_content "Succesfully updated the news article"
+    end
   end
 end
