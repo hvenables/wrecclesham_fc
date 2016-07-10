@@ -3,9 +3,11 @@ class WelcomeController < ApplicationController
   before_action :load_fixtures, only: :index
 
   def index
-    @years = show_year(@first_team_table.year)
     @teams = @first_team_table.teams.ordered_on_points
-    @teams = teams_around_us(@teams)
+    if @teams
+      @years = show_year(@first_team_table.year)
+      @teams = teams_around_us(@teams)
+    end
     @news = News.all
   end
 
