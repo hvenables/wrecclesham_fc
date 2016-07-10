@@ -19,7 +19,7 @@
       - if @first_team_table
         %h6.title
           = @first_team_table.name + " - " + @years
-        %table.table
+        %table.table.small-table
           %thead.thead-inverse
             %tr
               %th.small
@@ -33,10 +33,42 @@
               %th.small
                 Points
           %tbody
-            - @teams.each_with_index do |team, index|
+            - @first_team_teams.each do |team|
               %tr
                 %td{ class: 'small', scope: 'row' }
-                  = index + 1
+                  = team.position
+                %td.small
+                  = team.team
+                %td.small
+                  = team.games
+                %td.small
+                  = team.goal_difference
+                %td.small
+                  = team.points
+        = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
+      - else
+        Add teams to the league
+      - if @reserve_team_table
+        %h6.title
+          = @reserve_team_table.name + " - " + @years
+        %table.table.small-table
+          %thead.thead-inverse
+            %tr
+              %th.small
+                Pos
+              %th.small
+                Team
+              %th.small
+                Played
+              %th.small
+                Difference
+              %th.small
+                Points
+          %tbody
+            - @reserve_team_teams.each do |team|
+              %tr
+                %td{ class: 'small', scope: 'row' }
+                  = team.position
                 %td.small
                   = team.team
                 %td.small
