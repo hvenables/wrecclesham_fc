@@ -4,7 +4,7 @@
       .card-group
         - @news.each do |news|
           .card.col-xs-4.float-left.news-article
-            = image_tag('transparent_logo.png', class: 'img-fluid card-img-top')
+            = image_tag(news.image.url, class: 'img-fluid card-img-top')
             .card-block
               %h4.card-title
                 = news.title

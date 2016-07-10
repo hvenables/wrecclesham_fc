@@ -1,5 +1,5 @@
 - if @news
-  = image_tag @news.image.url(:thumb)
+  = image_tag @news.image.url(:large)
   = @news.title
   = preserve gfm(@news.content)
   = link_to "Edit #{@news.title}", edit_news_path(@news)
