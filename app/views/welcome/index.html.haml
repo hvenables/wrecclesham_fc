@@ -17,71 +17,72 @@
                   = preserve gfm(news.summary)
                 = link_to 'Read More', news_path(news), class: 'news-button btn btn-primary pull-xs-right'
     .container.col-xs-4.pull-xs-right
-      %h4.newsheading
-        League Tables
-    .container.col-xs-4.pull-xs-right.welcome-tables
-      - if @first_team_table
-        %h6.title
-          = @first_team_table.name + " - " + @years
-        %table.table.small-table
-          %thead.thead-inverse
-            %tr
-              %th.small
-                Pos
-              %th.small
-                Team
-              %th.small
-                Played
-              %th.small
-                Difference
-              %th.small
-                Points
-          %tbody
-            - @first_team_teams.each do |team|
+      .container
+        %h4.newsheading
+          League Tables
+      .container.welcome-tables
+        - if @first_team_table
+          %h6.title
+            = @first_team_table.name + " - " + @years
+          %table.table.small-table
+            %thead.thead-inverse
               %tr
-                %td{ class: 'small', scope: 'row' }
-                  = team.position
-                %td.small
-                  = team.team
-                %td.small
-                  = team.games
-                %td.small
-                  = team.goal_difference
-                %td.small
-                  = team.points
-        = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
-      - else
-        Add teams to the league
-    .container.col-xs-4.pull-xs-right.welcome-tables
-      - if @reserve_team_table
-        %h6.title
-          = @reserve_team_table.name + " - " + @years
-        %table.table.small-table
-          %thead.thead-inverse
-            %tr
-              %th.small
-                Pos
-              %th.small
-                Team
-              %th.small
-                Played
-              %th.small
-                Difference
-              %th.small
-                Points
-          %tbody
-            - @reserve_team_teams.each do |team|
+                %th.small
+                  Pos
+                %th.small
+                  Team
+                %th.small
+                  Played
+                %th.small
+                  Difference
+                %th.small
+                  Points
+            %tbody
+              - @first_team_teams.each do |team|
+                %tr
+                  %td{ class: 'small', scope: 'row' }
+                    = team.position
+                  %td.small
+                    = team.team
+                  %td.small
+                    = team.games
+                  %td.small
+                    = team.goal_difference
+                  %td.small
+                    = team.points
+          = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
+        - else
+          Add teams to the league
+      .container.welcome-tables
+        - if @reserve_team_table
+          %h6.title
+            = @reserve_team_table.name + " - " + @years
+          %table.table.small-table
+            %thead.thead-inverse
               %tr
-                %td{ class: 'small', scope: 'row' }
-                  = team.position
-                %td.small
-                  = team.team
-                %td.small
-                  = team.games
-                %td.small
-                  = team.goal_difference
-                %td.small
-                  = team.points
-        = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
-      - else
-        Add teams to the league
+                %th.small
+                  Pos
+                %th.small
+                  Team
+                %th.small
+                  Played
+                %th.small
+                  Difference
+                %th.small
+                  Points
+            %tbody
+              - @reserve_team_teams.each do |team|
+                %tr
+                  %td{ class: 'small', scope: 'row' }
+                    = team.position
+                  %td.small
+                    = team.team
+                  %td.small
+                    = team.games
+                  %td.small
+                    = team.goal_difference
+                  %td.small
+                    = team.points
+          = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
+        - else
+          Add teams to the league
