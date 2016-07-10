@@ -27,7 +27,7 @@ feature 'news' do
       fill_in 'Title', with: 'Test Article'
       fill_in 'Summary', with: 'Test Summary'
       fill_in 'Content', with: 'Test Content'
-      click_button 'Create News Story'
+      click_button 'Create News'
       expect(page).to have_content 'Test Article'
       expect(page).to have_content 'Test Content'
       expect(page).to have_content "News story successfully published"
