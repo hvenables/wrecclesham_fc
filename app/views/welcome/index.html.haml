@@ -16,9 +16,9 @@
                   = preserve gfm(news.summary)
                 = link_to 'Read More', news_path(news), class: 'news-button btn btn-primary pull-xs-right'
     .container.col-xs-4.pull-xs-right
-      %h6.title
-        = @first_team_table.name + " - " + @years
       - if @first_team_table.teams.any?
+        %h6.title
+          = @first_team_table.name + " - " + @years
         %table.table
           %thead.thead-inverse
             %tr
