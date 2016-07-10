@@ -39,9 +39,4 @@ class LeagueTablesController < ApplicationController
     params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url, :fixture_url, :number_of_teams)
   end
 
-  def show_year(year)
-    base = year.to_s.split(//).last(2).join
-    next_year = (base.to_i + 1).to_s
-    year.to_s + '/' + next_year
-  end
 end

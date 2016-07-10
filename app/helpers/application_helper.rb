@@ -23,4 +23,5 @@ module ApplicationHelper
     )
     @markdown.render(string).html_safe
   end
+
 end

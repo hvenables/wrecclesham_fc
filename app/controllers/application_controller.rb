@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     @reserve_team_table = LeagueTable.active_reserve_team_table
   end
 
+  def show_year(year)
+    base = year.to_s.split(//).last(2).join
+    next_year = (base.to_i + 1).to_s
+    year.to_s + '/' + next_year
+  end
 end

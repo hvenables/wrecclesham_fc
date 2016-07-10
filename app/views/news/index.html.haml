@@ -11,7 +11,7 @@
               %h4.card-title
                 = news.title
               %p.card-text
-                = news.summary
+                = preserve gfm(news.summary)
               = link_to 'Read More', news_path(news), class: 'btn btn-primary'
   - else
     = "No news has been add yet"

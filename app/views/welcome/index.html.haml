@@ -1,1 +1,50 @@
-.container
+.container-fluid
+  .row
+    .container.col-xs-7
+      %h4
+        Latest News
+      - if @news
+        .row
+          - @news.each do |news|
+            .card.col-xs-12
+              .col-xs-4
+                = image_tag('transparent_logo.png', class: 'img-fluid card-img-top')
+              .col-xs-8
+                %h4.card-title.news-title
+                  = news.title
+                %p.card-text
+                  = preserve gfm(news.summary)
+                = link_to 'Read More', news_path(news), class: 'news-button btn btn-primary pull-xs-right'
+    .container.col-xs-4.pull-xs-right
+      %h6.title
+        = @first_team_table.name + " - " + @years
+      - if @first_team_table.teams.any?
+        %table.table
+          %thead.thead-inverse
+            %tr
+              %th.small
+                Pos
+              %th.small
+                Team
+              %th.small
+                Played
+              %th.small
+                Difference
+              %th.small
+                Points
+          %tbody
+            - @teams.each_with_index do |team, index|
+              %tr
+                %td{ class: 'small', scope: 'row' }
+                  = index + 1
+                %td.small
+                  = team.team
+                %td.small
+                  = team.games
+                %td.small
+                  = team.goal_difference
+                %td.small
+                  = team.points
+        = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
+      - else
+        Add teams to the league
