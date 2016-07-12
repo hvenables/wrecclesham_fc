@@ -1,4 +1,14 @@
-= @video.title
-= @video.summary
-.embed-responsive.embed-responsive-16by9
-  %iframe.embed-responsive-item{:allowfullscreen => "", :src => "#{@video.url_santizer}"}
+.container
+  .card
+    .embed-responsive.embed-responsive-16by9.card-img-top
+      %iframe.embed-responsive-item{:allowfullscreen => "", :src => "#{@video.url_santizer}"}
+    .card-block
+      %h4.card-title
+        = @video.title
+      %p.card-text
+        = @video.summary
+      %p.card-text
+        %small.text-muted
+          = "Last updated #{relative_time(@video.updated_at)}"
+        = link_to 'Delete', video_path(@video), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
+        = link_to 'Edit', edit_video_path(@video), class: 'pull-xs-right btn btn-sm btn-success edit-button'

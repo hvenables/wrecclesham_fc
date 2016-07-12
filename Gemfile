@@ -47,6 +47,9 @@ gem 'paperclip'
 # Adding aws storage
 gem 'aws-sdk'
 
+#Calculating time differences
+gem 'time_difference'
+
 gem 'yt'
 
 group :development, :test do

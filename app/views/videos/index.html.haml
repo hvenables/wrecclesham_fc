@@ -1,7 +1,7 @@
-- if @videos
+- if @videos.any?
   .container
     .well.well-sm
-      %h3 Videos
+      %h3 Latest Videos
     - @videos.each do |video|
       #products.row.list-group
         = link_to video_path(video), class: 'item list-group-item' do
