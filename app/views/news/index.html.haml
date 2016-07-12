@@ -1,15 +1,14 @@
 .news.container
+  %h3.title Latest News
   - if @news.any?
-    .row
-      .card-group
-        - @news.each do |news|
-          .card.col-xs-4.float-left.news-article
-            = image_tag(news.image.url, class: 'img-fluid card-img-top')
-            .card-block
-              %h4.card-title
-                = news.title
-              %p.card-text
-                = preserve gfm(news.summary)
-              = link_to 'Read More', news_path(news), class: 'btn btn-primary'
+    .card-columns
+      - @news.each do |news|
+        .card
+          %img.card-img-top.center-block.new-image{:alt => "Card image cap", "src" => "#{news.image.url(:medium)}"}/
+          .card-block
+            %h4.card-title
+              = news.title
+            %p.card-text
+              = news.summary
   - else
     = "No news has been add yet"

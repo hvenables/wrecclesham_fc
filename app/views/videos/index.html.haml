@@ -1,9 +1,9 @@
 - if @videos.any?
   .container
     .well.well-sm
-      %h3 Latest Videos
+      %h3.title Latest Videos
     - @videos.each do |video|
-      #products.row.list-group
+      #products.row.list-group.video-link
         = link_to video_path(video), class: 'item list-group-item' do
           .thumbnail
             %img.group.list-group-image{:alt => "", :src => "#{video.thumbnail}"}/

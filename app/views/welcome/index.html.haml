@@ -2,7 +2,7 @@
   .row
     .container.col-xs-7
       .container
-        %h4.news-heading
+        %h4.news-heading.title
           Latest News
       - if @news
         .row
@@ -18,7 +18,7 @@
                 = link_to 'Read More', news_path(news), class: 'news-button btn btn-primary pull-xs-right'
     .container.col-xs-4.pull-xs-right
       .container
-        %h4.newsheading
+        %h4.newsheading.title
           League Tables
       .container.welcome-tables
         - if @first_team_table
