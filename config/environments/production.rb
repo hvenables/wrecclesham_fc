@@ -9,6 +9,8 @@ Rails.application.configure do
     :s3_region => ENV['AWS_REGION']
   }
 
+  Yt.configuration.api_key = ENV['YOUTUBE']
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
