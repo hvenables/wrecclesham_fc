@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :news
 
+  resources :videos
+
   resources :league_tables do
     resources :teams
     resources :fixtures
