@@ -1,0 +1,4 @@
+= @video.title
+= @video.summary
+.embed-responsive.embed-responsive-16by9
+  %iframe.embed-responsive-item{:allowfullscreen => "", :src => "#{@video.url_santizer}"}

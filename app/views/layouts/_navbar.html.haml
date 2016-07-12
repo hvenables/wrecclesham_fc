@@ -19,8 +19,16 @@
             = link_to 'News', news_index_path, {class: 'nav-link'}
         %li.nav-item.pull-xs-right.pull-sm-left
           %a.nav-link{:href => "#"} About
-        %li.nav-item.pull-xs-right.pull-sm-left
-          = link_to "Videos", videos_path(), { class: 'nav-link' }
+        - if current_user&.admin?
+          %li.nav-item{:class => "#{active_class(videos_path())} #{active_class(new_video_path())} pull-xs-right pull-sm-left dropdown"}
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Videos
+            .dropdown-menu
+              = link_to 'Videos', videos_path(), {class: 'dropdown-item'}
+              .dropdown-divider
+              = link_to 'New video', new_video_path(), {class: 'dropdown-item'}
+        - else
+          %li.nav-item.pull-xs-right.pull-sm-left
+            = link_to "Videos", videos_path(), { class: 'nav-link' }
         - if @first_team_table && @reserve_team_table
           %li.nav-item{:class => "#{active_class(league_table_path(@first_team_table))} #{active_class(league_table_path(@reserve_team_table))} pull-xs-right pull-sm-left dropdown"}
             %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} League Tables

@@ -1,4 +1,16 @@
 - if @videos
-  Do this
+  .container
+    .well.well-sm
+      %h3 Videos
+    - @videos.each do |video|
+      #products.row.list-group
+        = link_to video_path(video), class: 'item list-group-item' do
+          .thumbnail
+            %img.group.list-group-image{:alt => "", :src => "#{video.thumbnail}"}/
+            .caption
+              %h4.group.inner.list-group-item-heading
+                = video.title
+              %p.group.inner.list-group-item-text
+                = video.summary
 - else
   No videos have been added

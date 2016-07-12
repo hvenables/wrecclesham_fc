@@ -1,0 +1,12 @@
+= form_for @video do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, { class: "form-control" }
+  .formm-group
+    = f.label :summary
+    = f.text_area :summary, { class: 'form-control', rows: 5 }
+  .form-group
+    = f.label :url
+    = f.url_field :url
+  = f.submit class: 'btn btn-success'
+
