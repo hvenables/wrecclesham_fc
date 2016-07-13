@@ -10,5 +10,8 @@
               = news.title
             %p.card-text
               = news.summary
+          .card-footer.text-xs-right
+            = news.updated_at.to_formatted_s(:long)
+
   - else
     = "No news has been add yet"
