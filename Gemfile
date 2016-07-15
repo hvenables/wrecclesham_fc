@@ -50,6 +50,9 @@ gem 'aws-sdk'
 #Calculating time differences
 gem 'time_difference'
 
+# permissions
+gem 'cancancan', '~> 1.15'
+
 gem 'yt'
 
 group :development, :test do
