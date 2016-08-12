@@ -38,7 +38,8 @@
               -if can? :manage, LeagueTable
                 .dropdown-divider
                 = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
-        %li.nav-item.pull-xs-right.pull-sm-left
-          = link_to 'Fixtures', league_table_fixtures_path(league_table_id: @first_team_table), class: 'nav-link'
-        %li.nav-item.pull-xs-right.pull-sm-left
-          %a.nav-link{:href => "#"} Players
+        - if @first_team_table
+          %li.nav-item.pull-xs-right.pull-sm-left
+            = link_to 'Fixtures', league_table_fixtures_path(league_table_id: @first_team_table), class: 'nav-link'
+          %li.nav-item.pull-xs-right.pull-sm-left
+            %a.nav-link{:href => "#"} Players
