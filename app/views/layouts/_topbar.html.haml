@@ -1,7 +1,8 @@
 .topbar
   %nav.navbar.navbar-dark.topbar
     .container
-      = image_tag('transparent_logo.png', class: 'logo navbar-brand')
+      = link_to root_path do
+        = image_tag('transparent_logo.png', class: 'logo navbar-brand')
       %ul.nav.navbar-nav.pull-xs-right
         - if user_signed_in?
           %li.nav-item.join.log-in

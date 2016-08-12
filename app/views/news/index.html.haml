@@ -3,15 +3,17 @@
   - if @news.any?
     .card-columns
       - @news.each do |news|
-        .card
-          %img.card-img-top.center-block.new-image{:alt => "Card image cap", "src" => "#{news.image.url(:medium)}"}/
-          .card-block
-            %h4.card-title
-              = news.title
-            %p.card-text
-              = news.summary
-          .card-footer.text-xs-right
-            = news.updated_at.to_formatted_s(:long)
+        = link_to news_path(news), class: 'news-article-link' do
+          .card.green-hover
+            .card-block
+              %h4.card-title
+                = news.title
+            %img.card-img-top.img-fluid{:alt => "Card image cap", "src" => "#{news.image.url(:large)}"}/
+            .card-block
+              %p.card-text
+                = news.summary
+            .card-footer.text-xs-right
+              = news.updated_at.to_formatted_s(:long)
 
   - else
     = "No news has been add yet"

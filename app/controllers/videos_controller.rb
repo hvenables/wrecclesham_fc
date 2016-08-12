@@ -1,14 +1,14 @@
 class VideosController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @videos = Video.all
+    @videos = Video.all.order(created_at: :desc)
   end
 
   def new
-    @video = Video.new
   end
 
   def create
-    @video = Video.new(video_params)
     if @video.save
       flash[:notice] = "You have successfully published a new video"
       redirect_to video_path(@video)
@@ -19,15 +19,12 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id])
   end
 
   def edit
-    @video = Video.find(params[:id])
   end
 
   def update
-    @video = Video.find(params[:id])
     if @video.update(video_params)
       flash[:notice] = 'Video has been successfully updated'
       redirect_to video_path(@video)
@@ -38,7 +35,6 @@ class VideosController < ApplicationController
   end
 
   def destroy
-    @video = Video.find(params[:id])
     if @video.destroy
       flash[:notice] = 'Video has been deleted'
       redirect_to videos_path

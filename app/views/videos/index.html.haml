@@ -3,8 +3,8 @@
     .well.well-sm
       %h3.title Latest Videos
     - @videos.each do |video|
-      #products.row.list-group.video-link
-        = link_to video_path(video), class: 'item list-group-item' do
+      #products.row.list-group.video-container
+        = link_to video_path(video), class: 'item list-group-item video-link' do
           .thumbnail
             %img.group.list-group-image{:alt => "", :src => "#{video.thumbnail}"}/
             .caption
@@ -12,5 +12,7 @@
                 = video.title
               %p.group.inner.list-group-item-text
                 = video.summary
+              %p.group-inner.list-group-item-footer
+                = video.created_at.to_formatted_s(:month_and_year)
 - else
   No videos have been added

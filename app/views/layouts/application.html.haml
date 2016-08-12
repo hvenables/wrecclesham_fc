@@ -5,17 +5,16 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
-    %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css", :integrity => "sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd", :rel => "stylesheet"}/
-    %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity: "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin: "anonymous"}
+    %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css", :integrity => "sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY", :rel => "stylesheet"}/
+    %script{:crossorigin => "anonymous", :integrity => "sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js"}
     = favicon_link_tag 'favicon.ico'
   %body
     = render 'layouts/topbar'
     = render 'layouts/navbar'
     .container
-      .row
-        - flash.each do |key, value|
-          .alert{ :class => bootstrap_class_for(key) }
-            %button.close{ :data => { :dismiss => "alert" } } x
-            = value
+      - flash.each do |key, value|
+        .alert{ :class => bootstrap_class_for(key) }
+          %button.close{ :data => { :dismiss => "alert" } } x
+          = value
     .container.center-panel
       = yield

@@ -6,4 +6,5 @@ class News < ApplicationRecord
   validates :summary, presence: true
   validates :summary, length: { maximum: 250 }
   validates :content, presence: true
+
 end

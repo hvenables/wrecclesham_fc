@@ -1,22 +1,23 @@
 .container-fluid
   .row
-    .container.col-xs-7
+    .container.col-md-12.col-lg-8
+    .container.col-md-12.col-lg-8
       .container
         %h4.news-heading.title
           Latest News
       - if @news
         .row
           - @news.each do |news|
-            .card.col-xs-12
-              .col-xs-4
-                = image_tag('transparent_logo.png', class: 'img-fluid card-img-top')
-              .col-xs-8
-                %h4.card-title.news-title
-                  = news.title
-                %p.card-text
-                  = preserve gfm(news.summary)
-                = link_to 'Read More', news_path(news), class: 'news-button btn btn-primary pull-xs-right'
-    .container.col-xs-4.pull-xs-right
+            = link_to news_path(news), class: 'welcome-link' do
+              .card.col-xs-12.green-hover.welcome-news
+                .col-xs-4.image-container
+                  %img.card-img-top.img-fluid.welcome-image{:alt => "Card image cap", "src" => "#{news.image.url(:large)}"}/
+                .col-xs-8
+                  %h4.card-title.news-title
+                    = news.title
+                  %p.card-text
+                    = preserve gfm(news.summary)
+    .container.col-lg-4.pull-lg-right
       .container
         %h4.newsheading.title
           League Tables

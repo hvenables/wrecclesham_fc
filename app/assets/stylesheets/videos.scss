@@ -26,8 +26,15 @@
 {
   margin-right: 10px;
 }
-.video-link {
+.video-container {
   margin-bottom: 10px !important;
+}
+.video-link {
+  color: inherit;
+}
+.video-link:hover {
+  color: inherit;
+  text-decoration: none;
 }
 .edit-button {
   margin-right: 10px;

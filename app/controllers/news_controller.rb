@@ -1,40 +1,46 @@
 class NewsController < ApplicationController
+  load_and_authorize_resource
 
   def index
-    @news = News.all
+    @news = News.all.order(created_at: :desc)
   end
 
   def show
-    @news = News.find(params[:id])
   end
 
   def new
-    @news = News.new
-  end
-
-  def edit
-    @news = News.find(params[:id])
-  end
-
-  def update
-    @news = News.find(params[:id])
-    if @news.update(news_params)
-      flash[:notice] = "Succesfully updated the news article"
-      redirect_to news_path(@news)
-    else
-      flash[:error] = "Failed to update"
-      render :edit
-    end
   end
 
   def create
-    @news = News.new(news_params)
     if @news.save
       flash[:notice] = "News story successfully published"
       redirect_to news_path(@news)
     else
-      flash[:error] = "News story failed to save"
+      flash[:error] = "News story failed to save, #{@news.errors.full_messages.join(', ')}"
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @news.update(news_params)
+      flash[:notice] = "Succesfully updated the news article"
+      redirect_to news_path(@news)
+    else
+      flash[:error] = "Failed to update, #{@news.errors.full_messages.join(', ')}"
+      render :edit
+    end
+  end
+
+  def destroy
+    if @news.destroy
+      flash[:notice] = 'News article has been deleted'
+      redirect_to videos_path
+    else
+      flash[:error] = "News article could not be deleted"
+      redirect_to video_path(@video)
     end
   end
 

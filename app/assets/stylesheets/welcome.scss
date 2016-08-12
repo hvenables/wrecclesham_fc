@@ -12,4 +12,31 @@
 .welcome-tables {
   background: white;
   margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.welcome-link {
+  color: inherit;
+}
+.welcome-link:hover {
+  color: inherit;
+}
+
+.welcome-news {
+  height: 210px;
+}
+
+.welcome-image {
+  max-height: 200px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.image-container {
+  height: 210px;
+  position: relative;
 }
