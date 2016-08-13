@@ -15,12 +15,17 @@
 //   margin-top: 12px;
 //   border-radius: 0px;
 // }
-// .collapsing {
-//   display: none;
-// }
+.collapsing {
+  display: none;
+}
 
 @media only screen and (max-width: 992px) {
   .navbar-list {
     width: 100% !important;
+  }
+
+  .dropdown-menu {
+    right: 0 !important;
+    left: inherit !important;
   }
 }
