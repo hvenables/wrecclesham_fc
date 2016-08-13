@@ -2,24 +2,25 @@
   border-bottom: 2px solid white;
   border-top: 2px solid white;
 }
-.top-ad {
-  height: 20px;
-}
+
+// .top-ad {
+//   height: 20px;
+// }
 .dropdown-menu {
   padding: 0px;
   border-radius: 0px;
 }
 
-.open>.dropdown-menu {
-  margin-top: 12px;
-  border-radius: 0px;
-}
-.collapsing {
-  display: none;
-}
+// .open>.dropdown-menu {
+//   margin-top: 12px;
+//   border-radius: 0px;
+// }
+// .collapsing {
+//   display: none;
+// }
 
-@media (max-width: 34em) {
-  .nav-item {
-    width: 100%;
+@media only screen and (max-width: 992px) {
+  .navbar-list {
+    width: 100% !important;
   }
 }
