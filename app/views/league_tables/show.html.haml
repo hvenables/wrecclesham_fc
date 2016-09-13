@@ -1,57 +1,57 @@
-
-.container
-  %h2.title
-    = @league_table.name + " - " + @years
-  - if @league_table.seasons.any?
-    %table.table
-      %thead.thead-inverse
-        %tr
-          %th
-            Pos
-          %th
-            Team
-          %th
-            Played
-          %th
-            Won
-          %th
-            Drawn
-          %th
-            Lost
-          %th
-            For
-          %th
-            Against
-          %th
-            Difference
-          %th
-            Points
-      %tbody
-        - @teams.each_with_index do |season, index|
+-if @league_table
+  .container
+    %h2.title
+      = @league_table.name + " - " + @years
+    - if @league_table.seasons.any?
+      %table.table
+        %thead.thead-inverse
           %tr
-            %td{ scope: 'row' }
-              = index + 1
-            %td
-              = season.team.name
-            %td
-              = season.games
-            %td
-              = season.won
-            %td
-              = season.drawn
-            %td
-              = season.lost
-            %td
-              = season.goals_for
-            %td
-              = season.goals_against
-            %td
-              = season.goals_difference
-            %td
-              = season.points
-  - else
-    Add teams to the league
+            %th
+              Pos
+            %th
+              Team
+            %th
+              Played
+            %th
+              Won
+            %th
+              Drawn
+            %th
+              Lost
+            %th
+              For
+            %th
+              Against
+            %th
+              Difference
+            %th
+              Points
+        %tbody
+          - @teams.each_with_index do |season, index|
+            %tr
+              %td{ scope: 'row' }
+                = index + 1
+              %td
+                = season.team.name
+              %td
+                = season.games
+              %td
+                = season.won
+              %td
+                = season.drawn
+              %td
+                = season.lost
+              %td
+                = season.goals_for
+              %td
+                = season.goals_against
+              %td
+                = season.goals_difference
+              %td
+                = season.points
+    - else
+      Add teams to the league
 
-  = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post
+    = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post
 
-  = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"
+    = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"

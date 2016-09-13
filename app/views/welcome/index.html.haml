@@ -1,29 +1,6 @@
 .container-fluid
   .row
-    .container.col-lg-12.c-wrapper
-      #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
-        %ol.carousel-indicators
-          %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
-          %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
-          %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
-          %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
-          %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
-          %li{"data-slide-to" => "5", "data-target" => "#carousel-example-generic"}
-        .carousel-inner{:role => "listbox"}
-          .carousel-item.active
-            %img.col-xs-4.img-slide{:alt => "First slide", "src" => "#{@news[0].image.url(:medium)}"}/
-            %img.col-xs-4.img-slide{:alt => "Second slide", "src" => "#{@news[1].image.url(:medium)}"}/
-            %img.col-xs-4.img-slide{:alt => "Third slide", "src" => "#{@news[2].image.url(:medium)}"}/
-          .carousel-item
-            %img.col-xs-4.img-slide{:alt => "Fourth slide", "src" => "#{@news[3].image.url(:medium)}"}/
-            %img.col-xs-4.img-slide{:alt => "Fifth slide", "src" => "#{@news[4].image.url(:medium)}"}/
-            %img.col-xs-4.img-slide{:alt => "Sixth slide", "src" => "#{@news[5].image.url(:medium)}"}/
-        %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic", :role => "button"}
-          %span.icon-prev{"aria-hidden" => "true"}
-          %span.sr-only Previous
-        %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic", :role => "button"}
-          %span.icon-next{"aria-hidden" => "true"}
-          %span.sr-only Next
+    = render 'carousel'
     .container.col-md-12.col-lg-8
       .container
         %h4.news-heading.title
