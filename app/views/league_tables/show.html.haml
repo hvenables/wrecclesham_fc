@@ -52,6 +52,7 @@
     - else
       Add teams to the league
 
-    = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post
+  - if can? :manage, LeagueTable
+    = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post, class: 'btn btn-success'
 
-    = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"
+    = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-success'
