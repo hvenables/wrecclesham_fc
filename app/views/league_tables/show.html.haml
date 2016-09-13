@@ -2,7 +2,7 @@
 .container
   %h2.title
     = @league_table.name + " - " + @years
-  - if @league_table.teams.any?
+  - if @league_table.seasons.any?
     %table.table
       %thead.thead-inverse
         %tr
@@ -27,31 +27,31 @@
           %th
             Points
       %tbody
-        - @teams.each_with_index do |team, index|
+        - @teams.each_with_index do |season, index|
           %tr
             %td{ scope: 'row' }
               = index + 1
             %td
-              = team.team
+              = season.team.name
             %td
-              = team.games
+              = season.games
             %td
-              = team.won
+              = season.won
             %td
-              = team.drawn
+              = season.drawn
             %td
-              = team.lost
+              = season.lost
             %td
-              = team.goals_for
+              = season.goals_for
             %td
-              = team.goals_against
+              = season.goals_against
             %td
-              = team.goal_difference
+              = season.goals_difference
             %td
-              = team.points
+              = season.points
   - else
     Add teams to the league
 
-  = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_teams_path(@league_table), :method => :post
+  = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post
 
   = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?"

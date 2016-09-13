@@ -4,22 +4,22 @@ class WelcomeController < ApplicationController
 
   def index
     if @first_team_table
-      @first_team_teams = @first_team_table.teams.ordered_on_points
+      @first_team_teams = @first_team_table.seasons.ordered_on_points
       @years = show_year(@first_team_table.year)
-      @first_team_teams = teams_around_us(@first_team_teams, 'UFC Farnham')
+      @first_team_teams = teams_around_us(@first_team_teams, 'Wrecclesham')
     end
-    if @reserve_team_table
-      @reserve_team_teams = @reserve_team_table.teams.ordered_on_points
-      @reserve_team_teams = teams_around_us(@reserve_team_teams, 'UFC Farnham Reserves')
-    end
+    # if @reserve_team_table
+      # @reserve_team_teams = @reserve_team_table.seasons.ordered_on_points
+      # @reserve_team_teams = teams_around_us(@reserve_team_teams, 'UFC Farnham Reserves')
+    # end
     @news = News.all
   end
 
   private
 
   def teams_around_us(all_teams, team)
-    team = Team.find_by(team: team)
-    index = all_teams.to_a.index(team)
+    team = all_teams.find_by(team: Team.find_by(name:team))
+    index = team.position
     numbers = []
     while numbers.length < 7
       calc_up_and_down(index, numbers, all_teams.length) if numbers.length == 0

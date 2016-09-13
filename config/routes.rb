@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   # mount ActionCable.server => '/cable'
   root to: "welcome#index"
 
-  resource :welocome, only: :index
+  resource :welcome, only: :index
 
   resources :news
 
   resources :videos
 
   resources :league_tables do
-    resources :teams
+    resources :seasons
     resources :fixtures
   end
 end

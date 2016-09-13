@@ -10,6 +10,11 @@ class FixturesController < ApplicationController
     redirect_to league_table_fixtures_path(params[:league_table_id])
   end
 
+  def show
+    @home_fixtures = Fixture.where()
+
+  end
+
   private
 
   def fixture_params

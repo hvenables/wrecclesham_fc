@@ -1,10 +1,9 @@
-class TeamsController < ApplicationController
-  include TeamsHelper
+class SeasonsController < ApplicationController
+  include SeasonsHelper
 
   before_action :load_league, only: :create
 
   def index
-    @teams = Team.all.order(team: :asc)
   end
 
   def show
@@ -12,7 +11,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    if @league_table.teams.empty?
+    if @league_table.seasons.empty?
       create_teams(LeagueTableScrapper.get_team_data(@league_table.url, @league_table.number_of_teams), params[:league_table_id])
     else
       update_teams(LeagueTableScrapper.get_team_data(@league_table.url, @league_table.number_of_teams), params[:league_table_id])

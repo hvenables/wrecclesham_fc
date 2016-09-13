@@ -74,7 +74,6 @@ class FixtureScrapper
     end
 
     def sorted_fixtures(doc)
-
       array_scores = sort_data(doc)
 
       formatted_score = []

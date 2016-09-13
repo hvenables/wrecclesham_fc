@@ -1,6 +1,29 @@
 .container-fluid
   .row
-    .container.col-md-12.col-lg-8
+    .container.col-lg-12.c-wrapper
+      #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+        %ol.carousel-indicators
+          %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+          %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+          %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+          %li{"data-slide-to" => "3", "data-target" => "#carousel-example-generic"}
+          %li{"data-slide-to" => "4", "data-target" => "#carousel-example-generic"}
+          %li{"data-slide-to" => "5", "data-target" => "#carousel-example-generic"}
+        .carousel-inner{:role => "listbox"}
+          .carousel-item.active
+            %img.col-xs-4.img-slide{:alt => "First slide", "src" => "#{@news[0].image.url(:medium)}"}/
+            %img.col-xs-4.img-slide{:alt => "Second slide", "src" => "#{@news[1].image.url(:medium)}"}/
+            %img.col-xs-4.img-slide{:alt => "Third slide", "src" => "#{@news[2].image.url(:medium)}"}/
+          .carousel-item
+            %img.col-xs-4.img-slide{:alt => "Fourth slide", "src" => "#{@news[3].image.url(:medium)}"}/
+            %img.col-xs-4.img-slide{:alt => "Fifth slide", "src" => "#{@news[4].image.url(:medium)}"}/
+            %img.col-xs-4.img-slide{:alt => "Sixth slide", "src" => "#{@news[5].image.url(:medium)}"}/
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic", :role => "button"}
+          %span.icon-prev{"aria-hidden" => "true"}
+          %span.sr-only Previous
+        %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic", :role => "button"}
+          %span.icon-next{"aria-hidden" => "true"}
+          %span.sr-only Next
     .container.col-md-12.col-lg-8
       .container
         %h4.news-heading.title
@@ -23,7 +46,7 @@
           League Tables
       .container.welcome-tables
         - if @first_team_table
-          %h6.title
+          %h6
             = @first_team_table.name + " - " + @years
           %table.table.small-table
             %thead.thead-inverse
@@ -44,46 +67,47 @@
                   %td{ class: 'small', scope: 'row' }
                     = team.position
                   %td.small
-                    = team.team
+                    = team.team.name
                   %td.small
                     = team.games
                   %td.small
-                    = team.goal_difference
+                    = team.goals_difference
                   %td.small
                     = team.points
           = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
         - else
           Add teams to the league
       .container.welcome-tables
-        - if @reserve_team_table
-          %h6.title
-            = @reserve_team_table.name + " - " + @years
-          %table.table.small-table
-            %thead.thead-inverse
-              %tr
-                %th.small
-                  Pos
-                %th.small
-                  Team
-                %th.small
-                  Played
-                %th.small
-                  Difference
-                %th.small
-                  Points
-            %tbody
-              - @reserve_team_teams.each do |team|
-                %tr
-                  %td{ class: 'small', scope: 'row' }
-                    = team.position
-                  %td.small
-                    = team.team
-                  %td.small
-                    = team.games
-                  %td.small
-                    = team.goal_difference
-                  %td.small
-                    = team.points
-          = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
-        - else
-          Add teams to the league
+
+-#         - if @reserve_team_table
+-#           %h6.title
+-#             = @reserve_team_table.name + " - " + @years
+-#           %table.table.small-table
+-#             %thead.thead-inverse
+-#               %tr
+-#                 %th.small
+-#                   Pos
+-#                 %th.small
+-#                   Team
+-#                 %th.small
+-#                   Played
+-#                 %th.small
+-#                   Difference
+-#                 %th.small
+-#                   Points
+-#             %tbody
+-#               - @reserve_team_teams.each do |team|
+-#                 %tr
+-#                   %td{ class: 'small', scope: 'row' }
+-#                     = team.position
+-#                   %td.small
+-#                     = team.team
+-#                   %td.small
+-#                     = team.games
+-#                   %td.small
+-#                     = team.goal_difference
+-#                   %td.small
+-#                     = team.points
+-#           = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
+-#         - else
+-#           Add teams to the league

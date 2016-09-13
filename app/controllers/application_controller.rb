@@ -7,6 +7,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def home_team
+    Team.find_by(team: 'UFC Farnham')
+  end
+
+  def reserve_ream
+    Team.find_by(team: "UFC Farnham Reserves")
+  end
+
   def load_league
     @first_team_table = LeagueTable.active_first_team_table
     @reserve_team_table = LeagueTable.active_reserve_team_table

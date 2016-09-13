@@ -15,17 +15,19 @@ class LeagueTableScrapper
 
   def self.table(doc, number_of_teams)
     @table = []
-    doc.css('table.leagueTable').css('td').each do |element|
+    doc.css('table.League-TableDetail_Table.Table').css('td').each do |element|
       @table << element.text
     end
-    @table = @table.reject!(&:empty?).drop(10)
+
+    @table.each {|elem| elem.gsub!(/\s?/,"").gsub!(" ","")}.pop(1)
+
     split_teams(@table, number_of_teams)
   end
 
   def self.split_teams(teams, number_of_teams)
     table = []
     number_of_teams.times do
-      table << teams.pop(9)
+      table << teams.pop(20)
     end
     table
   end

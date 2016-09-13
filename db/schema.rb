@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712172622) do
+ActiveRecord::Schema.define(version: 20160905215359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,20 +60,34 @@ ActiveRecord::Schema.define(version: 20160712172622) do
     t.datetime "image_updated_at"
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.string   "team"
+  create_table "seasons", force: :cascade do |t|
     t.integer  "games"
     t.integer  "won"
     t.integer  "drawn"
     t.integer  "lost"
     t.integer  "goals_for"
     t.integer  "goals_against"
-    t.integer  "goal_difference"
+    t.integer  "goals_difference"
     t.integer  "points"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "league_table_id"
-    t.index ["league_table_id"], name: "index_teams_on_league_table_id", using: :btree
+    t.integer  "team_id"
+    t.integer  "home_wins"
+    t.integer  "home_drawn"
+    t.integer  "home_lost"
+    t.integer  "home_goals_for"
+    t.integer  "home_goals_against"
+    t.integer  "away_wins"
+    t.integer  "away_drawn"
+    t.integer  "away_lost"
+    t.integer  "away_goals_for"
+    t.integer  "away_goals_against"
+    t.integer  "position"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,5 +116,6 @@ ActiveRecord::Schema.define(version: 20160712172622) do
   end
 
   add_foreign_key "fixtures", "league_tables"
-  add_foreign_key "teams", "league_tables"
+  add_foreign_key "seasons", "league_tables"
+  add_foreign_key "seasons", "teams"
 end

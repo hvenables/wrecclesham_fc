@@ -19,7 +19,7 @@ class LeagueTablesController < ApplicationController
 
   def show
     @league_table = LeagueTable.find(params[:id])
-    @teams = @league_table.teams.ordered_on_points
+    @teams = @league_table.seasons.ordered_on_points
     @years = show_year(@league_table.year)
   end
 
