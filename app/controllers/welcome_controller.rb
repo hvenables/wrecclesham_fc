@@ -5,13 +5,12 @@ class WelcomeController < ApplicationController
   def index
     if @first_team_table
       @first_team_teams = @first_team_table.seasons.ordered_on_points
-      @years = show_year(@first_team_table.year)
       @first_team_teams = teams_around_us(@first_team_teams, 'Wrecclesham')
     end
-    # if @reserve_team_table
-      # @reserve_team_teams = @reserve_team_table.seasons.ordered_on_points
-      # @reserve_team_teams = teams_around_us(@reserve_team_teams, 'UFC Farnham Reserves')
-    # end
+    if @reserve_team_table
+      @reserve_team_teams = @reserve_team_table.seasons.ordered_on_points
+      @reserve_team_teams = teams_around_us(@reserve_team_teams, 'Wrecclesham Reserves')
+    end
     @news = News.all
   end
 
