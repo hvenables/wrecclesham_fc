@@ -1,19 +1,18 @@
-.news.container
-  %h3.title Latest News
-  - if @news.any?
-    .card-columns
-      - @news.each do |news|
-        = link_to news_path(news), class: 'news-article-link' do
-          .card.green-hover
-            .card-block
-              %h4.card-title
+- if @news.any?
+  .container
+    .well.well-sm
+      %h3.title Latest News
+    - @news.each do |news|
+      #products.row.list-group.video-container
+        = link_to news_path(news), class: 'item list-group-item video-link' do
+          .thumbnail
+            %img.group.list-group-image.news-image{:alt => "", :src => "#{news.image.url(:medium)}"}/
+            .caption
+              %h4.group.inner.list-group-item-heading
                 = news.title
-            %img.card-img-top.img-fluid{:alt => "Card image cap", "src" => "#{news.image.url(:large)}"}/
-            .card-block
-              %p.card-text
+              %p.group.inner.list-group-item-text
                 = news.summary
-            .card-footer.text-xs-right
-              = news.updated_at.to_formatted_s(:long)
-
-  - else
-    = "No news has been add yet"
+              %p.group-inner.list-group-item-footer.bottom-align-text
+                = news.created_at.to_formatted_s(:month_and_year)
+- else
+  No News has been added yet
