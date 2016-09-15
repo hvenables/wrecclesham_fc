@@ -1,0 +1,11 @@
+- if @about
+  .container
+    .card
+      .card-block
+        %h4.card-title
+          = @about.title
+        %p.card-text
+          = @about.content
+        %p.card-text
+          %small.text-muted
+            = "Last updated #{relative_time(@about.updated_at)}"

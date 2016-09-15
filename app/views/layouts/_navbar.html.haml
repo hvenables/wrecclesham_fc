@@ -17,7 +17,16 @@
         %li.nav-item{:class => active_class(news_index_path())}
           = link_to 'News', news_index_path, {class: 'nav-link'}
       %li.nav-item
-        %a.nav-link{:href => "#"} About
+      - if can? :manage, About
+        %li.nav-item{:class => "#{active_class(about_index_path())} dropdown"}
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} About
+          .dropdown-menu.pull-xs-right
+            = link_to 'About', about_index_path(), {class: 'dropdown-item'}
+            .dropdown-divider
+            = link_to 'Edit About', edit_about_path(About.last), {class: 'dropdown-item'}
+      - else
+        %li.nav-item{:class => active_class(about_index_path())}
+          = link_to 'About', about_index_path, {class: 'nav-link'}
       - if can? :manage, Video
         %li.nav-item{:class => "#{active_class(videos_path())} #{active_class(new_video_path())} dropdown"}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Videos

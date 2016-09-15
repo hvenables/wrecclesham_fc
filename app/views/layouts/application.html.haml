@@ -14,7 +14,7 @@
     = render 'layouts/navbar'
     .container
       - flash.each do |key, value|
-        .alert{ :class => bootstrap_class_for(key) }
+        .alert.flash-title{ :class => bootstrap_class_for(key) }
           %button.close{ :data => { :dismiss => "alert" } } x
           = value
     .container.center-panel

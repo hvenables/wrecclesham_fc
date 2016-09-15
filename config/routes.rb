@@ -16,4 +16,6 @@ Rails.application.routes.draw do
     resources :seasons
     resources :fixtures
   end
+
+  resources :about, only: [:index, :edit, :update]
 end

@@ -1,0 +1,9 @@
+= form_for @about, html: {multipart: true} do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, { class: "form-control" }
+  .form-group
+    = f.label :content
+    = f.label :Content_is_processed_using_markdown, { class: 'pull-xs-right text-muted small' }
+    = f.text_area :content, { class: 'form-control', rows: 15 }
+  = f.submit class: 'btn btn-success'
