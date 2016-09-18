@@ -6,12 +6,14 @@ class NewsController < ApplicationController
   end
 
   def show
+    @latest_news = News.latest_news(@news)
   end
 
   def new
   end
 
   def create
+    news_params[:content].gsub!(/\n+/, "")
     if @news.save
       flash[:notice] = "News story successfully published"
       redirect_to news_path(@news)
@@ -25,6 +27,7 @@ class NewsController < ApplicationController
   end
 
   def update
+    news_params[:content].gsub!(/\n+/, "")
     if @news.update(news_params)
       flash[:notice] = "Succesfully updated the news article"
       redirect_to news_path(@news)
@@ -37,10 +40,10 @@ class NewsController < ApplicationController
   def destroy
     if @news.destroy
       flash[:notice] = 'News article has been deleted'
-      redirect_to videos_path
+      redirect_to news_path
     else
       flash[:error] = "News article could not be deleted"
-      redirect_to video_path(@video)
+      redirect_to news_path(@video)
     end
   end
 

@@ -7,4 +7,15 @@ class News < ApplicationRecord
   validates :summary, length: { maximum: 250 }
   validates :content, presence: true
 
+  def self.latest_news(current_article)
+    latest_news = []
+    order(created_at: :desc).each do |news|
+      next if news == current_article
+      if latest_news.length < 5
+        latest_news << news
+      end
+    end
+    latest_news
+  end
+
 end
