@@ -1,13 +1,23 @@
 FactoryGirl.define do
   factory :season, class: Season do
     association :team, factory: :team
-    games 1
-    won 1
-    drawn 1
-    lost 1
+    games 6
+    won 2
+    drawn 2
+    lost 2
+    home_wins 1
+    home_drawn 1
+    home_lost 1
+    home_goals_for 5
+    home_goals_against 5
+    away_wins 1
+    away_drawn 1
+    away_lost 1
+    away_goals_for 5
+    away_goals_against 5
     goals_for 10
     goals_against 10
-    goal_difference 0
+    goals_difference 0
     points 4
     association :league_table, factory: :league_table
   end

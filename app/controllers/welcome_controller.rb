@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
       @reserve_team_teams = @reserve_team_table.seasons.ordered_on_points
       @reserve_team_teams = teams_around_us(@reserve_team_teams, 'Wrecclesham Reserves')
     end
-    @news = News.all
+    @news = News.all.order(updated_at: :desc).limit(5)
   end
 
   private
