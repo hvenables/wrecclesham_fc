@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905215359) do
+ActiveRecord::Schema.define(version: 20160918201502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20160905215359) do
 
   create_table "fixtures", force: :cascade do |t|
     t.date     "date"
-    t.string   "home"
-    t.string   "away"
+    t.integer  "home"
+    t.integer  "away"
     t.string   "home_score"
     t.string   "away_score"
     t.datetime "created_at",      null: false
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(version: 20160905215359) do
   end
 
   add_foreign_key "fixtures", "league_tables"
+  add_foreign_key "fixtures", "teams", column: "away"
+  add_foreign_key "fixtures", "teams", column: "home"
   add_foreign_key "seasons", "league_tables"
   add_foreign_key "seasons", "teams"
 end

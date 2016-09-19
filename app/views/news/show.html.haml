@@ -1,9 +1,10 @@
 .container.col-xs-12.col-lg-8
   .card
-    %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.image.url(:large)}"}/
     .card-block
       %h4.card-title
         = @news.title
+    %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.image.url(:large)}"}/
+    .card-block
       %p.card-text
         = preserve gfm(@news.content)
       %p.card-text

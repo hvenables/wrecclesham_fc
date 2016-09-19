@@ -4,6 +4,6 @@
   %ul
     - @fixtures.each do |fixture|
       %li
-        = "#{fixture.date} - #{Team.find(fixture.home).team} #{fixture.home_score} - #{fixture.away_score} #{Team.find(fixture.away).team}"
+        = "#{fixture.date} - #{fixture.home.name} #{fixture.home_score} - #{fixture.away_score} #{fixture.away.name}"
 
 = link_to "Add Fixtures", league_table_fixtures_path(), method: :post
