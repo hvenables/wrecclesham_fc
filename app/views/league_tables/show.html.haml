@@ -53,6 +53,7 @@
       Add teams to the league
 
   - if can? :manage, LeagueTable
-    = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post, class: 'btn btn-success'
+    = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post, class: 'btn btn-sm btn-success'
+    = link_to "Edit", edit_league_table_path(@league_table), class: 'btn btn-sm btn-primary'
 
-    = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-success'
+    = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-sm btn-danger'

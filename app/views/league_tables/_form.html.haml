@@ -1,0 +1,23 @@
+= form_for @league_table do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, { class: "form-control" }
+  .form-group
+    = f.label :year
+    = f.text_field :year, { class: "form-control" }
+  .form-group
+    = f.label :number_of_teams
+    = f.text_field :number_of_teams, { class: "form-control" }
+  .form-group
+    = f.label :promoted
+    = f.text_field :promoted, { class: "form-control" }
+  .form-group
+    = f.label :relegated
+    = f.text_field :relegated, { class: "form-control" }
+  .form-group
+    = f.label 'URL'
+    = f.text_field :url, { class: "form-control" }
+  .form-group
+    = f.label 'Fixture URL'
+    = f.text_field :fixture_url, { class: "form-control" }
+  = f.submit class: 'btn btn-success'
