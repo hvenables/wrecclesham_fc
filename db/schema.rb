@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20160918201502) do
 
   create_table "fixtures", force: :cascade do |t|
     t.date     "date"
-    t.integer  "home"
-    t.integer  "away"
+    t.integer  "home_id"
+    t.integer  "away_id"
     t.string   "home_score"
     t.string   "away_score"
     t.datetime "created_at",      null: false
@@ -116,8 +116,8 @@ ActiveRecord::Schema.define(version: 20160918201502) do
   end
 
   add_foreign_key "fixtures", "league_tables"
-  add_foreign_key "fixtures", "teams", column: "away"
-  add_foreign_key "fixtures", "teams", column: "home"
+  add_foreign_key "fixtures", "teams", column: "away_id"
+  add_foreign_key "fixtures", "teams", column: "home_id"
   add_foreign_key "seasons", "league_tables"
   add_foreign_key "seasons", "teams"
 end
