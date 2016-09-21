@@ -5,7 +5,7 @@ module FixturesHelper
     fixtures.each do |fixture|
       next if fixture[0] != 'Div' + league_table.name[-1]
       Fixture.create(
-        date: Date.parse(fixture[1][0..7]),
+        date: DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date,
         home_id: Team.find_by(name: fixture[2].underscore.split('_').collect{|c| c.capitalize}.join(' ')).id,
         away_id: Team.find_by(name: fixture[3].underscore.split('_').collect{|c| c.capitalize}.join(' ')).id,
         league_table_id: league_table.id
