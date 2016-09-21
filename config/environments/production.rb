@@ -2,7 +2,7 @@ Rails.application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => Rail.application.secure.s3_bucket_name,
+      :bucket => Rails.application.secure.s3_bucket_name,
       :access_key_id => Rails.application.secrets.aws_access_key_id,
       :secret_access_key => Rails.application.secrets.aws_secret_access_key
     },
