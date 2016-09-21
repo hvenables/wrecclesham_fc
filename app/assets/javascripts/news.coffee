@@ -3,4 +3,6 @@
 
 $(document).on "turbolinks:load", ->
   simplemde = new SimpleMDE({ element: $(".news-content")[0] })
-  simplemde1 = new SimpleMDE({ element: $(".news-summary")[0] })
+
+  if $(".news-summary").length != 0
+    simplemde1 = new SimpleMDE({ element: $(".news-summary")[0] })

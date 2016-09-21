@@ -43,7 +43,7 @@ class NewsController < ApplicationController
       redirect_to news_path
     else
       flash[:error] = "News article could not be deleted"
-      redirect_to news_path(@video)
+      redirect_to news_path
     end
   end
 
