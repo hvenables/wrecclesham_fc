@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
+server '95.172.20.122', roles: [:web, :app, :db], primary: true
+
 set :application, 'wrecclesham'
 set :repo_url, 'git@github.com:hvenables/wrecclesham_fc.git'
 set :user,            'deploy'
