@@ -1,6 +1,4 @@
 # config valid only for current version of Capistrano
-require 'whenever/capistrano'
-
 lock '3.6.1'
 
 server '95.172.20.122', roles: [:web, :app, :db], primary: true
