@@ -5,12 +5,12 @@
     - @fixtures.each do |fixture|
       - if @date == fixture.date
         %li.list-group-item
-          = "#{fixture.home.name} #{fixture.home_score} - #{fixture.away_score} #{fixture.away.name}"
+          = "#{fixture.home.name} #{fixture.home_score} vs. #{fixture.away_score} #{fixture.away.name}"
       - else
         %li.list-group-item.dark-color.form-label
-          = fixture.date.strftime("%d %B %Y")
+          = fixture.date.strftime("%a, %d %B %Y")
         %li.list-group-item
-          = "#{fixture.home.name} #{fixture.home_score} - #{fixture.away_score} #{fixture.away.name}"
+          = "#{fixture.home.name} #{fixture.home_score} vs. #{fixture.away_score} #{fixture.away.name}"
         - @date = fixture.date
 
 %br
