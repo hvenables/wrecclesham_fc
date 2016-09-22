@@ -1,13 +1,13 @@
 = form_for @video do |f|
   .form-group
-    = f.label :title
+    = f.label :title, class: "form-label"
     = f.text_field :title, { class: "form-control" }
   .formm-group
-    = f.label :summary
+    = f.label :summary, class: "form-label"
     = f.text_area :summary, { class: 'form-control, news-content', rows: 5 }
   .form-group
-    = f.label :url
+    = f.label :url, class: "form-label"
     .input-group
-      %span#basic-addon3.input-group-addon https://example.com/users/
+      %span#basic-addon3.input-group-addon https://www.youtube.com/embed/2iOQ053s_oM
       = f.text_field :url, {id: 'basic-url', class: 'form-control', 'aria-describedby': "basic-addon3", type: "text"}
   = f.submit class: 'btn btn-success'

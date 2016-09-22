@@ -1,10 +1,18 @@
 - if @fixtures.nil?
   Please Add fixtures
 - else
-  %ul
+  %ul.list-group
     - @fixtures.each do |fixture|
-      %li
-        = "#{fixture.date} - #{fixture.home.name} #{fixture.home_score} - #{fixture.away_score} #{fixture.away.name}"
+      - if @date == fixture.date
+        %li.list-group-item
+          = "#{fixture.home.name} #{fixture.home_score} vs. #{fixture.away_score} #{fixture.away.name}"
+      - else
+        %li.list-group-item.dark-color.form-label
+          = fixture.date.strftime("%a, %d %B %Y")
+        %li.list-group-item
+          = "#{fixture.home.name} #{fixture.home_score} vs. #{fixture.away_score} #{fixture.away.name}"
+        - @date = fixture.date
 
+%br
 - if can? :manage, Fixture
-  = link_to "Add Fixtures", league_table_fixtures_path(), method: :post
+  = link_to "Add Fixtures", league_table_fixtures_path(), method: :post, class: "btn btn-success"

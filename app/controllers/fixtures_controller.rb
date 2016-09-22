@@ -2,7 +2,7 @@ class FixturesController < ApplicationController
   include FixturesHelper
 
   def index
-    @fixtures = Fixture.where(league_table_id: params[:league_table_id])
+    @fixtures = Fixture.where(league_table_id: params[:league_table_id]).order(date: :asc)
   end
 
   def create

@@ -4,8 +4,6 @@
   = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand'
   .collapse.navbar-toggleable-md#collapsing-navbar
     %ul.nav.navbar-nav.pull-xs-right.pull-lg-left.text-xs-right.navbar-list
-      %li.nav-item{:class => active_class(root_path())}
-        = link_to 'Home', root_path, {class: 'nav-link'}
       - if can? :manage, News
         %li.nav-item{:class => "#{active_class(news_index_path())} #{active_class(new_news_path())} dropdown"}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} News
@@ -47,8 +45,9 @@
             -if can? :manage, LeagueTable
               .dropdown-divider
               = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
-      - if @first_team_table
-        %li.nav-item
-          = link_to 'Fixtures', league_table_fixtures_path(league_table_id: @first_team_table), class: 'nav-link'
-        %li.nav-item
-          %a.nav-link{:href => "#"} Players
+      - if @first_team_table && @reserve_team_table
+        %li.nav-item{:class => "#{active_class(league_table_fixtures_path(@first_team_table))} #{active_class(league_table_fixtures_path(@reserve_team_table))} dropdown"}
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Fixtures
+          .dropdown-menu
+            = link_to 'First Team', league_table_fixtures_path(league_table_id: @first_team_table), class: 'dropdown-item'
+            = link_to 'Reserve Team', league_table_fixtures_path(league_table_id: @reserve_team_table), class: 'dropdown-item'
