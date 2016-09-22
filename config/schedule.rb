@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every :day, at: '2am' do
-  rake 'update_league_table'
+  rake 'update_league_tables'
 end
