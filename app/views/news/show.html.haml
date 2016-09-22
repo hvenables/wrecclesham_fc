@@ -10,8 +10,9 @@
       %p.card-text
         %small.text-muted
           = "Last updated #{relative_time(@news.updated_at)}"
-        = link_to 'Delete', news_path(@news), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
-        = link_to 'Edit', edit_news_path(@news), class: 'pull-xs-right btn btn-sm btn-success edit-button'
+        - if can? :manage, News
+          = link_to 'Delete', news_path(@news), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
+          = link_to 'Edit', edit_news_path(@news), class: 'pull-xs-right btn btn-sm btn-success edit-button'
 .container.col-xs-4
   %h4
     Latest News
