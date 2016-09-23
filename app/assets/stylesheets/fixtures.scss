@@ -5,3 +5,20 @@
 .dark-color {
   background-color: #373A3C !important;
 }
+
+.list-group-item {
+  border-left: none !important;
+  border-right: none !important;
+}
+.list-group-item:first-child {
+  border-top: none !important;
+}
+.fixture-nav {
+  color: white;
+}
+.fixture-nav:hover {
+  color: gray;
+}
+.nav-tabs {
+  border-bottom: none !important;
+}
