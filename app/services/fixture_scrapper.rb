@@ -4,14 +4,19 @@ require 'nokogiri'
 class FixtureScrapper
 
   def self.get_fixtures_data(url)
-    doc = Nokogiri::HTML(open(url)) do |config|
-        config.noblanks
-    end
-
+    doc = scrap_website(url)
     fixtures(doc)
   end
 
   private
+
+  def self.scrap_website(url)
+    doc = Nokogiri::HTML(open(url)) do |config|
+      config.noblanks
+    end
+
+    doc
+  end
 
   def self.fixtures(doc)
     fixture_list = []
@@ -19,7 +24,7 @@ class FixtureScrapper
       fixture_list << element.text
     end
 
-    fixture_list.each {|elem| elem.gsub!(/\s?/,"").gsub!(" ","")}.pop(1)
+    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
 
     split_fixtures(fixture_list)
   end
@@ -27,9 +32,7 @@ class FixtureScrapper
   def self.split_fixtures(fixtures)
     fixture_list = []
     while fixtures.any? do
-      fixtures.pop(1)
       fixture_list << fixtures.pop(6)
-      fixtures.pop(1)
     end
     fixture_list
   end

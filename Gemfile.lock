@@ -187,6 +187,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (3.4.0)
     pygments.rb (0.6.3)
       posix-spawn (~> 0.3.6)
@@ -334,6 +336,7 @@ DEPENDENCIES
   paperclip
   pg (~> 0.18)
   pry
+  pry-rails
   puma
   pygments.rb
   rails (= 5.0.0)

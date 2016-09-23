@@ -15,4 +15,5 @@
 
 %br
 - if can? :manage, Fixture
-  = link_to "Add Fixtures", league_table_fixtures_path(), method: :post, class: "btn btn-success"
+  = link_to "Add Fixtures", league_table_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
+  = link_to "Add Results", league_table_fixtures_path(), method: :post, class: "btn btn-primary"
