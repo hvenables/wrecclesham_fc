@@ -20,4 +20,7 @@
   .form-group
     = f.label 'Fixture URL', class: "form-label"
     = f.text_field :fixture_url, { class: "form-control" }
+  .form-group
+    = f.label 'Result URL', class: "form-label"
+    = f.text_field :results_url, { class: "form-control" }
   = f.submit class: 'btn btn-success'

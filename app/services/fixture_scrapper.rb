@@ -8,6 +8,11 @@ class FixtureScrapper
     fixtures(doc)
   end
 
+  def self.get_results_data(url)
+    doc = scrap_website(url)
+    results(doc)
+  end
+
   private
 
   def self.scrap_website(url)
@@ -18,11 +23,36 @@ class FixtureScrapper
     doc
   end
 
-  def self.fixtures(doc)
+  def self.extract_fixtures(doc)
     fixture_list = []
+
     doc.css('table.League-Fixtures_Table.Table').css('td').each do |element|
       fixture_list << element.text
     end
+
+    fixture_list
+  end
+
+  def self.extract_results(doc)
+    fixture_list = []
+
+    doc.css('table.Table').css('td').each do |element|
+      fixture_list << element.text
+    end
+
+    fixture_list
+  end
+
+  def self.fixtures(doc)
+    fixture_list = extract_fixtures(doc)
+
+    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
+
+    split_fixtures(fixture_list)
+  end
+
+  def self.results(doc)
+    fixture_list = extract_results(doc)
 
     fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
 
@@ -36,5 +66,4 @@ class FixtureScrapper
     end
     fixture_list
   end
-
 end

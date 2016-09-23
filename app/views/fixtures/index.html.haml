@@ -2,16 +2,13 @@
   Please Add fixtures
 - else
   %ul.list-group
-    - @fixtures.each do |fixture|
-      - if @date == fixture.date
-        %li.list-group-item
-          = "#{fixture.home.name} #{fixture.home_score} vs. #{fixture.away_score} #{fixture.away.name}"
-      - else
-        %li.list-group-item.dark-color.form-label
-          = fixture.date.strftime("%a, %d %B %Y")
-        %li.list-group-item
-          = "#{fixture.home.name} #{fixture.home_score} vs. #{fixture.away_score} #{fixture.away.name}"
-        - @date = fixture.date
+    - @fixtures.group_by(&:date).each do |date, fixtures|
+      %li.list-group-item.dark-color.form-label
+        = date.strftime("%a, %d %B %Y")
+        - fixtures.each do |fixture|
+          %li.list-group-item
+            = "#{fixture.home.name} #{fixture.home_score} - #{fixture.away_score} #{fixture.away.name}"
+          - @date = fixture.date
 
 %br
 - if can? :manage, Fixture

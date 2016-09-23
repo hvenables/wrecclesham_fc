@@ -48,7 +48,7 @@ class LeagueTablesController < ApplicationController
   private
 
   def league_table_params
-    params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url, :fixture_url, :number_of_teams)
+    params.require(:league_table).permit(:name, :year, :promoted, :relegated, :url, :fixture_url, :number_of_teams, :results_url)
   end
 
 end
