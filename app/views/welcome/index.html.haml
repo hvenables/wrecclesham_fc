@@ -1,23 +1,39 @@
 .container-fluid
   .row
     = render 'carousel'
-    .container.col-md-12.col-lg-8
+    .container.col-md-12.col-lg-7
       .container
         %h4.news-heading.title
           Latest News
       - if @news
         .row
           - @news.each do |news|
-            = link_to news_path(news), class: 'welcome-link' do
-              .card.col-xs-12.green-hover.welcome-news
-                .col-xs-4.image-container
-                  %img.card-img-top.img-fluid.welcome-image{:alt => "Card image cap", "src" => "#{news.image.url(:large)}"}/
-                .col-xs-8
-                  %h4.card-title.news-title
-                    = news.title
-                  %p.card-text
-                    = preserve gfm(news.summary)
-    .container.col-lg-4.col-md-12.pull-lg-right
+            #products.row.list-group.video-container.welcome-container.hidden-xs-down
+              = link_to news_path(news), class: 'item list-group-item video-link' do
+                .thumbnail
+                  %img.group.list-group-image.welcome-image{:alt => "", :src => "#{news.image.url(:medium)}"}/
+                  .caption
+                    %h4.group.inner.list-group-item-heading
+                      = news.title
+                    %p.group.inner.list-group-item-text
+                      = news.summary
+                    %p.group-inner.list-group-item-footer.bottom-align-text
+                      = news.created_at.to_formatted_s(:month_and_year)
+            .hidden-sm-up
+              = link_to news_path(news), class: 'video-link' do
+                .card.green-hover
+                  %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
+                  .card-block
+                    %h4.card-title
+                      = news.title
+                    %p.card-text
+                      = news.summary
+                    %p.card-text
+                      %small.text-muted
+                        = news.created_at.to_formatted_s(:month_and_year)
+
+
+    .container.col-lg-5.col-md-12.pull-lg-right.welcome-table-container
       .container
         %h4.newsheading.title
           League Tables
@@ -32,11 +48,11 @@
                   Pos
                 %th.small
                   Team
-                %th.small
+                %th.small.text-xs-center
                   Played
-                %th.small
-                  Difference
-                %th.small
+                %th.small.text-xs-center
+                  Diff
+                %th.small.text-xs-center
                   Points
             %tbody
               - @first_team_teams.each do |team|
@@ -45,11 +61,11 @@
                     = team.position
                   %td.small
                     = team.team.name
-                  %td.small
+                  %td.small.text-xs-center
                     = team.games
-                  %td.small
+                  %td.small.text-xs-center
                     = team.goals_difference
-                  %td.small
+                  %td.small.text-xs-center
                     = team.points
           = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
         - else
@@ -65,11 +81,11 @@
                   Pos
                 %th.small
                   Team
-                %th.small
+                %th.small.text-xs-center
                   Played
-                %th.small
-                  Difference
-                %th.small
+                %th.small.text-xs-center
+                  Diff
+                %th.small.text-xs-center
                   Points
             %tbody
               - @reserve_team_teams.each do |team|
@@ -78,11 +94,11 @@
                     = team.position
                   %td.small
                     = team.team.name
-                  %td.small
+                  %td.small.text-xs-center
                     = team.games
-                  %td.small
+                  %td.small.text-xs-center
                     = team.goals_difference
-                  %td.small
+                  %td.small.text-xs-center
                     = team.points
           = link_to 'See full table', league_table_path(@reserve_team_table), {class: 'small pull-xs-right'}
         - else

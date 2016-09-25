@@ -1,23 +1,14 @@
-.news-article-link:hover {
-  color: inherit;
-}
-.news-article-link {
-  color: inherit;
-}
-
 .editor-toolbar {
   background-color: white;
 }
 
-@media (min-width: 768px ) {
-  .row {
-      position: relative;
-  }
+.row {
+    position: relative;
+}
 
-  .bottom-align-text {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-right: 10px;
-  }
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
 }

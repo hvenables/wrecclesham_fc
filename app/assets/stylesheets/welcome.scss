@@ -22,36 +22,21 @@
   color: inherit;
 }
 
-.welcome-news {
-  height: 210px;
-}
-
-.welcome-image {
-  max-height: 200px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.image-container {
-  height: 210px;
-  position: relative;
-}
-
-.c-wrapper {
-  height: 255px;
-}
-
 .welcome-league-title {
   color: #493A3C !important;
 }
 
 .flash-title {
   margin-top: 10px;
+}
+
+.welcome-image {
+  max-width: 250px;
+}
+@media only screen and (min-width: 768px) {
+  .welcome-tables {
+    margin-left: 20px !important;
+
+
+  }
 }
