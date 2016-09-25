@@ -55,9 +55,12 @@ gem 'cancancan', '~> 1.15'
 
 gem 'yt'
 
+# caching storage
+gem 'dalli'
+
 # Error reporting
 gem 'rollbar'
-
+gem "jquery-slick-rails"
 # running cron jobs
 gem 'whenever', require: false
 

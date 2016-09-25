@@ -30,13 +30,23 @@
   margin-top: 10px;
 }
 
+.carousel-title {
+  padding-bottom: 1px !important;
+}
+
 .welcome-image {
   max-width: 250px;
 }
-@media only screen and (min-width: 768px) {
-  .welcome-tables {
-    margin-left: 20px !important;
-
-
+.carousel-item {
+  height: 400px;
+  margin-left: 5px;
+}
+@media only screen and (max-width: 544px) {
+  .nav-title {
+    font-size: 16px !important;
+    margin-top: 5px;
+  }
+  .carousel-item {
+    height: 440px;
   }
 }
