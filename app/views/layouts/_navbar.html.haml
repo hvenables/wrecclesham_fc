@@ -1,7 +1,7 @@
 %nav.navbar.navbar-light.main-menu{:role => "navigation", :style => "background-color: #146614;"}
   %button.navbar-toggler.hidden-lg-up.pull-xs-right{"data-target" => "#collapsing-navbar", "data-toggle" => "collapse", :type => "button"}
     \☰
-  = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand'
+  = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand nav-title'
   .collapse.navbar-toggleable-md#collapsing-navbar
     %ul.nav.navbar-nav.pull-xs-right.pull-lg-left.text-xs-right.navbar-list
       - if can? :manage, News

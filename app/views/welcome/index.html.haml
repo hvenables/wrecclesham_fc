@@ -1,39 +1,7 @@
 .container-fluid
+  = render 'carousel'
   .row
-    = render 'carousel'
-    .container.col-md-12.col-lg-7
-      .container
-        %h4.news-heading.title
-          Latest News
-      - if @news
-        .row
-          - @news.each do |news|
-            #products.row.list-group.video-container.welcome-container.hidden-xs-down
-              = link_to news_path(news), class: 'item list-group-item video-link' do
-                .thumbnail
-                  %img.group.list-group-image.welcome-image{:alt => "", :src => "#{news.image.url(:medium)}"}/
-                  .caption
-                    %h4.group.inner.list-group-item-heading
-                      = news.title
-                    %p.group.inner.list-group-item-text
-                      = news.summary
-                    %p.group-inner.list-group-item-footer.bottom-align-text
-                      = news.created_at.to_formatted_s(:month_and_year)
-            .hidden-sm-up
-              = link_to news_path(news), class: 'video-link' do
-                .card.green-hover
-                  %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
-                  .card-block
-                    %h4.card-title
-                      = news.title
-                    %p.card-text
-                      = news.summary
-                    %p.card-text
-                      %small.text-muted
-                        = news.created_at.to_formatted_s(:month_and_year)
-
-
-    .container.col-lg-5.col-md-12.pull-lg-right.welcome-table-container
+    .container.col-lg-4.col-md-12.pull-lg-right.welcome-table-container
       .container
         %h4.newsheading.title
           League Tables
@@ -103,3 +71,8 @@
           = link_to 'See full table', league_table_path(@reserve_team_table), {class: 'small pull-xs-right'}
         - else
           Add teams to the league
+    .container.col-lg-7.col-md-12
+      %h4.newsheading.title
+        Recent Form
+
+
