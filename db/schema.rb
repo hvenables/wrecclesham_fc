@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923220321) do
+ActiveRecord::Schema.define(version: 20160925150111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,28 +62,28 @@ ActiveRecord::Schema.define(version: 20160923220321) do
   end
 
   create_table "seasons", force: :cascade do |t|
-    t.integer  "games"
-    t.integer  "won"
-    t.integer  "drawn"
-    t.integer  "lost"
-    t.integer  "goals_for"
-    t.integer  "goals_against"
-    t.integer  "goals_difference"
-    t.integer  "points"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "games",              default: 0
+    t.integer  "won",                default: 0
+    t.integer  "drawn",              default: 0
+    t.integer  "lost",               default: 0
+    t.integer  "goals_for",          default: 0
+    t.integer  "goals_against",      default: 0
+    t.integer  "goals_difference",   default: 0
+    t.integer  "points",             default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "league_table_id"
     t.integer  "team_id"
-    t.integer  "home_wins"
-    t.integer  "home_drawn"
-    t.integer  "home_lost"
-    t.integer  "home_goals_for"
-    t.integer  "home_goals_against"
-    t.integer  "away_wins"
-    t.integer  "away_drawn"
-    t.integer  "away_lost"
-    t.integer  "away_goals_for"
-    t.integer  "away_goals_against"
+    t.integer  "home_wins",          default: 0
+    t.integer  "home_drawn",         default: 0
+    t.integer  "home_lost",          default: 0
+    t.integer  "home_goals_for",     default: 0
+    t.integer  "home_goals_against", default: 0
+    t.integer  "away_wins",          default: 0
+    t.integer  "away_drawn",         default: 0
+    t.integer  "away_lost",          default: 0
+    t.integer  "away_goals_for",     default: 0
+    t.integer  "away_goals_against", default: 0
     t.integer  "position"
   end
 

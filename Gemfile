@@ -55,6 +55,9 @@ gem 'cancancan', '~> 1.15'
 
 gem 'yt'
 
+# Error reporting
+gem 'rollbar'
+
 # running cron jobs
 gem 'whenever', require: false
 
