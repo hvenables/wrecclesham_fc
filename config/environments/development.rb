@@ -2,14 +2,14 @@ Rails.application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => ENV['S3_BUCKET_NAME'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      :bucket => ENV['S3_BUCKET_NAME'] || Rails.application.secrets.s3_bucket_name,
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'] || Rails.application.secrets.aws_access_key_id,
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] || Rails.application.secrets.aws_secret_access_key
     },
-    :s3_region => ENV['AWS_REGION']
+    :s3_region => ENV['AWS_REGION'] || Rails.application.secrets.aws_region
   }
 
-  Yt.configuration.api_key = ENV['YOUTUBE']
+  Yt.configuration.api_key = ENV['YOUTUBE'] || Rails.application.secrets.youtube
 
   # Settings specified here will take precedence over those in config/application.rb.
 

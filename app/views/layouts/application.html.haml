@@ -16,13 +16,14 @@
     %script{:src => "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"}
     = favicon_link_tag 'favicon.ico'
   %body
-    = render 'layouts/topbar'
-    = render 'layouts/navbar'
-    .container
-      - flash.each do |key, value|
-        .alert.flash-title{ :class => bootstrap_class_for(key) }
-          %button.close{ :data => { :dismiss => "alert" } } x
-          = value
-    .container.center-panel
-      = yield
+    #wrap
+      = render 'layouts/topbar'
+      = render 'layouts/navbar'
+      .container
+        - flash.each do |key, value|
+          .alert.flash-title{ :class => bootstrap_class_for(key) }
+            %button.close{ :data => { :dismiss => "alert" } } x
+            = value
+      .container.center-panel
+        = yield
     = render 'layouts/footer'
