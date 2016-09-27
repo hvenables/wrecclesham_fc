@@ -40,3 +40,5 @@ $(document).on "turbolinks:load", ->
   if $(".news-summary").length != 0
     simplemde1 = new SimpleMDE({ element: $(".news-summary")[0] })
 
+$(document). on "turbolinks:before-cache", ->
+  $('.carousel').slick('unslick')

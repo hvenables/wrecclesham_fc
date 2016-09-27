@@ -1,0 +1,3 @@
+@mixin carousel-width($items, $percentage) {
+  width: ((100% / $items) - $percentage);
+}

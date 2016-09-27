@@ -40,10 +40,10 @@ class NewsController < ApplicationController
   def destroy
     if @news.destroy
       flash[:notice] = 'News article has been deleted'
-      redirect_to news_path
+      redirect_to news_index_path
     else
       flash[:error] = "News article could not be deleted"
-      redirect_to news_path
+      redirect_to news_index_path
     end
   end
 

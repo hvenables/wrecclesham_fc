@@ -41,6 +41,35 @@
   height: 400px;
   margin-left: 5px;
 }
+
+.carousel:not(.slick-initialized) {
+  @media only screen and (max-width: 480px) {
+    .carousel-item {
+      @include carousel-width(1);
+      float: left;
+    }
+  }
+  @media only screen and (min-width: 481px) and (max-width: 600px) {
+    .carousel-item {
+      @include carousel-width(2);
+      float: left;
+    }
+  }
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .carousel-item {
+      @include carousel-width(3);
+      float: left;
+    }
+  }
+  @media only screen and (min-width: 1025px) {
+    .carousel-item {
+      @include carousel-width(4);
+      float: left;
+    }
+  }
+}
+
+
 @media only screen and (max-width: 544px) {
   .nav-title {
     font-size: 16px !important;
