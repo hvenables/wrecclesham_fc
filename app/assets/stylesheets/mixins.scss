@@ -1,3 +1,9 @@
-@mixin carousel-width($items, $percentage) {
-  width: ((100% / $items) - $percentage);
+@mixin carousel-width($items) {
+  width: (95% / $items);
+}
+
+@mixin hide-extra-elements($items) {
+  &:nth-child(n + #{$items}) {
+    display: none;
+  }
 }
