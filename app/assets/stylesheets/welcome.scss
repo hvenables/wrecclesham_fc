@@ -43,10 +43,14 @@
 }
 
 .carousel:not(.slick-initialized) {
+  .carousel-item {
+    float: left;
+  }
+
   @media only screen and (max-width: 480px) {
     .carousel-item {
       @include carousel-width(1);
-      float: left;
+      margin-bottom: 52px;
     }
     .video-link {
       @include hide-extra-elements(2)
@@ -55,7 +59,7 @@
   @media only screen and (min-width: 481px) and (max-width: 600px) {
     .carousel-item {
       @include carousel-width(2);
-      float: left;
+      margin-bottom: 52px;
     }
     .video-link{
       @include hide-extra-elements(3)
@@ -65,7 +69,7 @@
   @media only screen and (min-width: 601px) and (max-width: 1024px) {
     .carousel-item {
       @include carousel-width(3);
-      float: left;
+      margin-bottom: 42px;
     }
     .video-link {
       @include hide-extra-elements(4)
@@ -74,7 +78,7 @@
   @media only screen and (min-width: 1025px) {
     .carousel-item {
       @include carousel-width(4);
-      float: left;
+      margin-bottom: 42px;
     }
     .video-link {
       @include hide-extra-elements(5)
