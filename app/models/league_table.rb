@@ -1,5 +1,6 @@
 class LeagueTable < ApplicationRecord
   has_many :seasons, dependent: :destroy
+  has_many :teams
   # has_many :fixtures
 
   def self.active_first_team_table

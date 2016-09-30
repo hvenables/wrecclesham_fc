@@ -10,7 +10,7 @@ class Season < ApplicationRecord
     table.each do |season|
       Season.create!(
         position: season[0],
-        team: Team.find_or_create_by!(name: season[1].underscore.split('_').collect{|c| c.capitalize}.join(' ')),
+        team: Team.find_or_create_by!(name: season[1].underscore.split('_').collect{|c| c.capitalize}.join(' '), league_table_id: current_league),
         games: season[2],
         won: season[13],
         drawn: season[14],
