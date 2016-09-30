@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925150111) do
+ActiveRecord::Schema.define(version: 20160930115342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,8 @@ ActiveRecord::Schema.define(version: 20160925150111) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "league_table_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -121,4 +122,5 @@ ActiveRecord::Schema.define(version: 20160925150111) do
   add_foreign_key "fixtures", "teams", column: "home_id"
   add_foreign_key "seasons", "league_tables"
   add_foreign_key "seasons", "teams"
+  add_foreign_key "teams", "league_tables"
 end
