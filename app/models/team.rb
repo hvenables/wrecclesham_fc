@@ -1,8 +1,8 @@
 class Team < ApplicationRecord
   belongs_to :league_table
   has_many :seasons
-  has_many :fixtures, as: :home
-  has_many :fixtures, as: :away
+  has_many :home_fixtures, class_name: Fixture, foreign_key: 'home_id'
+  has_many :away_fixtures, class_name: Fixture, foreign_key: 'away_id'
 
   scope :first_team, -> { find_by(name: "Wrecclesham") }
   scope :reserve_team, -> { find_by(name: "Wrecclesham Reserves") }
