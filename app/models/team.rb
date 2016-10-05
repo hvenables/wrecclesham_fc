@@ -20,8 +20,6 @@ class Team < ApplicationRecord
     Season.find_by(team: self, league_table: self.league_table)
   end
 
-  private
-
   def seven_positions_around_team
     positions = []
     all_teams = self.league_table.teams
@@ -34,8 +32,10 @@ class Team < ApplicationRecord
         positions.sort!
       end
     end
-    positions
+    Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.reverse
   end
+
+  private
 
   def calc_up_and_down(index, numbers, league_size)
     counter = index
