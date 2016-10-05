@@ -2,17 +2,19 @@
   .container
     .well.well-sm
       %h3.title Latest News
-    - @news.each do |news|
-      #products.row.list-group.video-container
-        = link_to news_path(news), class: 'item list-group-item video-link' do
-          .thumbnail
-            %img.group.list-group-image.news-image{:alt => "", :src => "#{news.image.url(:medium)}"}/
-            .caption
-              %h4.group.inner.list-group-item-heading
-                = news.title
-              %p.group.inner.list-group-item-text
-                = preserve gfm(news.summary)
-              %p.group-inner.list-group-item-footer.bottom-align-text
-                = news.created_at.to_formatted_s(:month_and_year)
+    .card-deck-wrapper
+      .card-deck
+        - @news.each do |news|
+          = link_to news_path(news), class: 'video-link news-link col-md-4' do
+            .card.green-hover.news-article
+              %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
+              .card-block
+                %h4.card-title
+                  = news.title
+                %p.card-text
+                  = news.summary
+                %p.card-text
+                  %small.text-muted.bottom-align-text
+                    = news.created_at.to_formatted_s(:month_and_year)
 - else
   No News has been added yet
