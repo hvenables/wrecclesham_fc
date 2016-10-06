@@ -2,19 +2,24 @@
   .container
     .well.well-sm
       %h3.title Latest News
-    .card-deck-wrapper
-      .card-deck
-        - @news.each do |news|
-          = link_to news_path(news), class: 'video-link news-link col-md-4' do
-            .card.green-hover.news-article
-              %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
-              .card-block
-                %h4.card-title
-                  = news.title
-                %p.card-text
-                  = news.summary
-                %p.card-text
-                  %small.text-muted.bottom-align-text
-                    = news.created_at.to_formatted_s(:month_and_year)
+    = render 'welcome/carousel', carousel_articles: @news.limit(5)
+  .container
+    .well.well-sm
+      %h3.title All News
+    .row
+      .card-deck-wrapper
+        .card-deck
+          - @news.each do |news|
+            = link_to news_path(news), class: 'video-link news-link col-md-4' do
+              .card.green-hover.news-article
+                %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
+                .card-block
+                  %h4.card-title
+                    = news.title
+                  %p.card-text
+                    = news.summary
+                  %p.card-text
+                    %small.text-muted.bottom-align-text
+                      = news.created_at.to_formatted_s(:month_and_year)
 - else
   No News has been added yet
