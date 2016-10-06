@@ -32,7 +32,7 @@ class Team < ApplicationRecord
         positions.sort!
       end
     end
-    Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.reverse
+    Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.sort{|a,b| a.position <=> b.position}
   end
 
   private
