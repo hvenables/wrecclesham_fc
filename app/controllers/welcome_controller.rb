@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
   before_action :load_league, only: :index
-  before_action :load_fixtures, only: :index
 
   def index
     @carousel_articles = latest_carousel_items
