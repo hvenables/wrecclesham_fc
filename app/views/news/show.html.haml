@@ -1,44 +1,33 @@
 .container.col-xs-12.col-lg-8
-  .card
-    .card-block
-      %h4.card-title
-        = @news.title
-    %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.image.url(:large)}"}/
-    .card-block
-      %p.card-text
-        = preserve gfm(@news.content)
-      %p.card-text
-        %small.text-muted
-          = "Last updated #{relative_time(@news.updated_at)}"
-        - if can? :manage, News
-          = link_to 'Delete', news_path(@news), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
-          = link_to 'Edit', edit_news_path(@news), class: 'pull-xs-right btn btn-sm btn-success edit-button'
-.container.col-xs-4
+  .row
+    .card
+      .card-block
+        %h4.card-title
+          = @news.title
+      %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.image.url(:large)}"}/
+      .card-block
+        %p.card-text
+          = preserve gfm(@news.content)
+        %p.card-text
+          %small.text-muted
+            = "Last updated #{relative_time(@news.updated_at)}"
+          - if can? :manage, News
+            = link_to 'Delete', news_path(@news), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
+            = link_to 'Edit', edit_news_path(@news), class: 'pull-xs-right btn btn-sm btn-success edit-button'
+.container.col-xs-12.col-lg-4
   %h4.form-label
     Latest News
-.container.col-xs-12.col-lg-4
+.container.col-xs-12.col-md-8.offset-md-2.offset-lg-0.col-lg-4
   - @latest_news.each do |news|
-    .hidden-md-down
-      = link_to news_path(news), class: 'video-link' do
-        .card.green-hover
-          %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
-          .card-block
-            %h4.card-title
-              = news.title
-            %p.card-text
-              = news.summary
-            %p.card-text
-              %small.text-muted
-                = news.created_at.to_formatted_s(:month_and_year)
-    #products.row.list-group.video-container.hidden-lg-up
-      = link_to news_path(news), class: 'item list-group-item video-link' do
-        .thumbnail
-          %img.group.list-group-image.news-image{:alt => "", :src => "#{news.image.url(:medium)}"}/
-          .caption
-            %h4.group.inner.list-group-item-heading
-              = news.title
-            %p.group.inner.list-group-item-text
-              = news.summary
-            %p.group-inner.list-group-item-footer.bottom-align-text
+    = link_to news_path(news), class: 'video-link' do
+      .card.green-hover
+        %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
+        .card-block
+          %h4.card-title
+            = news.title
+          %p.card-text
+            = news.summary
+          %p.card-text
+            %small.text-muted.bottom-align-text
               = news.created_at.to_formatted_s(:month_and_year)
 

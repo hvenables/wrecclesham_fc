@@ -2,13 +2,17 @@
   background-color: white;
 }
 
-.row {
-    position: relative;
-}
-
 .bottom-align-text {
   position: absolute;
   bottom: 0;
   right: 0;
   margin-right: 10px;
+}
+
+.news-article {
+  height: 420px;
+}
+
+.news-link {
+  margin-top: 20px;
 }
