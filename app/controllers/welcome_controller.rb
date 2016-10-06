@@ -28,7 +28,4 @@ class WelcomeController < ApplicationController
 
     carousel_items
   end
-
-  def load_fixtures
-  end
 end
