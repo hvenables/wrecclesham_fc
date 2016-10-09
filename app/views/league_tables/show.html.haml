@@ -4,52 +4,53 @@
       %h2.title
         = @league_table.name + " - " + @years
       - if @league_table.seasons.any?
-        %table.table
-          %thead.thead-inverse
-            %tr
-              %th
-                Pos
-              %th
-                Team
-              %th.text-xs-center
-                Played
-              %th.hidden-sm-down.text-xs-center
-                Won
-              %th.hidden-sm-down.text-xs-center
-                Drawn
-              %th.hidden-sm-down.text-xs-center
-                Lost
-              %th.hidden-md-down.text-xs-center
-                For
-              %th.hidden-md-down.text-xs-center
-                Against
-              %th.text-xs-center
-                Difference
-              %th.text-xs-center
-                Points
-          %tbody
-            - @teams.each_with_index do |season, index|
+        .table-responsive
+          %table.table
+            %thead.thead-inverse
               %tr
-                %td{ scope: 'row' }
-                  = index + 1
-                %td
-                  = season.team.name
-                %td.text-xs-center
-                  = season.games
-                %td.hidden-sm-down.text-xs-center
-                  = season.won
-                %td.hidden-sm-down.text-xs-center
-                  = season.drawn
-                %td.hidden-sm-down.text-xs-center
-                  = season.lost
-                %td.hidden-md-down.text-xs-center
-                  = season.goals_for
-                %td.hidden-md-down.text-xs-center
-                  = season.goals_against
-                %td.text-xs-center
-                  = season.goals_difference
-                %td.text-xs-center
-                  = season.points
+                %th
+                  Pos
+                %th
+                  Team
+                %th.text-xs-center
+                  Played
+                %th.hidden-sm-down.text-xs-center
+                  Won
+                %th.hidden-sm-down.text-xs-center
+                  Drawn
+                %th.hidden-sm-down.text-xs-center
+                  Lost
+                %th.hidden-md-down.text-xs-center
+                  For
+                %th.hidden-md-down.text-xs-center
+                  Against
+                %th.text-xs-center
+                  Diff
+                %th.text-xs-center
+                  Points
+            %tbody
+              - @teams.each_with_index do |season, index|
+                %tr
+                  %td{ scope: 'row' }
+                    = index + 1
+                  %td
+                    = season.team.name
+                  %td.text-xs-center
+                    = season.games
+                  %td.hidden-sm-down.text-xs-center
+                    = season.won
+                  %td.hidden-sm-down.text-xs-center
+                    = season.drawn
+                  %td.hidden-sm-down.text-xs-center
+                    = season.lost
+                  %td.hidden-md-down.text-xs-center
+                    = season.goals_for
+                  %td.hidden-md-down.text-xs-center
+                    = season.goals_against
+                  %td.text-xs-center
+                    = season.goals_difference
+                  %td.text-xs-center
+                    = season.points
       - else
         Add teams to the league
 
