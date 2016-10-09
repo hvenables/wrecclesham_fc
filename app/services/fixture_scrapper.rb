@@ -71,7 +71,7 @@ class FixtureScrapper
     fixture_list = []
 
     fixtures.each do |fixture|
-      if fixture == "Div4"
+      if fixture.include?("Div") && fixture.length == 4
         fixture_list << @current_fixture if @current_fixture
         @current_fixture = []
         @current_fixture << fixture
