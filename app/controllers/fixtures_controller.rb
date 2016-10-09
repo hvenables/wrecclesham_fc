@@ -3,7 +3,7 @@ class FixturesController < ApplicationController
   def index
     @league_table = LeagueTable.find(params[:league_table_id])
     @fixtures = Fixture.fixtures.where(league_table_id: @league_table).order(date: :asc)
-    @results = Fixture.results.where(league_table_id: @league_table).order(date: :asc)
+    @results = Fixture.results.where(league_table_id: @league_table).order(date: :desc)
   end
 
   def create
