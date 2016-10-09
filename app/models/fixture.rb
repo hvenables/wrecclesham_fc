@@ -44,10 +44,10 @@ class Fixture < ApplicationRecord
         away = Team.find_by(name: fixture[4].underscore.split('_').collect{|c| c.capitalize}.join(' '))
         current_fixture = Fixture.find_by(date: date, home: home, away: away, league_table: league_table)
         home_score, away_score = fixture[3].split('-')
-        if fixture
+        if current_fixture
           current_fixture.update!(home_score: home_score, away_score: away_score)
         else
-          current_fixture = Fixture.find_by(date: date, home: away, away: home, league_table: league_table)
+          current_fixture = Fixture.find_or_create_by(date: date, home: away, away: home, league_table: league_table)
           current_fixture.update!(home: away, away: home, home_score: home_score, away_score: away_score)
         end
       end
