@@ -23,6 +23,22 @@ class FixtureScrapper
     doc
   end
 
+  def self.fixtures(doc)
+    fixture_list = extract_fixtures(doc)
+
+    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
+
+    split_fixtures(fixture_list)
+  end
+
+  def self.results(doc)
+    fixture_list = extract_results(doc)
+
+    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
+
+    split_results(fixture_list)
+  end
+
   def self.extract_fixtures(doc)
     fixture_list = []
 
@@ -43,27 +59,27 @@ class FixtureScrapper
     fixture_list
   end
 
-  def self.fixtures(doc)
-    fixture_list = extract_fixtures(doc)
-
-    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
-
-    split_fixtures(fixture_list)
-  end
-
-  def self.results(doc)
-    fixture_list = extract_results(doc)
-
-    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
-
-    split_fixtures(fixture_list)
-  end
-
   def self.split_fixtures(fixtures)
     fixture_list = []
     while fixtures.any? do
       fixture_list << fixtures.pop(6)
     end
+    fixture_list
+  end
+
+  def self.split_results(fixtures)
+    fixture_list = []
+
+    fixtures.each do |fixture|
+      if fixture.include?("Div") && fixture.length == 4
+        fixture_list << @current_fixture if @current_fixture
+        @current_fixture = []
+        @current_fixture << fixture
+      else
+        @current_fixture << fixture
+      end
+    end
+
     fixture_list
   end
 end
