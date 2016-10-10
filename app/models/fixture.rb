@@ -8,8 +8,8 @@ class Fixture < ApplicationRecord
 
   scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date) }
   scope :results, -> { where("date < ?", Time.now.utc.to_date) }
-  scope :next_game, ->(team) { where(home: team, home_score: nil).or(Fixture.where(away: team, away_score: nil)).order(date: :asc).limit(1) }
-  scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).limit(1) }
+  scope :next_game, ->(team) { where(home: team, home_score: nil).or(Fixture.where(away: team, away_score: nil)).order(date: :asc).limit(1)[0] }
+  scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).limit(1)[0] }
 
   class << self
     def create_fixtures(league_table_id)
@@ -47,8 +47,8 @@ class Fixture < ApplicationRecord
         if current_fixture
           current_fixture.update!(home_score: home_score, away_score: away_score)
         else
-          current_fixture = Fixture.find_or_create_by(date: date, home: away, away: home, league_table: league_table)
-          current_fixture.update!(home: away, away: home, home_score: home_score, away_score: away_score)
+          current_fixture = Fixture.find_or_create_by(date: date, home: home, away: away, league_table: league_table)
+          current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
         end
       end
     end
