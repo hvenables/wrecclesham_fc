@@ -74,5 +74,30 @@
     .container.col-lg-7.col-md-12
       %h4.newsheading.title
         Recent Form
+      .card
+        .card-header
+          %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+            %li.nav-item
+              %a.nav-link.active{ href: "#first_team", role: "tab", data: { toggle: "tab" } }
+                First Team
+            %li.nav-item
+              %a.nav-link{ href: "#reserve_team", role: "tab", data: { toggle: "tab" } }
+                Reserve Team
+        .tab-content
+          .tab-pane.active#first_team{ role: "tabpanel" }
+            .card-block
+              .card-text
+                .text-xs-left#goals_for
+                  = "#{@first_team.seasons.last.goals_for} Goals scored"
+                %progress.progress.progress-success{ value: "#{@first_team.seasons.last.goals_for}", max: "#{@first_team.seasons.last.goals_difference >= 0 ? @first_team.seasons.last.goals_for : @first_team.seasons.last.goals_against}", aria: { describedby: "goals_for" } }
+                .text-xs-left#goals_against
+                  = "#{@first_team.seasons.last.goals_against} Goals conceded"
+                %progress.progress.progress-danger{ value: "#{@first_team.seasons.last.goals_against}", max: "#{@first_team.seasons.last.goals_difference >= 0 ? @first_team.seasons.last.goals_for : @first_team.seasons.last.goals_against}", aria: { describedby: "goals_against" } }
+
+          .tab-pane#reserve_team{ role: "tabpanel" }
+            .card-block
+              %p.card-text
+                Test 2
+
 
 
