@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.slick
+//= require Chart.min
+//= require guarded_ready
 //= require_tree .
