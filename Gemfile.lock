@@ -96,6 +96,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chartjs-ror (3.0.2)
+      rails (>= 3.1)
     chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -328,6 +330,7 @@ DEPENDENCIES
   capistrano-rvm
   capistrano3-puma
   capybara
+  chartjs-ror
   coffee-rails (~> 4.1.0)
   coveralls
   dalli
@@ -368,4 +371,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.1

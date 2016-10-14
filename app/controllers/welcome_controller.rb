@@ -3,15 +3,16 @@ class WelcomeController < ApplicationController
 
   def index
     @carousel_articles = latest_carousel_items
+    @first_team = Team.first_team
+    @reserve_team = Team.reserve_team
     if @first_team_table
-      @first_team_teams = Team.first_team.seven_positions_around_team
+      @first_team_teams = @first_team.seven_positions_around_team
     end
     if @reserve_team_table
-      @reserve_team_teams = Team.reserve_team.seven_positions_around_team
+      @reserve_team_teams = @reserve_team.seven_positions_around_team
     end
-    @news = News.all.order(updated_at: :desc).limit(5)
-    @first_team_fixture = Fixture.next_game(Team.first_team)
-    @reserve_team_fixture = Fixture.next_game(Team.reserve_team)
+    @first_team_form = Fixture.team_results(@first_team)
+    @reserve_team_fixture = Fixture.next_game(@reserve_team)
   end
 
   private
