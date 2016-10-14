@@ -11,8 +11,10 @@ class WelcomeController < ApplicationController
     if @reserve_team_table
       @reserve_team_teams = @reserve_team.seven_positions_around_team
     end
-    @first_team_form = Fixture.team_results(@first_team)
+    @first_team_fixture = Fixture.next_game(@first_team)
     @reserve_team_fixture = Fixture.next_game(@reserve_team)
+    @first_team_result= Fixture.last_game(@first_team)
+    @reserve_team_result= Fixture.last_game(@reserve_team)
   end
 
   private

@@ -71,20 +71,20 @@
           = link_to 'See full table', league_table_path(@reserve_team_table), {class: 'small pull-xs-right'}
         - else
           Add teams to the league
-    .container.col-lg-4.col-md-12
+    .container.col-lg-4.col-md-6.col-sm-12
       %h4.newsheading.title
         Recent Form
       .card
         .card-header
           %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
             %li.nav-item
-              %a.nav-link.active{ href: "#first_team", role: "tab", data: { toggle: "tab" } }
+              %a.nav-link.active{ href: "#first_team_form", role: "tab", data: { toggle: "tab" } }
                 First Team
             %li.nav-item
-              %a.nav-link{ href: "#reserve_team", role: "tab", data: { toggle: "tab" } }
+              %a.nav-link{ href: "#reserve_team_form", role: "tab", data: { toggle: "tab" } }
                 Reserve Team
         .tab-content
-          .tab-pane.active#first_team{ role: "tabpanel" }
+          .tab-pane.active#first_team_form{ role: "tabpanel" }
             .card-block
               .card-text
                 .text-xs-left#goals_for
@@ -108,7 +108,7 @@
                   .col-xs-8
                     %canvas#first_piechart{ width: '400', height: '400', data: { win: "#{@first_team.seasons.last.won}", drawn: "#{@first_team.seasons.last.drawn}", lost: "#{@first_team.seasons.last.lost}" } }
 
-          .tab-pane#reserve_team{ role: "tabpanel" }
+          .tab-pane#reserve_team_form{ role: "tabpanel" }
             .card-block
               .card-text
                 .text-xs-left#goals_for
@@ -131,6 +131,89 @@
                       = "#{@reserve_team.seasons.last.games}"
                   .col-xs-8
                     %canvas#reserve_piechart{ width: '400', height: '400', data: { win: "#{@reserve_team.seasons.last.won}", drawn: "#{@reserve_team.seasons.last.drawn}", lost: "#{@reserve_team.seasons.last.lost}" } }
+    .container.col-lg-4.col-md-6.col-sm-12
+      %h4.newsheading.title
+        Next Fixture
+      .card
+        .card-header
+          %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+            %li.nav-item
+              %a.nav-link.active{ href: "#first_team_fixture", role: "tab", data: { toggle: "tab" } }
+                First Team
+            %li.nav-item
+              %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
+                Reserve Team
+        .tab-content
+          .tab-pane.active#first_team_fixture{ role: "tabpanel" }
+            .card-block
+              .card-text
+                .row
+                  .col-xs-12.text-xs-left
+                    = @first_team_fixture.date.strftime("%a, %d %B %Y")
+                %hr.underline
+                .row
+                  .col-xs-5
+                    = @first_team_fixture.home.name
+                  .col-xs-2
+                    = "-"
+                  .col-xs-5
+                    = @first_team_fixture.away.name
+          .tab-pane#reserve_team_fixture{ role: "tabpanel" }
+            .card-block
+              .card-text
+                .row
+                  .col-xs-12.text-xs-left
+                    = @first_team_fixture.date.strftime("%a, %d %B %Y")
+                %hr.underline
+                .row
+                  .col-xs-5
+                    = @reserve_team_fixture.home.name
+                  .col-xs-2
+                    = "-"
+                  .col-xs-5
+                    = @reserve_team_fixture.away.name
+    .container.col-lg-4.col-md-6.col-sm-12
+      %h4.newsheading.title
+        Previous Result
+      .card
+        .card-header
+          %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+            %li.nav-item
+              %a.nav-link.active{ href: "#first_team_result", role: "tab", data: { toggle: "tab" } }
+                First Team
+            %li.nav-item
+              %a.nav-link{ href: "#reserve_team_result", role: "tab", data: { toggle: "tab" } }
+                Reserve Team
+        .tab-content
+          .tab-pane.active#first_team_result{ role: "tabpanel" }
+            .card-block
+              .card-text
+                .row
+                  .col-xs-12.text-xs-left
+                    = @first_team_result.date.strftime("%a, %d %B %Y")
+                %hr.underline
+                .row
+                  .col-xs-5
+                    = @first_team_result.home.name
+                  .col-xs-2.no-padding.text-xs-center
+                    = "#{@first_team_result.home_score} - #{@first_team_result.away_score}"
+                  .col-xs-5
+                    = @first_team_result.away.name
+          .tab-pane#reserve_team_result{ role: "tabpanel" }
+            .card-block
+              .card-text
+                .row
+                  .col-xs-12.text-xs-left
+                    = @reserve_team_result.date.strftime("%a, %d %B %Y")
+                %hr.underline
+                .row
+                  .col-xs-5
+                    = @reserve_team_result.home.name
+                  .col-xs-2.no-padding.text-xs-center
+                    = "#{@reserve_team_result.home_score} - #{@reserve_team_result.away_score}"
+                  .col-xs-5
+                    = @reserve_team_result.away.name
+
 
 
 
