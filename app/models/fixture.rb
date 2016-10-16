@@ -8,8 +8,8 @@ class Fixture < ApplicationRecord
 
   scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date) }
   scope :results, -> { where("date < ?", Time.now.utc.to_date) }
-  scope :next_game, ->(team) { where(home: team, home_score: nil).or(Fixture.where(away: team, away_score: nil)).order(date: :asc).limit(1)[0] }
-  scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).limit(1)[0] }
+  scope :next_game, ->(team) { where(home: team, home_score: nil).or(Fixture.where(away: team, away_score: nil)).order(date: :asc).first }
+  scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).first }
   scope :team_results, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc) }
 
   class << self
@@ -17,7 +17,7 @@ class Fixture < ApplicationRecord
       league_table = LeagueTable.find(league_table_id)
       fixtures = FixtureScrapper.get_fixtures_data(league_table.fixture_url)
       fixtures.each do |fixture|
-        next if not_league_game(fixture, league_table)
+        next if not_league_game?(fixture, league_table) || postponed?(fixture)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
         home = Team.find_by(name: fixture[2].underscore.split('_').collect{|c| c.capitalize}.join(' '))
         away = Team.find_by(name: fixture[3].underscore.split('_').collect{|c| c.capitalize}.join(' '))
@@ -31,15 +31,11 @@ class Fixture < ApplicationRecord
       end
     end
 
-    def not_league_game(fixture, league_table)
-      fixture[0] != 'Div' + league_table.name[-1]
-    end
-
     def update_fixtures(league_table_id)
       league_table = LeagueTable.find(league_table_id)
       fixtures = FixtureScrapper.get_results_data(league_table.results_url)
       fixtures.each do |fixture|
-        next if fixture[0] != 'Div' + league_table.name[-1]
+        next if not_league_game?(fixture, league_table)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
         home = Team.find_by(name: fixture[2].underscore.split('_').collect{|c| c.capitalize}.join(' '))
         away = Team.find_by(name: fixture[4].underscore.split('_').collect{|c| c.capitalize}.join(' '))
@@ -52,6 +48,16 @@ class Fixture < ApplicationRecord
           current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
         end
       end
+    end
+
+    private
+
+    def not_league_game?(fixture, league_table)
+      fixture[0] != 'Div' + league_table.name[-1]
+    end
+
+    def postponed?(fixture)
+      fixture.any?{ |s| s.casecmp("Postponed") == 0 }
     end
   end
 end

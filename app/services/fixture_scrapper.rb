@@ -36,7 +36,7 @@ class FixtureScrapper
 
     fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
 
-    split_results(fixture_list)
+    split_fixtures(fixture_list)
   end
 
   def self.extract_fixtures(doc)
@@ -60,14 +60,6 @@ class FixtureScrapper
   end
 
   def self.split_fixtures(fixtures)
-    fixture_list = []
-    while fixtures.any? do
-      fixture_list << fixtures.pop(6)
-    end
-    fixture_list
-  end
-
-  def self.split_results(fixtures)
     fixture_list = []
 
     fixtures.each do |fixture|
