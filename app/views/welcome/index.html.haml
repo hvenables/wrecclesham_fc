@@ -6,71 +6,9 @@
         %h4.newsheading.title
           League Tables
       .container.welcome-tables
-        - if @first_team_table
-          %h6.title.welcome-league-title
-            = @first_team_table.name
-          %table.table.small-table
-            %thead.thead-inverse
-              %tr
-                %th.small
-                  Pos
-                %th.small
-                  Team
-                %th.small.text-xs-center
-                  Played
-                %th.small.text-xs-center
-                  Diff
-                %th.small.text-xs-center
-                  Points
-            %tbody
-              - @first_team_teams.each do |team|
-                %tr
-                  %td{ class: 'small', scope: 'row' }
-                    = team.position
-                  %td.small
-                    = team.team.name
-                  %td.small.text-xs-center
-                    = team.games
-                  %td.small.text-xs-center
-                    = team.goals_difference
-                  %td.small.text-xs-center
-                    = team.points
-          = link_to 'See full table', league_table_path(@first_team_table), {class: 'small pull-xs-right'}
-        - else
-          Add teams to the league
+        = render 'table', team_table: @first_team_table, table_teams: @first_team_teams
       .container.welcome-tables
-        - if @reserve_team_table
-          %h6.title.welcome-league-title
-            = @reserve_team_table.name
-          %table.table.small-table
-            %thead.thead-inverse
-              %tr
-                %th.small
-                  Pos
-                %th.small
-                  Team
-                %th.small.text-xs-center
-                  Played
-                %th.small.text-xs-center
-                  Diff
-                %th.small.text-xs-center
-                  Points
-            %tbody
-              - @reserve_team_teams.each do |team|
-                %tr
-                  %td{ class: 'small', scope: 'row' }
-                    = team.position
-                  %td.small
-                    = team.team.name
-                  %td.small.text-xs-center
-                    = team.games
-                  %td.small.text-xs-center
-                    = team.goals_difference
-                  %td.small.text-xs-center
-                    = team.points
-          = link_to 'See full table', league_table_path(@reserve_team_table), {class: 'small pull-xs-right'}
-        - else
-          Add teams to the league
+        = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
     .container.col-lg-4.col-md-6.col-sm-12
       %h4.newsheading.title
         Recent Form
@@ -85,52 +23,9 @@
                 Reserve Team
         .tab-content
           .tab-pane.active#first_team_form{ role: "tabpanel" }
-            .card-block
-              .card-text
-                .text-xs-left#goals_for
-                  %small
-                    = "#{@first_team.seasons.last.goals_for} Goals scored"
-                %progress.progress.progress-success{ value: "#{@first_team.seasons.last.goals_for}", max: "#{@first_team.seasons.last.goals_difference >= 0 ? @first_team.seasons.last.goals_for : @first_team.seasons.last.goals_against}", aria: { describedby: "goals_for" } }
-                .text-xs-left#goals_against
-                  %small
-                    = "#{@first_team.seasons.last.goals_against} Goals conceded"
-                %progress.progress.progress-danger{ value: "#{@first_team.seasons.last.goals_against}", max: "#{@first_team.seasons.last.goals_difference >= 0 ? @first_team.seasons.last.goals_for : @first_team.seasons.last.goals_against}", aria: { describedby: "goals_against" } }
-                .row
-                  .col-xs-4
-                    %small
-                      Current Position
-                    %h2
-                      = "#{@first_team.seasons.last.position.ordinalize}"
-                    %small
-                      Games Played
-                    %h2
-                      = "#{@first_team.seasons.last.games}"
-                  .col-xs-8
-                    %canvas#first_piechart{ width: '400', height: '400', data: { win: "#{@first_team.seasons.last.won}", drawn: "#{@first_team.seasons.last.drawn}", lost: "#{@first_team.seasons.last.lost}" } }
-
+            = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
           .tab-pane#reserve_team_form{ role: "tabpanel" }
-            .card-block
-              .card-text
-                .text-xs-left#goals_for
-                  %small
-                    = "#{@reserve_team.seasons.last.goals_for} Goals scored"
-                %progress.progress.progress-success{ value: "#{@reserve_team.seasons.last.goals_for}", max: "#{@reserve_team.seasons.last.goals_difference >= 0 ? @reserve_team.seasons.last.goals_for : @reserve_team.seasons.last.goals_against}", aria: { describedby: "goals_for" } }
-                .text-xs-left#goals_against
-                  %small
-                    = "#{@reserve_team.seasons.last.goals_against} Goals conceded"
-                %progress.progress.progress-danger{ value: "#{@reserve_team.seasons.last.goals_against}", max: "#{@reserve_team.seasons.last.goals_difference >= 0 ? @reserve_team.seasons.last.goals_for : @reserve_team.seasons.last.goals_against}", aria: { describedby: "goals_against" } }
-                .row
-                  .col-xs-4
-                    %small
-                      Current Position
-                    %h2
-                      = "#{@reserve_team.seasons.last.position.ordinalize}"
-                    %small
-                      Games Played
-                    %h2
-                      = "#{@reserve_team.seasons.last.games}"
-                  .col-xs-8
-                    %canvas#reserve_piechart{ width: '400', height: '400', data: { win: "#{@reserve_team.seasons.last.won}", drawn: "#{@reserve_team.seasons.last.drawn}", lost: "#{@reserve_team.seasons.last.lost}" } }
+            = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
     .container.col-lg-4.col-md-6.col-sm-12
       %h4.newsheading.title
         Next Fixture
@@ -145,33 +40,9 @@
                 Reserve Team
         .tab-content
           .tab-pane.active#first_team_fixture{ role: "tabpanel" }
-            .card-block
-              .card-text
-                .row
-                  .col-xs-12.text-xs-left
-                    = @first_team_fixture.date.strftime("%a, %d %B %Y")
-                %hr.underline
-                .row
-                  .col-xs-5
-                    = @first_team_fixture.home.name
-                  .col-xs-2
-                    = "-"
-                  .col-xs-5
-                    = @first_team_fixture.away.name
+            = render 'next_fixture', team_fixture: @first_team_fixture
           .tab-pane#reserve_team_fixture{ role: "tabpanel" }
-            .card-block
-              .card-text
-                .row
-                  .col-xs-12.text-xs-left
-                    = @first_team_fixture.date.strftime("%a, %d %B %Y")
-                %hr.underline
-                .row
-                  .col-xs-5
-                    = @reserve_team_fixture.home.name
-                  .col-xs-2
-                    = "-"
-                  .col-xs-5
-                    = @reserve_team_fixture.away.name
+            = render 'next_fixture', team_fixture: @reserve_team_fixture
     .container.col-lg-4.col-md-6.col-sm-12
       %h4.newsheading.title
         Previous Result
@@ -186,34 +57,6 @@
                 Reserve Team
         .tab-content
           .tab-pane.active#first_team_result{ role: "tabpanel" }
-            .card-block
-              .card-text
-                .row
-                  .col-xs-12.text-xs-left
-                    = @first_team_result.date.strftime("%a, %d %B %Y")
-                %hr.underline
-                .row
-                  .col-xs-5
-                    = @first_team_result.home.name
-                  .col-xs-2.no-padding.text-xs-center
-                    = "#{@first_team_result.home_score} - #{@first_team_result.away_score}"
-                  .col-xs-5
-                    = @first_team_result.away.name
+            = render 'last_result', team_result: @first_team_result
           .tab-pane#reserve_team_result{ role: "tabpanel" }
-            .card-block
-              .card-text
-                .row
-                  .col-xs-12.text-xs-left
-                    = @reserve_team_result.date.strftime("%a, %d %B %Y")
-                %hr.underline
-                .row
-                  .col-xs-5
-                    = @reserve_team_result.home.name
-                  .col-xs-2.no-padding.text-xs-center
-                    = "#{@reserve_team_result.home_score} - #{@reserve_team_result.away_score}"
-                  .col-xs-5
-                    = @reserve_team_result.away.name
-
-
-
-
+            = render 'last_result', team_result: @reserve_team_result

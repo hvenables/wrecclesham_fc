@@ -1,0 +1,13 @@
+.card-block
+  .card-text
+    .row
+      .col-xs-12.text-xs-left
+        = team_fixture.date.strftime("%a, %d %B %Y")
+    %hr.underline
+    .row
+      .col-xs-5
+        = team_fixture.home.name
+      .col-xs-2
+        = "-"
+      .col-xs-5
+        = team_fixture.away.name

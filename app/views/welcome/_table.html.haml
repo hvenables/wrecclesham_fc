@@ -1,0 +1,32 @@
+- if team_table
+  %h6.title.welcome-league-title
+    = team_table.name
+  %table.table.small-table
+    %thead.thead-inverse
+      %tr
+        %th.small
+          Pos
+        %th.small
+          Team
+        %th.small.text-xs-center
+          Played
+        %th.small.text-xs-center
+          Diff
+        %th.small.text-xs-center
+          Points
+    %tbody
+      - table_teams.each do |team|
+        %tr
+          %td{ class: 'small', scope: 'row' }
+            = team.position
+          %td.small
+            = team.team.name
+          %td.small.text-xs-center
+            = team.games
+          %td.small.text-xs-center
+            = team.goals_difference
+          %td.small.text-xs-center
+            = team.points
+  = link_to 'See full table', league_table_path(team_table), {class: 'small pull-xs-right'}
+- else
+  Add teams to the league

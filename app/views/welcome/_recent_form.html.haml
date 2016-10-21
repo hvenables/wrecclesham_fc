@@ -1,0 +1,22 @@
+.card-block
+  .card-text
+    .text-xs-left#goals_for
+      %small
+        = "#{team.seasons.last.goals_for} Goals scored"
+    %progress.progress.progress-success{ value: "#{team.seasons.last.goals_for}", max: "#{team.seasons.last.goals_difference >= 0 ? team.seasons.last.goals_for : team.seasons.last.goals_against}", aria: { describedby: "goals_for" } }
+    .text-xs-left#goals_against
+      %small
+        = "#{team.seasons.last.goals_against} Goals conceded"
+    %progress.progress.progress-danger{ value: "#{team.seasons.last.goals_against}", max: "#{team.seasons.last.goals_difference >= 0 ? team.seasons.last.goals_for : team.seasons.last.goals_against}", aria: { describedby: "goals_against" } }
+    .row
+      .col-xs-4
+        %small
+          Current Position
+        %h2
+          = "#{team.seasons.last.position.ordinalize}"
+        %small
+          Games Played
+        %h2
+          = "#{team.seasons.last.games}"
+      .col-xs-8
+        %canvas{ id: "#{piechart_id}", width: '400', height: '400', data: { win: "#{team.seasons.last.won}", drawn: "#{team.seasons.last.drawn}", lost: "#{team.seasons.last.lost}" } }
