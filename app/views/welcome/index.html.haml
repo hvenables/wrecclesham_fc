@@ -5,10 +5,22 @@
       .container
         %h4.newsheading.title
           League Tables
-      .container.welcome-tables
-        = render 'table', team_table: @first_team_table, table_teams: @first_team_teams
-      .container.welcome-tables
-        = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
+        .card
+          .card-header
+            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+              %li.nav-item
+                %a.nav-link.active{ href: "#first_team_table", role: "tab", data: { toggle: "tab" } }
+                  First Team
+              %li.nav-item
+                %a.nav-link{ href: "#reserve_team_table", role: "tab", data: { toggle: "tab" } }
+                  Reserve Team
+          .tab-content
+            .tab-pane.active#first_team_table{ role: "tabpanel" }
+              .container.welcome-tables
+                = render 'table', team_table: @first_team_table, table_teams: @first_team_teams
+            .tab-pane#reserve_team_table{ role: "tabpanel" }
+              .container.welcome-tables
+                = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
     .container.col-lg-4.col-md-6.col-sm-12
       %h4.newsheading.title
         Recent Form
