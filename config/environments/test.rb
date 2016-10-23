@@ -9,6 +9,8 @@ Rails.application.configure do
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = true
 
+  config.secret_key_base = "37c0f3962d5b6bf4694dbd73359ed4f73c31f64d7cd6c82b99ca5ef4d6af48d61991ad0db0e867b844c7dd9ef17842d2b1cd092c5651aabb4fd19572b771fc7b"
+
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
