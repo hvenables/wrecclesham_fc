@@ -12,7 +12,7 @@
           - @news.each do |news|
             = link_to news_path(news), class: 'video-link news-link col-md-4' do
               .card.green-hover.news-article
-                %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
+                %img.card-img-top.news-img{:alt => "", :src => "#{news.image.url(:large)}"}/
                 .card-block
                   %h4.card-title
                     = news.title
