@@ -64,6 +64,9 @@ gem "jquery-slick-rails"
 # running cron jobs
 gem 'whenever', require: false
 
+# pagination
+gem 'kaminari'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'
