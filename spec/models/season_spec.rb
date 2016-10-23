@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Season, type: :model do
   let!(:league_table) { create :league_table }
-  let!(:wrecclesham) { create :team, name: 'Wrecclesham' }
+  let!(:wrecclesham) { create :team, name: 'Wrecclesham', league_table: league_table }
   context '#create_teams' do
     scenario 'will create a team in the db' do
       table_data = [["1", "Wrecclesham", "18", "3", "3", "3", "31",
@@ -22,6 +22,7 @@ RSpec.describe Season, type: :model do
       expect(season.league_table_id).to eq league_table.id
     end
   end
+
   context '#update_teams' do
     let!(:season) { create :season, team: wrecclesham, league_table: league_table }
     scenario 'will update a team in the db' do
