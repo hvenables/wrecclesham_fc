@@ -11,12 +11,11 @@ class WelcomeController < ApplicationController
     if @reserve_team_table
       @reserve_team_teams = @reserve_team.seven_positions_around_team
     end
-    unless @first_team.blank? && @reserve_team.blank?
-      @first_team_fixture = Fixture.next_game(@first_team)
-      @reserve_team_fixture = Fixture.next_game(@reserve_team)
-      @first_team_result= Fixture.last_game(@first_team)
-      @reserve_team_result= Fixture.last_game(@reserve_team)
-    end
+    @first_team_fixture = Fixture.next_game(@first_team)
+    @reserve_team_fixture = Fixture.next_game(@reserve_team)
+    @first_team_result= Fixture.last_game(@first_team)
+    @reserve_team_result= Fixture.last_game(@reserve_team)
+    @twitter = TwitterFeed.new
   end
 
   private

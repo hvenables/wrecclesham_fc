@@ -67,6 +67,10 @@ gem 'whenever', require: false
 # pagination
 gem 'kaminari'
 
+gem 'twitter', '~> 5.16'
+
+gem 'rails_autolink'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'
