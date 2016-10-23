@@ -229,6 +229,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    rb-readline (0.5.3)
     redcarpet (3.3.4)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
@@ -353,6 +354,7 @@ DEPENDENCIES
   puma
   pygments.rb
   rails (= 5.0.0)
+  rb-readline
   redcarpet
   rollbar
   rspec-rails
