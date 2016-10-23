@@ -22,3 +22,42 @@
     border-bottom: 5px solid white;
   }
 }
+
+.footer-nav .footer-list {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.footer-nav {
+  text-align: center;
+}
+
+.social-media {
+  border-radius: 35px;
+  background-color: white;
+  width: 45px;
+  height: 45px;
+}
+
+.social-media:hover {
+  background-color: $wrecclesham-green;
+
+  i.fa-twitter {
+    color: white;
+  }
+
+  i.fa-facebook {
+    color: white;
+  }
+}
+
+.social-media{
+  i.fa-twitter {
+    color: $wrecclesham-green;
+  }
+
+  i.fa-facebook {
+    color: $wrecclesham-green;
+  }
+}
