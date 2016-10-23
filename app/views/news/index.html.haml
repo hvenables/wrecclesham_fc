@@ -19,7 +19,7 @@
             = link_to news_path(news), class: 'video-link news-link col-md-4' do
               .card.green-hover.news-article
                 %img.card-img-top.news-img{:alt => "", :src => "#{news.image.url(:large)}"}/
-                .card-block
+                .card-block.news-block
                   %h4.card-title
                     = news.title
                   %p.card-text
