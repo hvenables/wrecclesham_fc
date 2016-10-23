@@ -5,6 +5,8 @@ class News < ApplicationRecord
     :s3_protocol => :https
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  paginates_per 9
+
   validates :title, :summary, :image, presence: true
   validates :summary, length: { maximum: 250 }
   validates :content, presence: true

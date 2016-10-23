@@ -2,18 +2,24 @@
   .container
     .well.well-sm
       %h3.title Latest News
-    = render 'welcome/carousel', carousel_articles: @news.limit(5)
+    = render 'welcome/carousel', carousel_articles: @carousel_news
   .container
     .well.well-sm
       %h3.title All News
+    .col-xs-12.col-sm-6
+      = paginate @news
+    .col-xs-12.col-sm-6
+      .page-entries.pull-xs-left.pull-sm-right
+        = page_entries_info @news
+    .clearfix
     .row
       .card-deck-wrapper
         .card-deck
           - @news.each do |news|
             = link_to news_path(news), class: 'video-link news-link col-md-4' do
               .card.green-hover.news-article
-                %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
-                .card-block
+                %img.card-img-top.news-img{:alt => "", :src => "#{news.image.url(:large)}"}/
+                .card-block.news-block
                   %h4.card-title
                     = news.title
                   %p.card-text

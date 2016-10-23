@@ -5,4 +5,5 @@ module VideoHelper
     allow(Yt::Video).to receive(:new).and_return(url)
     allow(url).to receive(:thumbnail_url).and_return(url.thumbnail)
   end
+
 end

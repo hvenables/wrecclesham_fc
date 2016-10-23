@@ -2,7 +2,8 @@ class NewsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @news = News.all.order(created_at: :desc)
+    @carousel_news = News.all.order(created_at: :desc).limit(6)
+    @news = News.all.order(created_at: :desc).page(params[:page]).per(params[:per])
   end
 
   def show

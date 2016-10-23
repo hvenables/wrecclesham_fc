@@ -1,8 +1,8 @@
 .container-fluid
   = render 'carousel', carousel_articles: @carousel_articles
   .row
-    .container.col-lg-4.col-md-12.pull-lg-right.welcome-table-container
-      .container
+    - if @first_team_table && @reserve_team_table
+      .container.col-lg-4.col-md-12.pull-lg-right.welcome-table-container
         %h4.newsheading.title
           League Tables
         .card
@@ -21,54 +21,57 @@
             .tab-pane#reserve_team_table{ role: "tabpanel" }
               .container.welcome-tables
                 = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
-    .container.col-lg-4.col-md-6.col-sm-12
-      %h4.newsheading.title
-        Recent Form
-      .card
-        .card-header
-          %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-            %li.nav-item
-              %a.nav-link.active{ href: "#first_team_form", role: "tab", data: { toggle: "tab" } }
-                First Team
-            %li.nav-item
-              %a.nav-link{ href: "#reserve_team_form", role: "tab", data: { toggle: "tab" } }
-                Reserve Team
-        .tab-content
-          .tab-pane.active#first_team_form{ role: "tabpanel" }
-            = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
-          .tab-pane#reserve_team_form{ role: "tabpanel" }
-            = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
-    .container.col-lg-4.col-md-6.col-sm-12
-      %h4.newsheading.title
-        Next Fixture
-      .card
-        .card-header
-          %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-            %li.nav-item
-              %a.nav-link.active{ href: "#first_team_fixture", role: "tab", data: { toggle: "tab" } }
-                First Team
-            %li.nav-item
-              %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
-                Reserve Team
-        .tab-content
-          .tab-pane.active#first_team_fixture{ role: "tabpanel" }
-            = render 'next_fixture', team_fixture: @first_team_fixture
-          .tab-pane#reserve_team_fixture{ role: "tabpanel" }
-            = render 'next_fixture', team_fixture: @reserve_team_fixture
-    .container.col-lg-4.col-md-6.col-sm-12
-      %h4.newsheading.title
-        Previous Result
-      .card
-        .card-header
-          %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-            %li.nav-item
-              %a.nav-link.active{ href: "#first_team_result", role: "tab", data: { toggle: "tab" } }
-                First Team
-            %li.nav-item
-              %a.nav-link{ href: "#reserve_team_result", role: "tab", data: { toggle: "tab" } }
-                Reserve Team
-        .tab-content
-          .tab-pane.active#first_team_result{ role: "tabpanel" }
-            = render 'last_result', team_result: @first_team_result
-          .tab-pane#reserve_team_result{ role: "tabpanel" }
-            = render 'last_result', team_result: @reserve_team_result
+    - unless @first_team.blank? && @reserve_team.blank?
+      .container.col-lg-4.col-md-6.col-sm-12
+        %h4.newsheading.title
+          Recent Form
+        .card
+          .card-header
+            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+              %li.nav-item
+                %a.nav-link.active{ href: "#first_team_form", role: "tab", data: { toggle: "tab" } }
+                  First Team
+              %li.nav-item
+                %a.nav-link{ href: "#reserve_team_form", role: "tab", data: { toggle: "tab" } }
+                  Reserve Team
+          .tab-content
+            .tab-pane.active#first_team_form{ role: "tabpanel" }
+              = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
+            .tab-pane#reserve_team_form{ role: "tabpanel" }
+              = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
+    - if @first_team_fixture && @reserve_team_fixture
+      .container.col-lg-4.col-md-6.col-sm-12
+        %h4.newsheading.title
+          Next Fixture
+        .card
+          .card-header
+            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+              %li.nav-item
+                %a.nav-link.active{ href: "#first_team_fixture", role: "tab", data: { toggle: "tab" } }
+                  First Team
+              %li.nav-item
+                %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
+                  Reserve Team
+          .tab-content
+            .tab-pane.active#first_team_fixture{ role: "tabpanel" }
+              = render 'next_fixture', team_fixture: @first_team_fixture
+            .tab-pane#reserve_team_fixture{ role: "tabpanel" }
+              = render 'next_fixture', team_fixture: @reserve_team_fixture
+    - if @first_team_result && @reserve_team_result
+      .container.col-lg-4.col-md-6.col-sm-12
+        %h4.newsheading.title
+          Previous Result
+        .card
+          .card-header
+            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+              %li.nav-item
+                %a.nav-link.active{ href: "#first_team_result", role: "tab", data: { toggle: "tab" } }
+                  First Team
+              %li.nav-item
+                %a.nav-link{ href: "#reserve_team_result", role: "tab", data: { toggle: "tab" } }
+                  Reserve Team
+          .tab-content
+            .tab-pane.active#first_team_result{ role: "tabpanel" }
+              = render 'last_result', team_result: @first_team_result
+            .tab-pane#reserve_team_result{ role: "tabpanel" }
+              = render 'last_result', team_result: @reserve_team_result

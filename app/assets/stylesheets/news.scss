@@ -13,8 +13,22 @@
   height: 420px;
 }
 
+.news-block {
+  height: 144px;
+}
+
 .news-link {
   margin-top: 20px;
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+.news-img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+.page-entries {
+  height: 80px;
+  padding-top: 25px;
+  color: white;
 }
