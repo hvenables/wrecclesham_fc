@@ -48,6 +48,26 @@
   width: 100%;
 }
 
+.twitter-icon {
+  height: 60px;
+  width: 60px;
+}
+
+.twitter-link {
+  color: black;
+  margin-right: 5px;
+}
+
+.twitter-link:active {
+  text-decoration: none;
+}
+.twitter-link:visited {
+  text-decoration: none;
+}
+.twitter-link:hover {
+  text-decoration: none;
+}
+
 .carousel:not(.slick-initialized) {
   .carousel-item {
     float: left;
