@@ -3,12 +3,12 @@
     .container
       = link_to root_path do
         = image_tag('transparent_logo.png', class: 'logo navbar-brand')
-      %ul.nav.navbar-nav.pull-xs-right
+      %ul.nav.navbar-nav
         - if user_signed_in?
-          %li.nav-item.join.log-in
+          %li.nav-item.join.log-in.pull-xs-right
             = link_to "Sign out", destroy_user_session_path, {method: :delete, class: "nav-link"}
         - else
-          %li.nav-item.join.log-in
+          %li.nav-item.join.log-in.pull-xs-right
             = link_to "Log in", new_user_session_path, {class: "nav-link"}
-          %li.nav-item.join.sign-up
+          %li.nav-item.join.sign-up.pull-xs-right
             = link_to "Sign up", new_user_registration_path, {class: "nav-link"}
