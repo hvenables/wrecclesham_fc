@@ -8,8 +8,10 @@ class TwitterFeed
       config.access_token = Rails.application.secrets.access_token
       config.access_token_secret = Rails.application.secrets.access_secret
     end
-    @user = @client.user(user)
-    @feed = @client.user_timeline(user)
+    if @client
+      @user = @client.user(user)
+      @feed = @client.user_timeline(user)
+    end
   end
 
   def own_tweets
