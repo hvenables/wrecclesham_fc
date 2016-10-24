@@ -21,7 +21,7 @@
             .tab-pane#reserve_team_table{ role: "tabpanel" }
               .container.welcome-tables
                 = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
-    - unless @first_team.blank? && @reserve_team.blank?
+    - if @first_team.any? && @reserve_team.any?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
           Recent Form
@@ -39,7 +39,7 @@
               = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
             .tab-pane#reserve_team_form{ role: "tabpanel" }
               = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
-    - if @first_team_fixture && @reserve_team_fixture
+    - if @first_team_fixture.any? && @reserve_team_fixture.any?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
           Next Fixture
@@ -57,7 +57,7 @@
               = render 'next_fixture', team_fixture: @first_team_fixture
             .tab-pane#reserve_team_fixture{ role: "tabpanel" }
               = render 'next_fixture', team_fixture: @reserve_team_fixture
-    - if @first_team_result && @reserve_team_result
+    - if @first_team_result.any? && @reserve_team_result.any?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
           Previous Result
@@ -75,35 +75,36 @@
               = render 'last_result', team_result: @first_team_result
             .tab-pane#reserve_team_result{ role: "tabpanel" }
               = render 'last_result', team_result: @reserve_team_result
-    .col-xs-12
-      .row
-        .col-xs-10
-          %h4.newsheading.title
-            Twitter Feed
-        .col-xs-2
-          %a.btn.btn-primary.pull-xs-right{href: @twitter.user.url, target: "_blank"}
-            %i.fa.fa-twitter{"aria-hidden" => "true"}
-            Twitter
-      %ul.list-group
-        - @twitter.own_tweets[0..5].each do |tweet|
-          %li.list-group-item
-            .row
-              .col-xs-3.col-sm-2.col-lg-1
-                = image_tag('transparent_logo.png', class: 'twitter-icon')
-              %span.col-xs-9.col-sm-10.col-lg-11
-                = simple_format(auto_link(tweet.text))
-            .row
-              .col-xs-9.col-sm-10.col-lg-11.offset-xs-3.offset-sm-2.offset-lg-1
-                %a.twitter-link{href: tweet.url, target: "_blank"}
-                  %span
-                    %i.fa.fa-eye{"aria-hidden" => "true"}
-                    View
-                %a.twitter-link{href: tweet.url, target: "_blank"}
-                  %span
-                    %i.fa.fa-heart{"aria-hidden" => "true"}
-                    = tweet.favorite_count
-                %a.twitter-link{href: tweet.url, target: "_blank"}
-                  %span
-                    %i.fa.fa-retweet{"aria-hidden" => "true"}
-                    = tweet.retweet_count
+    - if @twitter.client
+      .col-xs-12
+        .row
+          .col-xs-10
+            %h4.newsheading.title
+              Twitter Feed
+          .col-xs-2
+            %a.btn.btn-primary.pull-xs-right{href: @twitter.user.url, target: "_blank"}
+              %i.fa.fa-twitter{"aria-hidden" => "true"}
+              Twitter
+        %ul.list-group
+          - @twitter.own_tweets[0..5].each do |tweet|
+            %li.list-group-item
+              .row
+                .col-xs-3.col-sm-2.col-lg-1
+                  = image_tag('transparent_logo.png', class: 'twitter-icon')
+                %span.col-xs-9.col-sm-10.col-lg-11
+                  = simple_format(auto_link(tweet.text))
+              .row
+                .col-xs-9.col-sm-10.col-lg-11.offset-xs-3.offset-sm-2.offset-lg-1
+                  %a.twitter-link{href: tweet.url, target: "_blank"}
+                    %span
+                      %i.fa.fa-eye{"aria-hidden" => "true"}
+                      View
+                  %a.twitter-link{href: tweet.url, target: "_blank"}
+                    %span
+                      %i.fa.fa-heart{"aria-hidden" => "true"}
+                      = tweet.favorite_count
+                  %a.twitter-link{href: tweet.url, target: "_blank"}
+                    %span
+                      %i.fa.fa-retweet{"aria-hidden" => "true"}
+                      = tweet.retweet_count
 
