@@ -21,7 +21,7 @@
             .tab-pane#reserve_team_table{ role: "tabpanel" }
               .container.welcome-tables
                 = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
-    - if @first_team.any? && @reserve_team.any?
+    - if @first_team.present? && @reserve_team.present?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
           Recent Form
@@ -39,7 +39,7 @@
               = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
             .tab-pane#reserve_team_form{ role: "tabpanel" }
               = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
-    - if @first_team_fixture.any? && @reserve_team_fixture.any?
+    - if @first_team_fixture.present? && @reserve_team_fixture.present?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
           Next Fixture
@@ -57,7 +57,7 @@
               = render 'next_fixture', team_fixture: @first_team_fixture
             .tab-pane#reserve_team_fixture{ role: "tabpanel" }
               = render 'next_fixture', team_fixture: @reserve_team_fixture
-    - if @first_team_result.any? && @reserve_team_result.any?
+    - if @first_team_result.present? && @reserve_team_result.present?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
           Previous Result
