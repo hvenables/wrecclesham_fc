@@ -18,12 +18,13 @@ feature 'news' do
   end
 
   context 'Adding a new news story' do
-    xscenario 'prompts admin to fill in a form' do
+    scenario 'prompts admin to fill in a form' do
       sign_in(admin)
       click_link 'New article'
       fill_in 'Title', with: 'Test Article'
-      fill_in 'Summary', with: 'Test Summary'
-      fill_in 'Content', with: 'Test Content'
+      fill_in 'news[summary]', with: 'Test Summary'
+      fill_in 'news[content]', with: 'Test Content'
+      attach_file 'news[image]', File.join(Rails.root, 'spec', 'fixtures', 'test.png')
       click_button 'Create News'
       expect(page).to have_content 'Test Article'
       expect(page).to have_content 'Test Content'
@@ -33,13 +34,14 @@ feature 'news' do
 
   context "Editing an existing news story" do
     let(:news) { create(:news) }
-    xscenario 'prompts user to fill in a form to edit story' do
+    scenario 'prompts user to fill in a form to edit story' do
       sign_in(admin)
       visit news_path(news)
       click_link "Edit"
       fill_in 'Title', with: 'Test Title'
-      fill_in 'Summary', with: 'Test Summary'
-      fill_in 'Content', with: 'Test Content'
+      fill_in 'news[summary]', with: 'Test Summary'
+      fill_in 'news[content]', with: 'Test Content'
+      attach_file 'news[image]', File.join(Rails.root, 'spec', 'fixtures', 'test.png')
       click_button 'Update News'
       expect(page).to have_content 'Test Title'
       expect(page).to have_content 'Test Content'
