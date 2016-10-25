@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :season, class: Season do
     association :team, factory: :team
+    sequence(:position){ |n| "#{n}" }
     games 6
     won 2
     drawn 2

@@ -7,15 +7,6 @@ class Team < ApplicationRecord
   scope :first_team, -> { find_by(name: "Wrecclesham") }
   scope :reserve_team, -> { find_by(name: "Wrecclesham Reserves") }
 
-  def teams_around_team
-    positions = seven_positions_around_team
-    teams = []
-    positions.each do |position|
-      teams << self.league_table.teams[position - 1]
-    end
-    teams
-  end
-
   def current_season
     Season.find_by(team: self, league_table: self.league_table)
   end
