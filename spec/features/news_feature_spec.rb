@@ -48,4 +48,15 @@ feature 'news' do
       expect(page).to have_content "Succesfully updated the news article"
     end
   end
+
+  context "Deleting an existing news story" do
+    let(:news) { create(:news) }
+    scenario 'can delete a news story' do
+      sign_in(admin)
+      visit news_path(news)
+      click_link "Delete"
+      expect(current_path).to eq news_index_path
+      expect(page).to have_content "News article has been deleted"
+    end
+  end
 end
