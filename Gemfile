@@ -101,6 +101,7 @@ group :test do
   gem 'shoulda'
   gem 'factory_girl_rails', :github => 'thoughtbot/factory_girl_rails'
   gem 'coveralls', require: false
+  gem 'timecop'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
