@@ -3,6 +3,8 @@ require 'nokogiri'
 
 class FixtureScrapper
 
+  COMPETITIONS = ['Div2', 'Div4', 'SLJC', 'JunC']
+
   def self.get_fixtures_data(url)
     doc = scrap_website(url)
     fixtures(doc)
@@ -63,7 +65,7 @@ class FixtureScrapper
     fixture_list = []
 
     fixtures.each do |fixture|
-      if fixture.include?("Div") && fixture.length == 4
+      if ([fixture] & COMPETITIONS).present? && fixture.length == 4
         fixture_list << @current_fixture if @current_fixture
         @current_fixture = []
         @current_fixture << fixture
