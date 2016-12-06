@@ -11,7 +11,7 @@ RSpec.describe News, type: :model do
 
   context '#latest_news' do
     it 'gets the last 5 news articles by date except for itself' do
-      expect(News.latest_news(news_1)).to eq [news_2, news_3, news_4, news_5, news_6]
+      expect(News.latest_news(news_0)).to eq [news_1, news_2, news_3, news_4, news_5]
     end
   end
   
