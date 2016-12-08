@@ -2,17 +2,20 @@
   .container
     .well.well-sm
       %h3.title Latest Videos
-    - @videos.each do |video|
-      #products.row.list-group.video-container
-        = link_to video_path(video), class: 'item list-group-item video-link' do
-          .thumbnail
-            %img.group.list-group-image{:alt => "", :src => "#{video.thumbnail}"}/
-            .caption
-              %h4.group.inner.list-group-item-heading
-                = video.title
-              %p.group.inner.list-group-item-text
-                = video.summary
-              %p.group-inner.list-group-item-footer.bottom-align-text
-                = video.created_at.to_formatted_s(:month_and_year)
+    .row
+      .card-deck-wrapper
+        .card-deck
+          - @videos.each do |video|
+            = link_to video_path(video), class: 'video-link news-link col-md-4' do
+              .card.green-hover.news-article
+                %img.card-img-top.news-img{:alt => "", :src => "#{video.thumbnail}"}/
+                .card-block.news-block
+                  %h4.card-title
+                    = video.title
+                  %p.card-text.summary
+                    = video.summary
+                  %p.card-text
+                    %small.text-muted.bottom-align-text
+                      = video.created_at.to_formatted_s(:month_and_year)
 - else
   No videos have been added
