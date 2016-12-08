@@ -73,7 +73,7 @@
           .tab-content
             .tab-pane.active#first_team_result{ role: "tabpanel" }
               = render 'last_result', team_result: @first_team_result
-            -# .tab-pane#reserve_team_result{ role: "tabpanel" }
+            .tab-pane#reserve_team_result{ role: "tabpanel" }
               = render 'last_result', team_result: @reserve_team_result
     - if @twitter.client
       .col-xs-12
