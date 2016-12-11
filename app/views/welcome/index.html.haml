@@ -53,10 +53,12 @@
                 %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
                   Reserve Team
           .tab-content
-            .tab-pane.active#first_team_fixture{ role: "tabpanel" }
-              = render 'next_fixture', team_fixture: @first_team_fixture
-            .tab-pane#reserve_team_fixture{ role: "tabpanel" }
-              = render 'next_fixture', team_fixture: @reserve_team_fixture
+            - if @first_team_fixture.length == 1
+              .tab-pane.active#first_team_fixture{ role: "tabpanel" }
+                = render 'next_fixture', team_fixture: @first_team_fixture
+            - if @first_team_fixture.length == 1
+              .tab-pane#reserve_team_fixture{ role: "tabpanel" }
+                = render 'next_fixture', team_fixture: @reserve_team_fixture
     - if @first_team_result.present? && @reserve_team_result.present?
       .container.col-lg-4.col-md-6.col-sm-12
         %h4.newsheading.title
