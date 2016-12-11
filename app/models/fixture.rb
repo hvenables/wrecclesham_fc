@@ -8,7 +8,6 @@ class Fixture < ApplicationRecord
 
   scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date) }
   scope :results, -> { where("date < ?", Time.now.utc.to_date) }
-  scope :next_game, ->(team) { where(home: team, home_score: nil).or(Fixture.where(away: team, away_score: nil)).order(date: :asc).first }
   scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).first }
   scope :team_results, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc) }
 
@@ -48,6 +47,10 @@ class Fixture < ApplicationRecord
           current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
         end
       end
+    end
+
+    def next_game(team)
+      where(home: team, home_score: nil).or(where(away: team, away_score: nil)).order(date: :asc).first
     end
 
     private
