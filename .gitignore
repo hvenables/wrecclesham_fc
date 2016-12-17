@@ -18,3 +18,5 @@
 .byebug_history
 screen-256color.ti
 config/secrets.yml
+
+*.DS_Store
