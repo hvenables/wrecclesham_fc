@@ -10,7 +10,7 @@
           = preserve gfm(@news.content)
         %p.card-text
           %small.text-muted
-            = "Last updated #{relative_time(@news.updated_at)}"
+            = "Last updated #{time_ago_in_words(@news.updated_at)} ago"
           - if can? :manage, News
             = link_to 'Delete', news_path(@news), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
             = link_to 'Edit', edit_news_path(@news), class: 'pull-xs-right btn btn-sm btn-success edit-button'

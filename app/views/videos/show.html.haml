@@ -9,7 +9,7 @@
         = @video.summary
       %p.card-text
         %small.text-muted
-          = "Last updated #{relative_time(@video.updated_at)}"
+          = "Last updated #{time_ago_in_words(@video.updated_at)} ago"
         - if can? :manage, Video
           = link_to 'Delete', video_path(@video), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
           = link_to 'Edit', edit_video_path(@video), class: 'pull-xs-right btn btn-sm btn-success edit-button'

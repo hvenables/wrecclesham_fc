@@ -8,4 +8,4 @@
           = @about.content
         %p.card-text
           %small.text-muted
-            = "Last updated #{relative_time(@about.updated_at)}"
+            = "Last updated #{time_ago_in_words(@about.updated_at)}"
