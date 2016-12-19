@@ -13,7 +13,7 @@ class VideosController < ApplicationController
       flash[:notice] = "You have successfully published a new video"
       redirect_to video_path(@video)
     else
-      flash[:error] = "Their has been an error in creating a video"
+      flash[:error] = "Video failed to save, #{@video.errors.full_messages.join(', ')}"
       render :new
     end
   end
@@ -29,7 +29,7 @@ class VideosController < ApplicationController
       flash[:notice] = 'Video has been successfully updated'
       redirect_to video_path(@video)
     else
-      flash[:error] = 'Video could not be updated'
+      flash[:error] = "Video failed to update, #{@video.errors.full_messages.join(', ')}"
       render :edit
     end
   end
@@ -39,7 +39,7 @@ class VideosController < ApplicationController
       flash[:notice] = 'Video has been deleted'
       redirect_to videos_path
     else
-      flash[:error] = "Video could not be deleted"
+      flash[:error] = "Video failed to be deleted"
       redirect_to video_path(@video)
     end
   end

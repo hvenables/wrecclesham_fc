@@ -34,55 +34,76 @@ feature 'video' do
     end
   end
 
-  context '#new/#create' do
-    before(:example) do
-      stub_yt
-    end
-    scenario 'should be able to add a video' do
+  context 'Specs you need to be admin for' do
+    before(:each) do
       sign_in(admin)
-      click_link 'New video'
-      fill_in 'Title', with: "Test Video"
-      fill_in 'Summary', with: 'Test Summary'
-      fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
-      click_button 'Create Video'
-      expect(page).to have_content 'Test Video'
-      expect(page).to have_content 'Test Summary'
-      expect(page).to have_css("iframe[src*='//www.youtube.com/embed/2iOQ053s_oM']")
     end
-  end
+    context '#new/#create' do
+      before(:example) do
+        stub_yt
+      end
+      scenario 'should be able to add a video' do
+        click_link 'New video'
+        fill_in 'Title', with: "Test Video"
+        fill_in 'Summary', with: 'Test Summary'
+        fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
+        click_button 'Create Video'
+        expect(page).to have_content 'Test Video'
+        expect(page).to have_content 'Test Summary'
+        expect(page).to have_css("iframe[src*='//www.youtube.com/embed/2iOQ053s_oM']")
+      end
 
-  context '#edit/#update' do
-    let(:video) { create :video }
-    before(:example) do
-      stub_yt
+      scenario 'not be able to add a video' do
+        click_link 'New video'
+        fill_in 'Title', with: ''
+        fill_in 'Summary', with: ''
+        fill_in 'basic-url', with: ''
+        click_button 'Create Video'
+        expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to save, Title can't be blank, Summary can't be blank, Url can't be blank, Link is not an embedable link please see example"
+      end
     end
-    scenario 'should be able to edit a video' do
-      sign_in(admin)
-      visit video_path(video)
-      click_link 'Edit'
-      fill_in 'Title', with: "Test Video"
-      fill_in 'Summary', with: 'Test Summary'
-      fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
-      click_button 'Update Video'
-      expect(page).to have_content 'Test Video'
-      expect(page).to have_content 'Test Summary'
-      expect(page).to have_css("iframe[src*='//www.youtube.com/embed/2iOQ053s_oM']")
-    end
-  end
 
-  context '#destroy' do
-    let(:video) { create :video }
-    before(:example) do
-      stub_yt
+    context '#edit/#update' do
+      let(:video) { create :video }
+      before(:example) do
+        stub_yt
+      end
+      scenario 'should be able to edit a video' do
+        visit video_path(video)
+        click_link 'Edit'
+        fill_in 'Title', with: "Test Video"
+        fill_in 'Summary', with: 'Test Summary'
+        fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
+        click_button 'Update Video'
+        expect(page).to have_content 'Test Video'
+        expect(page).to have_content 'Test Summary'
+        expect(page).to have_css("iframe[src*='//www.youtube.com/embed/2iOQ053s_oM']")
+      end
+
+      scenario 'cant edit a video and make it invalid' do
+        visit video_path(video)
+        click_link 'Edit'
+        fill_in 'Title', with: ''
+        fill_in 'Summary', with: ''
+        fill_in 'basic-url', with: ''
+        click_button 'Update Video'
+        expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to update, Title can't be blank, Summary can't be blank, Url can't be blank, Link is not an embedable link please see example"
+      end
     end
-    scenario 'should be able to delete a video' do
-      sign_in(admin)
-      visit video_path(video)
-      click_link 'Delete'
-      expect(current_path).to eq videos_path
-      expect(page).to_not have_content 'Video Title'
-      expect(page).to_not have_content 'Video Summary'
-      expect(page).to have_content 'Video has been deleted'
+
+    context '#destroy' do
+      let!(:video) { create :video }
+      before(:example) do
+        stub_yt
+      end
+      scenario 'should be able to delete a video' do
+        visit video_path(video)
+        click_link 'Delete'
+        expect(current_path).to eq videos_path
+        expect(page).to_not have_content 'Video Title'
+        expect(page).to_not have_content 'Video Summary'
+        expect(page).to have_content 'Video has been deleted'
+      end
     end
   end
 end

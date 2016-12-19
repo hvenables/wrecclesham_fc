@@ -15,7 +15,7 @@ class Video < ApplicationRecord
 
   def embedable_url
     unless url.include?("embed")
-      errors[:video] << "This is not an embedable link please get the embedable link from youtube"
+      errors[:link] << "is not an embedable link please see example"
     end
   end
 
