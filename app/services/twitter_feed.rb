@@ -1,5 +1,5 @@
 class TwitterFeed
-  attr_reader :feed, :user, :client
+  attr_reader :feed, :client
 
   def initialize(user = 'wreccleshamfc')
     @client = Twitter::REST::Client.new do |config|
@@ -8,10 +8,7 @@ class TwitterFeed
       config.access_token = Rails.application.secrets.access_token
       config.access_token_secret = Rails.application.secrets.access_secret
     end
-    if @client
-      @user = @client.user(user)
-      @feed = @client.user_timeline(user)
-    end
+    @feed = @client&.user_timeline(user)
   end
 
   def own_tweets
