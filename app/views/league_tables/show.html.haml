@@ -2,7 +2,7 @@
   .container
     .row
       %h2.title
-        = @league_table.name + " - " + @years
+        = @league_table.name + " - " + format_year(@league_table.year)
       - if @league_table.seasons.any?
         .wrapper
           .table-responsive

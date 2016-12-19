@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def format_year(year)
+    base = year.to_s.split(//).last(2).join
+    next_year = (base.to_i + 1).to_s
+    year.to_s + '/' + next_year
+  end
+
   def active_class(link_path)
     current_page?(link_path) ? "active" : ""
   end
