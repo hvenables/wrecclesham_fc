@@ -17,9 +17,11 @@
                 - fixtures.each do |fixture|
                   %li.list-group-item
                     .row
+                      .col-xs-1.text-xs-left
+                        = fixture.competition.abbreviation
                       .col-xs-4.col-md-5.text-xs-right
                         = fixture.home.name
-                      .col-xs-4.col-md-2.text-xs-center
+                      .col-xs-3.col-md-1.text-xs-center
                         = "#{fixture.home_score} - #{fixture.away_score}"
                       .col-xs-4.col.xs-5.text-xs-left
                         = fixture.away.name
@@ -32,13 +34,14 @@
                 - fixtures.each do |fixture|
                   %li.list-group-item
                     .row
+                      .col-xs-1.text-xs-left
+                        = fixture.competition.abbreviation
                       .col-xs-4.col-md-5.text-xs-right
                         = fixture.home.name
-                      .col-xs-4.col-md-2.text-xs-center
+                      .col-xs-3.col-md-1.text-xs-center
                         = "#{fixture.home_score} - #{fixture.away_score}"
                       .col-xs-4.col.xs-5.text-xs-left
                         = fixture.away.name
-
     %br
     - if can? :manage, Fixture
       = link_to "Add Fixtures", league_table_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"

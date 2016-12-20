@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009175134) do
+ActiveRecord::Schema.define(version: 20161220130023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,16 +22,24 @@ ActiveRecord::Schema.define(version: 20161009175134) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cups", force: :cascade do |t|
+    t.integer  "year"
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "fixtures", force: :cascade do |t|
     t.date     "date"
     t.integer  "home_id"
     t.integer  "away_id"
     t.string   "home_score"
     t.string   "away_score"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "league_table_id"
-    t.index ["league_table_id"], name: "index_fixtures_on_league_table_id", using: :btree
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "competition_id"
+    t.string   "competition_type"
   end
 
   create_table "league_tables", force: :cascade do |t|
@@ -47,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161009175134) do
     t.boolean  "active_first_team_table",   default: false, null: false
     t.boolean  "active_reserve_team_table", default: false, null: false
     t.string   "results_url"
+    t.string   "abbreviation"
   end
 
   create_table "news", force: :cascade do |t|
@@ -117,7 +126,6 @@ ActiveRecord::Schema.define(version: 20161009175134) do
     t.string   "thumbnail"
   end
 
-  add_foreign_key "fixtures", "league_tables"
   add_foreign_key "fixtures", "teams", column: "away_id"
   add_foreign_key "fixtures", "teams", column: "home_id"
   add_foreign_key "seasons", "league_tables"

@@ -45,6 +45,16 @@
             -if can? :manage, LeagueTable
               .dropdown-divider
               = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
+      %li.nav-item.dropdown
+        %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Cups
+        .dropdown-menu
+          - if @first_team_cups && @reserve_team_cups
+            = link_to 'First Team', cups_path(@first_team_cups), class: 'dropdown-item'
+            = link_to 'Reserve Team', cups_path(@reserve_team_cups), class: 'dropdown-item'
+            .dropdown-divider
+          - if can? :manage, Cup
+            = link_to 'Manage Cups', new_cup_path, class: 'dropdown-item'
+
       - if @first_team_table && @reserve_team_table
         %li.nav-item{:class => "#{active_class(league_table_fixtures_path(@first_team_table))} #{active_class(league_table_fixtures_path(@reserve_team_table))} dropdown"}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}= "Fixtures & Results"
