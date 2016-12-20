@@ -53,10 +53,10 @@
                 %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
                   Reserve Team
           .tab-content
-            - if @first_team_fixture.length == 1
+            - if @first_team_fixture
               .tab-pane.active#first_team_fixture{ role: "tabpanel" }
                 = render 'next_fixture', team_fixture: @first_team_fixture
-            - if @first_team_fixture.length == 1
+            - if @reserve_team_fixture
               .tab-pane#reserve_team_fixture{ role: "tabpanel" }
                 = render 'next_fixture', team_fixture: @reserve_team_fixture
     - if @first_team_result.present? && @reserve_team_result.present?

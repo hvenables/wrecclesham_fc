@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :videos
 
+  resources :cups
+
   resources :league_tables do
     resources :seasons
     resources :fixtures
