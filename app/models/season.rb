@@ -10,7 +10,7 @@ class Season < ApplicationRecord
     table.each do |season|
       Season.create!(
         position: season[0],
-        team: Team.find_or_create_by!(name: season[1].underscore.split('_').collect{|c| c.capitalize}.join(' '), league_table_id: current_league),
+        team: Team.find_or_create_by!(name: season[1], league_table_id: current_league),
         games: season[2],
         won: season[13],
         drawn: season[14],
@@ -36,7 +36,7 @@ class Season < ApplicationRecord
 
   def self.update_teams(table, current_league)
     table.each do |season|
-      current_team = Team.find_by(name: season[1].underscore.split('_').collect{|c| c.capitalize}.join(' '))
+      current_team = Team.find_by(name: season[1])
       if current_team
         current_season = Season.find_by(team: current_team, league_table: current_league)
         current_season.update!(

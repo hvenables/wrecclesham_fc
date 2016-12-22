@@ -19,7 +19,7 @@ class LeagueTableScrapper
       @table << element.text
     end
 
-    @table.each {|elem| elem.gsub!(/\s?/,"").gsub!(" ","")}.pop(1)
+    @table.each {|elem| elem.gsub!(/\s\s+/,"")}.pop(1)
 
     split_teams(@table, number_of_teams)
   end
