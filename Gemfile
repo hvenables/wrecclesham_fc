@@ -71,6 +71,7 @@ gem 'twitter', '~> 5.16'
 
 gem 'rails_autolink'
 
+# Speeds up boot time by caching require calls
 gem 'bootscale'
 
 group :development, :test do
