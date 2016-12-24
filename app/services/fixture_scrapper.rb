@@ -3,16 +3,9 @@ require 'nokogiri'
 
 class FixtureScrapper
 
-  COMPETITIONS = ['Div2', 'Div4', 'SLJC', 'JunC']
-
   def self.get_fixtures_data(url)
     doc = scrap_website(url)
     fixtures(doc)
-  end
-
-  def self.get_results_data(url)
-    doc = scrap_website(url)
-    results(doc)
   end
 
   private
@@ -28,30 +21,12 @@ class FixtureScrapper
   def self.fixtures(doc)
     fixture_list = extract_fixtures(doc)
 
-    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
-
-    split_fixtures(fixture_list)
-  end
-
-  def self.results(doc)
-    fixture_list = extract_results(doc)
-
-    fixture_list.each{|elem| elem.gsub!(/\s?/,"")}.reject!(&:blank?)
+    fixture_list.each{|elem| elem.gsub!(/\s\s+/,"")}.reject!(&:blank?)
 
     split_fixtures(fixture_list)
   end
 
   def self.extract_fixtures(doc)
-    fixture_list = []
-
-    doc.css('table.League-Fixtures_Table.Table').css('td').each do |element|
-      fixture_list << element.text
-    end
-
-    fixture_list
-  end
-
-  def self.extract_results(doc)
     fixture_list = []
 
     doc.css('table.Table').css('td').each do |element|
@@ -65,7 +40,7 @@ class FixtureScrapper
     fixture_list = []
 
     fixtures.each do |fixture|
-      if ([fixture] & COMPETITIONS).present? && fixture.length == 4
+      if fixture.match(/^[A-Z][a-zA-Z0-9]{2}[A-Z0-9]$/)
         fixture_list << @current_fixture if @current_fixture
         @current_fixture = []
         @current_fixture << fixture

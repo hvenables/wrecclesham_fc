@@ -18,8 +18,8 @@ class Fixture < ApplicationRecord
       fixtures.each do |fixture|
         next if not_league_game?(fixture, league_table) || postponed?(fixture)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
-        home = Team.find_by(name: fixture[2].underscore.split('_').collect{|c| c.capitalize}.join(' '))
-        away = Team.find_by(name: fixture[3].underscore.split('_').collect{|c| c.capitalize}.join(' '))
+        home = Team.find_by(name: fixture[2])
+        away = Team.find_by(name: fixture[3])
         next if Fixture.exists?(date: date, home: home, away: away, league_table: league_table)
         Fixture.create!(
           date: date,
@@ -32,12 +32,12 @@ class Fixture < ApplicationRecord
 
     def update_fixtures(league_table_id)
       league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.get_results_data(league_table.results_url)
+      fixtures = FixtureScrapper.get_fixtures_data(league_table.results_url)
       fixtures.each do |fixture|
         next if not_league_game?(fixture, league_table)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
-        home = Team.find_by(name: fixture[2].underscore.split('_').collect{|c| c.capitalize}.join(' '))
-        away = Team.find_by(name: fixture[4].underscore.split('_').collect{|c| c.capitalize}.join(' '))
+        home = Team.find_by(name: fixture[2])
+        away = Team.find_by(name: fixture[4])
         current_fixture = Fixture.find_by(date: date, home: home, away: away, league_table: league_table)
         home_score, away_score = fixture[3].split('-')
         if current_fixture
