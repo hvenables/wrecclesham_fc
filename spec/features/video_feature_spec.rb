@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 feature 'video' do
+  before(:each) do
+    allow_any_instance_of(Yt::Video).to receive(:thumbnail_url).and_return('https://i.ytimg.com/vi/2iOQ053s_oM/mqdefault.jpg')
+  end
   let(:admin) { create :admin }
   context '#index' do
     context 'No Videos have been added' do
