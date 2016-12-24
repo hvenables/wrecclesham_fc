@@ -68,6 +68,7 @@ GEM
     aws-sdk-resources (2.6.12)
       aws-sdk-core (= 2.6.12)
     bcrypt (3.1.11)
+    bootscale (0.7.0)
     buftok (0.2.0)
     builder (3.2.2)
     cancancan (1.15.0)
@@ -371,6 +372,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bootscale
   cancancan (~> 1.15)
   capistrano
   capistrano-bundler

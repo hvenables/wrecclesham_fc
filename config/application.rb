@@ -21,6 +21,10 @@ module WreccleshamFc
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    initializer :regenerate_require_cache, before: :load_environment_config do
+      Bootscale.regenerate
+    end
   end
 end
 
