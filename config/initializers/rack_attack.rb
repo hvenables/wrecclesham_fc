@@ -1,5 +1,10 @@
 class Rack::Attack
 
+  safelist('allow from localhost') do |req|
+    # Requests are allowed if the return value is truthy
+    '127.0.0.1' == req.ip || '::1' == req.ip
+  end
+
   throttle('logins/ip', limit: 5, period: 20.seconds) do |req|
     req.ip if req.path == '/users/sign_in' && req.post?
   end
