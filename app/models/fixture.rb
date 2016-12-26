@@ -16,7 +16,7 @@ class Fixture < ApplicationRecord
       league_table = LeagueTable.find(league_table_id)
       fixtures = FixtureScrapper.get_fixtures_data(league_table.fixture_url)
       fixtures.each do |fixture|
-        next if not_league_game?(fixture, league_table) || postponed?(fixture)
+        next if not_league_game?(fixture) || postponed?(fixture)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
         home = Team.find_by(name: fixture[2])
         away = Team.find_by(name: fixture[3])
@@ -34,12 +34,12 @@ class Fixture < ApplicationRecord
       league_table = LeagueTable.find(league_table_id)
       fixtures = FixtureScrapper.get_fixtures_data(league_table.results_url)
       fixtures.each do |fixture|
-        next if not_league_game?(fixture, league_table)
+        next if not_league_game?(fixture)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
         home = Team.find_by(name: fixture[2])
         away = Team.find_by(name: fixture[4])
         current_fixture = Fixture.find_by(date: date, home: home, away: away, league_table: league_table)
-        home_score, away_score = fixture[3].split('-')
+        home_score, away_score = fixture[3].split('-').map(&:strip)
         if current_fixture
           current_fixture.update!(home_score: home_score, away_score: away_score)
         else
@@ -55,8 +55,8 @@ class Fixture < ApplicationRecord
 
     private
 
-    def not_league_game?(fixture, league_table)
-      fixture[0] != 'Div' + league_table.name[-1]
+    def not_league_game?(fixture)
+      !fixture[0].match(/Div[0-9]/)
     end
 
     def postponed?(fixture)
