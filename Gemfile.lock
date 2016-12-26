@@ -223,6 +223,8 @@ GEM
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.2.0)
     rack (2.0.1)
+    rack-attack (5.0.1)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0)
@@ -400,6 +402,7 @@ DEPENDENCIES
   pry-rails
   puma
   pygments.rb
+  rack-attack
   rails (= 5.0.0)
   rails_autolink
   rb-readline

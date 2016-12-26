@@ -22,12 +22,12 @@ module WreccleshamFc
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    config.middleware.use Rack::Attack
+
+    config.assets << Rails.root.join("app", "services")
+
     initializer :regenerate_require_cache, before: :load_environment_config do
       Bootscale.regenerate
     end
   end
-end
-
-WreccleshamFc::Application.configure do
-  config.assets << Rails.root.join("app", "services")
 end
