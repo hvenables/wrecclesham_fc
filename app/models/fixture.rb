@@ -62,12 +62,6 @@ class Fixture < ApplicationRecord
 
     private
 
-    def not_league_game?(fixture)
-      !fixture[0].match(/Div[0-9]/)
-    end
-
-    private
-
     def postponed?(fixture)
       fixture.any?{ |s| s.casecmp("Postponed") == 0 }
     end
