@@ -3,9 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :load_league
+  before_action :load_league, :load_teams
 
   private
+
+  def load_teams
+    @first_team = Team.first_team
+    @reserve_team = Team.reserve_team
+  end
 
   def load_league
     @first_team_table = LeagueTable.active_first_team_table

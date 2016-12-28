@@ -43,6 +43,6 @@
                       .col-xs-4.col.xs-5.text-xs-left
                         = fixture.away.name
     %br
-    - if can? :manage, Fixture
+    - if (can? :manage, Fixture) && @league_table
       = link_to "Add Fixtures", league_table_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
       = link_to "Add Results", league_table_fixtures_path(), method: :post, class: "btn btn-primary"

@@ -1,10 +1,7 @@
 class WelcomeController < ApplicationController
-  before_action :load_league, only: :index
 
   def index
     @carousel_articles = latest_carousel_items
-    @first_team = Team.first_team
-    @reserve_team = Team.reserve_team
     @first_team_teams = @first_team.seven_positions_around_team if @first_team_table
     @reserve_team_teams = @reserve_team.seven_positions_around_team if @reserve_team_table
     @first_team_fixture = Fixture.next_game(@first_team)
@@ -27,4 +24,5 @@ class WelcomeController < ApplicationController
 
     carousel_items
   end
+
 end

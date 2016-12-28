@@ -1,9 +1,16 @@
 class FixturesController < ApplicationController
 
   def index
-    @league_table = LeagueTable.find(params[:league_table_id])
-    @fixtures = Fixture.fixtures.where(competition: @league_table).order(date: :asc)
-    @results = Fixture.results.where(competition: @league_table).order(date: :desc)
+    binding.pry
+    if params[:league_table_id]
+      @league_table = LeagueTable.find(params[:league_table_id])
+      @fixtures = Fixture.fixtures.where(competition: @league_table).order(date: :asc)
+      @results = Fixture.results.where(competition: @league_table).order(date: :desc)
+    elsif params[:team_id]
+      @team = Team.find(params[:team_id])
+      @fixtures = Fixture.fixtures.team_results(@team)
+      @results = Fixture.results.team_results(@team)
+    end
   end
 
   def create
