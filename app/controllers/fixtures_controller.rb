@@ -1,25 +1,26 @@
 class FixturesController < ApplicationController
 
   def index
-    binding.pry
     if params[:league_table_id]
       @league_table = LeagueTable.find(params[:league_table_id])
       @fixtures = Fixture.fixtures.where(competition: @league_table).order(date: :asc)
       @results = Fixture.results.where(competition: @league_table).order(date: :desc)
     elsif params[:team_id]
       @team = Team.find(params[:team_id])
-      @fixtures = Fixture.fixtures.team_results(@team)
+      @fixtures = Fixture.fixtures.team_fixtures(@team)
       @results = Fixture.results.team_results(@team)
     end
   end
 
   def create
+    team = Team.find(params[:team_id])
+    league_table = LeagueTable.find_by(id: params[:league_table_id]) || LeagueTable.find_by(id: team.league_table_id)
     if params[:fixtures]
-      Fixture.create_fixtures(params[:league_table_id])
+      Fixture.create_fixtures(league_table)
     else
-      Fixture.update_fixtures(params[:league_table_id])
+      Fixture.update_fixtures(league_table)
     end
-    redirect_to league_table_fixtures_path(params[:league_table_id])
+    redirect_to team_fixtures_path(params[:team_id])
   end
 
   private

@@ -7,6 +7,8 @@ class Team < ApplicationRecord
   scope :first_team, -> { find_by(name: "Wrecclesham") }
   scope :reserve_team, -> { find_by(name: "Wrecclesham Reserves") }
 
+  serialize :cups
+
   def current_season
     Season.find_by(team: self, league_table: self.league_table)
   end

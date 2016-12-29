@@ -22,7 +22,7 @@ class CupsController < ApplicationController
   private
 
   def cup_params
-    params.require(:cup).permit(:name, :abbreviation, :year)
+    params.require(:cup).permit(:name, :abbreviation, :year, :fixture_url, :result_url, :team, :active)
   end
 
 end

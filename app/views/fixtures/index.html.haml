@@ -11,20 +11,19 @@
       #fixtures.tab-pane.active{:role => "tabpanel"}
         .row
           %ul.list-group
-            - @fixtures.group_by(&:date).each do |date, fixtures|
-              %li.list-group-item.dark-color.form-label.text-xs-center
-                = date.strftime("%a, %d %B %Y")
-                - fixtures.each do |fixture|
-                  %li.list-group-item
-                    .row
-                      .col-xs-1.text-xs-left
-                        = fixture.competition.abbreviation
-                      .col-xs-4.col-md-5.text-xs-right
-                        = fixture.home.name
-                      .col-xs-3.col-md-1.text-xs-center
-                        = "#{fixture.home_score} - #{fixture.away_score}"
-                      .col-xs-4.col.xs-5.text-xs-left
-                        = fixture.away.name
+            - @fixtures.each do |fixture|
+              %li.list-group-item
+                .row
+                  .col-xs-1.text-xs-left
+                    = fixture.competition.abbreviation
+                  .col-xs-1.text-xs-left
+                    = fixture.date&.strftime("%a, %d %B %Y") || 'TBC'
+                  .col-xs-4.col-md-5.text-xs-right
+                    = fixture.home.name
+                  .col-xs-2.col-md-1.text-xs-center
+                    = "#{fixture.home_score} - #{fixture.away_score}"
+                  .col-xs-4.col.xs-5.text-xs-left
+                    = fixture.away.name
       #results.tab-pane{:role => "tabpanel"}
         .row
           %ul.list-group
@@ -43,6 +42,6 @@
                       .col-xs-4.col.xs-5.text-xs-left
                         = fixture.away.name
     %br
-    - if (can? :manage, Fixture) && @league_table
-      = link_to "Add Fixtures", league_table_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
-      = link_to "Add Results", league_table_fixtures_path(), method: :post, class: "btn btn-primary"
+    - if (can? :manage, Fixture)
+      = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
+      = link_to "Add Results", team_fixtures_path(), method: :post, class: "btn btn-primary"
