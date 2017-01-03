@@ -1,5 +1,7 @@
 class Team < ApplicationRecord
   belongs_to :league_table
+  has_many :team_cups
+  has_many :cups, through: :team_cups
   has_many :seasons
   has_many :home_fixtures, class_name: Fixture, foreign_key: 'home_id'
   has_many :away_fixtures, class_name: Fixture, foreign_key: 'away_id'
@@ -26,6 +28,10 @@ class Team < ApplicationRecord
       end
     end
     Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.sort{|a,b| a.position <=> b.position}
+  end
+
+  def competitions
+    [self.league_table] + self.cups
   end
 
   private
