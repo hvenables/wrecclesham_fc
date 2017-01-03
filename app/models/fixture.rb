@@ -13,45 +13,47 @@ class Fixture < ApplicationRecord
   scope :team_fixtures, ->(team) { where(home: team).where(home_score: nil).or(Fixture.where(away: team).where(away_score: nil)).order(date: :asc) }
 
   class << self
-    def create_fixtures(league_table_id)
-      league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.get_fixtures_data(league_table.fixture_url)
-      fixtures.each do |fixture|
-        next if postponed?(fixture)
-        begin
-          date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
-        rescue
-          date = nil
+    def create_fixtures(team)
+      team.competitions.each do |comp|
+        fixtures = FixtureScrapper.get_fixtures_data(comp.fixture_url)
+        fixtures.each do |fixture|
+          next if postponed?(fixture)
+          begin
+            date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
+          rescue
+            date = nil
+          end
+          home = Team.find_or_create_by(name: fixture[2])
+          away = Team.find_or_create_by(name: fixture[3])
+          competition = LeagueTable.find_by(abbreviation: fixture[0]) || Cup.find_by(abbreviation: fixture[0]) || false
+          next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
+          next unless competition
+          Fixture.create!(
+            date: date,
+            home_id: home.id,
+            away_id: away.id,
+            competition: competition
+          )
         end
-        home = Team.find_or_create_by(name: fixture[2])
-        away = Team.find_or_create_by(name: fixture[3])
-        competition = LeagueTable.find_by(abbreviation: fixture[0]) || Cup.find_by(abbreviation: fixture[0]) || false
-        next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
-        next unless competition
-        Fixture.create!(
-          date: date,
-          home_id: home.id,
-          away_id: away.id,
-          competition: competition
-        )
       end
     end
 
-    def update_fixtures(league_table_id)
-      league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.get_fixtures_data(league_table.results_url)
-      fixtures.each do |fixture|
-        home = Team.find_or_create_by(name: fixture[2])
-        away = Team.find_or_create_by(name: fixture[4])
-        competition = LeagueTable.find_by(abbreviation: fixture[0]) || Cup.find_by(abbreviation: fixture[0]) || false
-        next unless competition
-        current_fixture = Fixture.find_by(home: home, away: away, competition: competition)
-        home_score, away_score = fixture[3].split('-')
-        if current_fixture
-          current_fixture.update!(home_score: home_score, away_score: away_score)
-        else
-          current_fixture = Fixture.find_or_create_by(home: home, away: away, competition: competition)
-          current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
+    def update_fixtures(team)
+      team.competitions.each do |comp|
+        fixtures = FixtureScrapper.get_fixtures_data(comp.results_url)
+        fixtures.each do |fixture|
+          home = Team.find_or_create_by(name: fixture[2])
+          away = Team.find_or_create_by(name: fixture[4])
+          competition = LeagueTable.find_by(abbreviation: fixture[0]) || Cup.find_by(abbreviation: fixture[0]) || false
+          next unless competition
+          current_fixture = Fixture.find_by(home: home, away: away, competition: competition)
+          home_score, away_score = fixture[3].split('-')
+          if current_fixture
+            current_fixture.update!(home_score: home_score, away_score: away_score)
+          else
+            current_fixture = Fixture.find_or_create_by(home: home, away: away, competition: competition)
+            current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
+          end
         end
       end
     end

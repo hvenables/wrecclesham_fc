@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229135956) do
+ActiveRecord::Schema.define(version: 20170103132642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20161229135956) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "fixture_url"
-    t.string   "result_url"
+    t.string   "results_url"
     t.boolean  "active",       default: true
   end
 
@@ -99,10 +99,19 @@ ActiveRecord::Schema.define(version: 20161229135956) do
     t.integer  "position"
   end
 
+  create_table "team_cups", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "cup_id"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cup_id"], name: "index_team_cups_on_cup_id", using: :btree
+    t.index ["team_id"], name: "index_team_cups_on_team_id", using: :btree
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string  "name"
     t.integer "league_table_id"
-    t.text    "cups"
   end
 
   create_table "users", force: :cascade do |t|

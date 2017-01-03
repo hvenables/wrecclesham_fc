@@ -49,8 +49,6 @@ class FixtureScrapper
       end
     end
 
-    binding.pry
-
     fixture_list
   end
 end

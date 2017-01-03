@@ -14,11 +14,10 @@ class FixturesController < ApplicationController
 
   def create
     team = Team.find(params[:team_id])
-    league_table = LeagueTable.find_by(id: params[:league_table_id]) || LeagueTable.find_by(id: team.league_table_id)
     if params[:fixtures]
-      Fixture.create_fixtures(league_table)
+      Fixture.create_fixtures(team)
     else
-      Fixture.update_fixtures(league_table)
+      Fixture.update_fixtures(team)
     end
     redirect_to team_fixtures_path(params[:team_id])
   end
