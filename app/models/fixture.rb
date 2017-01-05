@@ -14,18 +14,13 @@ class Fixture < ApplicationRecord
 
   class << self
     def create_fixtures(team)
-      team.competitions.each do |comp|
-        fixtures = FixtureScrapper.get_fixtures_data(comp.fixture_url)
+      team.competitions.each do |competition|
+        fixtures = FixtureScrapper.get_fixtures_data(competition.fixture_url)
         fixtures.each do |fixture|
           next if postponed?(fixture)
-          begin
-            date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
-          rescue
-            date = nil
-          end
+          date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
           home = Team.find_or_create_by(name: fixture[2])
           away = Team.find_or_create_by(name: fixture[3])
-          competition = LeagueTable.find_by(abbreviation: fixture[0]) || Cup.find_by(abbreviation: fixture[0]) || false
           next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
           next unless competition
           Fixture.create!(
@@ -39,20 +34,19 @@ class Fixture < ApplicationRecord
     end
 
     def update_fixtures(team)
-      team.competitions.each do |comp|
-        fixtures = FixtureScrapper.get_fixtures_data(comp.results_url)
+      team.competitions.each do |competition|
+        fixtures = FixtureScrapper.get_fixtures_data(competition.results_url)
         fixtures.each do |fixture|
           home = Team.find_or_create_by(name: fixture[2])
           away = Team.find_or_create_by(name: fixture[4])
-          competition = LeagueTable.find_by(abbreviation: fixture[0]) || Cup.find_by(abbreviation: fixture[0]) || false
-          next unless competition
           current_fixture = Fixture.find_by(home: home, away: away, competition: competition)
           home_score, away_score = fixture[3].split('-')
           if current_fixture
             current_fixture.update!(home_score: home_score, away_score: away_score)
           else
+            date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
             current_fixture = Fixture.find_or_create_by(home: home, away: away, competition: competition)
-            current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
+            current_fixture.update!(date: date, home_score: home_score, away_score: away_score)
           end
         end
       end
