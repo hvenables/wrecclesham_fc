@@ -23,6 +23,9 @@ class FixtureScrapper
 
     fixture_list.each{|elem| elem.gsub!(/\s\s+/,"")}.reject!(&:blank?)
 
+    #reject any element about penalties, these are not yet handled
+    fixture_list.reject!{|elem| elem.match(/Pen\s?+\d-\d/)}
+
     split_fixtures(fixture_list)
   end
 
@@ -48,6 +51,9 @@ class FixtureScrapper
         @current_fixture << fixture
       end
     end
+
+    fixture_list << @current_fixture if @current_fixture
+    @current_fixture = nil
 
     fixture_list
   end
