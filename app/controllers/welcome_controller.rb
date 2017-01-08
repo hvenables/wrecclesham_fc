@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
   private
 
   def latest_carousel_items
-    news = News.order(updated_at: :desc).limit(5).to_a
+    news = News.order(updated_at: :desc).limit(6).to_a
     videos = Video.order(updated_at: :desc).limit(2).to_a
     carousel_items = news + videos
 
