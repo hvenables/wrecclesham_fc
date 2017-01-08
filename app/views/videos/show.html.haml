@@ -6,7 +6,7 @@
       %h4.card-title
         = @video.title
       %p.card-text
-        = @video.summary
+        = @video.content
       %p.card-text
         %small.text-muted
           = "Last updated #{time_ago_in_words(@video.updated_at)} ago"

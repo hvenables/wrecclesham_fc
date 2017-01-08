@@ -18,16 +18,8 @@
   %h4.form-label
     Latest News
 .container.col-xs-12.col-md-8.offset-md-2.offset-lg-0.col-lg-4
-  - @latest_news.each do |news|
-    = link_to news_path(news), class: 'video-link' do
-      .card.green-hover
-        %img.card-img-top.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{news.image.url(:large)}"}/
-        .card-block
-          %h4.card-title
-            = news.title
-          %p.card-text
-            = news.summary
-          %p.card-text
-            %small.text-muted.bottom-align-text
-              = news.created_at.to_formatted_s(:month_and_year)
-
+  .card-deck-wrapper
+    .card-deck
+      .row
+        - @latest_news.each do |news|
+          = render 'shared/card', news: news, width: 'col-xs-12'

@@ -2,14 +2,17 @@
   - carousel_articles.each do |news|
     = link_to news, class: 'video-link' do
       .card.carousel-item
-        .card-block.carousel-title
-          %h4.card-title
-            %span#carousel-news-title
-              = news.title
         %img.carousel-img{:alt => "", :src => "#{news.try(:image)&.url(:large) || news.thumbnail}"}/
         .card-block
+          .card-text
+            .row.news-info
+              .col-xs-4
+                = news.class.to_s
+              .col-xs-8
+                %small.text-muted.pull-right
+                  = news.created_at.to_formatted_s(:month_and_year)
+          %h5.card-title
+            %span#carousel-news-title
+              = news.title
           %p.card-text
-            = news.summary
-          %p.card-text.bottom-align-text
-            %small.text-muted
-              = news.created_at.to_formatted_s(:month_and_year)
+            = truncate(news.content, length: 120)

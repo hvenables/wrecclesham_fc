@@ -1,10 +1,6 @@
 - if @news.any?
   .container
     .well.well-sm
-      %h3.title Latest News
-    = render 'welcome/carousel', carousel_articles: @carousel_news
-  .container
-    .well.well-sm
       %h3.title All News
     .col-xs-12.col-sm-6
       = paginate @news
@@ -16,16 +12,6 @@
       .card-deck-wrapper
         .card-deck
           - @news.each do |news|
-            = link_to news_path(news), class: 'video-link news-link col-md-4' do
-              .card.green-hover.news-article
-                %img.card-img-top.news-img{:alt => "", :src => "#{news.image.url(:large)}"}/
-                .card-block.news-block
-                  %h4.card-title
-                    = news.title
-                  %p.card-text.summary
-                    = news.summary
-                  %p.card-text
-                    %small.text-muted.bottom-align-text
-                      = news.created_at.to_formatted_s(:month_and_year)
+            = render 'shared/card', news: news, width: 'col-md-4'
 - else
   No News has been added yet

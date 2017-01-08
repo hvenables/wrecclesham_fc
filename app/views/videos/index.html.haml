@@ -6,16 +6,6 @@
       .card-deck-wrapper
         .card-deck
           - @videos.each do |video|
-            = link_to video_path(video), class: 'video-link news-link col-md-4' do
-              .card.green-hover.news-article
-                %img.card-img-top.news-img{:alt => "", :src => "#{video.thumbnail}"}/
-                .card-block.news-block
-                  %h4.card-title
-                    = video.title
-                  %p.card-text.summary
-                    = video.summary
-                  %p.card-text
-                    %small.text-muted.bottom-align-text
-                      = video.created_at.to_formatted_s(:month_and_year)
+            = render 'shared/card', news: video, width: 'col-md-4'
 - else
   No videos have been added
