@@ -9,7 +9,8 @@ RSpec.describe Fixture, type: :model do
     let!(:burpham) { create :team, name: "Burpham"}
 
     before do
-      expect(FixtureScrapper).to receive(:get_fixtures_data).and_return(fixture_data)
+      expect_any_instance_of(FixtureScrapper).to receive(:fixtures).and_return(fixture_data)
+      expect_any_instance_of(FixtureScrapper).to receive(:scrap_website)
     end
 
     context '#create fixtures' do

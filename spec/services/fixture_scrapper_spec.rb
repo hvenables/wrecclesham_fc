@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe FixtureScrapper do
   context 'Fixtures' do
     scenario 'Will return an array of fixtures' do
-      fixture = FixtureScrapper.get_fixtures_data((Rails.root + 'spec/fixtures/test_fixtures.html'))
+      fixture = FixtureScrapper.new(Rails.root + 'spec/fixtures/test_fixtures.html').fixtures
       #                           Abbr    Date                   Home                       Away                             Venue                         Competition
       expect(fixture[0]).to eq  ['IntC', 'TBC',            "Laleham Athletic",        "Surrey Athletic",           "Egham Leisure Centre #2",           "Intermediate Cup"]
       expect(fixture[1]).to eq  ["IntC", "TBC",            "Staines Lammas Reserves", "Windlesham & Lightwater A", "Littleton Recreation Ground",       "Intermediate Cup"]

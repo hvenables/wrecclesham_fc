@@ -14,7 +14,7 @@ class Fixture < ApplicationRecord
   class << self
     def create_fixtures(league_table_id)
       league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.get_fixtures_data(league_table.fixture_url)
+      fixtures = FixtureScrapper.new(league_table.fixture_url).fixtures
       fixtures.each do |fixture|
         next if not_league_game?(fixture) || postponed?(fixture)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
@@ -32,7 +32,7 @@ class Fixture < ApplicationRecord
 
     def update_fixtures(league_table_id)
       league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.get_fixtures_data(league_table.results_url)
+      fixtures = FixtureScrapper.new(league_table.results_url).fixtures
       fixtures.each do |fixture|
         next if not_league_game?(fixture)
         date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
