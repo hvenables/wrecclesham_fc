@@ -103,8 +103,7 @@ group :test do
   gem 'webmock'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
-  gem 'shoulda'
+  gem 'shoulda-matchers'
   gem 'factory_girl_rails', :github => 'thoughtbot/factory_girl_rails'
   gem 'coveralls', require: false
   gem 'timecop'
