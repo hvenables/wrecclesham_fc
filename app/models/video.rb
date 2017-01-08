@@ -1,7 +1,7 @@
 class Video < ApplicationRecord
   before_save :add_thumbnail
 
-  validates :title, :summary, :url, presence: :true
+  validates :title, :content, :url, presence: :true
   validate :embedable_url
 
   def url_santizer
@@ -14,6 +14,7 @@ class Video < ApplicationRecord
   end
 
   def embedable_url
+    return false if url.blank?
     unless url.include?("embed")
       errors[:link] << "is not an embedable link please see example"
     end

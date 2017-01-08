@@ -2,7 +2,6 @@ class NewsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @carousel_news = News.all.order(created_at: :desc).limit(6)
     @news = News.all.order(created_at: :desc).page(params[:page]).per(params[:per])
   end
 
@@ -33,7 +32,7 @@ class NewsController < ApplicationController
       flash[:notice] = "Succesfully updated the news article"
       redirect_to news_path(@news)
     else
-      flash[:error] = "Failed to update, #{@news.errors.full_messages.join(', ')}"
+      flash[:error] = "News story failed to update, #{@news.errors.full_messages.join(', ')}"
       render :edit
     end
   end
@@ -51,6 +50,6 @@ class NewsController < ApplicationController
   private
 
   def news_params
-    params.require(:news).permit(:title, :summary, :content, :image)
+    params.require(:news).permit(:title, :content, :image)
   end
 end

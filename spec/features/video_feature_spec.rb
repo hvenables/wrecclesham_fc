@@ -21,7 +21,7 @@ feature 'video' do
         visit root_path
         click_link 'Videos'
         expect(page).to have_content video.title
-        expect(page).to have_content video.summary
+        expect(page).to have_content video.content
         expect(page).to have_css("img[src*='#{video.thumbnail}']")
       end
     end
@@ -32,7 +32,7 @@ feature 'video' do
     scenario 'Should be able to visit a individual video' do
       visit video_path(video)
       expect(page).to have_content video.title
-      expect(page).to have_content video.summary
+      expect(page).to have_content video.content
       expect(page).to have_css("iframe[src*='#{video.url_santizer}']")
     end
   end
@@ -48,7 +48,7 @@ feature 'video' do
       scenario 'should be able to add a video' do
         click_link 'New video'
         fill_in 'Title', with: "Test Video"
-        fill_in 'Summary', with: 'Test Summary'
+        fill_in 'Content', with: 'Test Summary'
         fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
         click_button 'Create Video'
         expect(page).to have_content 'Test Video'
@@ -59,10 +59,10 @@ feature 'video' do
       scenario 'not be able to add a video' do
         click_link 'New video'
         fill_in 'Title', with: ''
-        fill_in 'Summary', with: ''
+        fill_in 'Content', with: ''
         fill_in 'basic-url', with: ''
         click_button 'Create Video'
-        expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to save, Title can't be blank, Summary can't be blank, Url can't be blank, Link is not an embedable link please see example"
+        expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to save, Title can't be blank, Content can't be blank, Url can't be blank"
       end
     end
 
@@ -75,7 +75,7 @@ feature 'video' do
         visit video_path(video)
         click_link 'Edit'
         fill_in 'Title', with: "Test Video"
-        fill_in 'Summary', with: 'Test Summary'
+        fill_in 'Content', with: 'Test Summary'
         fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
         click_button 'Update Video'
         expect(page).to have_content 'Test Video'
@@ -87,10 +87,10 @@ feature 'video' do
         visit video_path(video)
         click_link 'Edit'
         fill_in 'Title', with: ''
-        fill_in 'Summary', with: ''
+        fill_in 'Content', with: ''
         fill_in 'basic-url', with: ''
         click_button 'Update Video'
-        expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to update, Title can't be blank, Summary can't be blank, Url can't be blank, Link is not an embedable link please see example"
+        expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to update, Title can't be blank, Content can't be blank, Url can't be blank"
       end
     end
 

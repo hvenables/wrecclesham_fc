@@ -3,10 +3,6 @@
     = f.label :title, class: "form-label"
     = f.text_field :title, { class: "form-control" }
   .form-group
-    = f.label :summary_max_length_250_characters, class: "form-label"
-    = f.label :Content_is_processed_using_markdown, { class: 'pull-xs-right form-label text-muted small' }
-    = f.text_area :summary, { class: 'form-control news-summary', rows: 5 }
-  .form-group
     = f.label :content, class: "form-label"
     = f.label :Content_is_processed_using_markdown, { class: 'form-label pull-xs-right text-muted small' }
     = f.text_area :content, { class: 'form-control news-content', rows: 15 }

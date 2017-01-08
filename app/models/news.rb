@@ -7,19 +7,8 @@ class News < ApplicationRecord
 
   paginates_per 9
 
-  validates :title, :summary, :image, presence: true
-  validates :summary, length: { maximum: 250 }
-  validates :content, presence: true
+  validates :title, :image, :content, presence: true
 
-  def self.latest_news(current_article)
-    latest_news = []
-    order(created_at: :desc).each do |news|
-      next if news == current_article
-      if latest_news.length < 5
-        latest_news << news
-      end
-    end
-    latest_news
-  end
+  scope :latest_news, ->(current_article) { where.not(id: current_article.id).order(created_at: :desc).limit(4) }
 
 end
