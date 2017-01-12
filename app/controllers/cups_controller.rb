@@ -1,11 +1,14 @@
 class CupsController < ApplicationController
+  load_and_authorize_resource
+
+  def index
+  end
 
   def show
     @cup = Cup.find(params[:id])
   end
 
   def new
-    @cups = Cup.all
     @cup = Cup.new
   end
 
