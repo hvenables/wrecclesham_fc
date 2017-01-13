@@ -8,64 +8,97 @@
       %li.nav-item
         %a.nav-link.fixture-nav{"data-toggle" => "tab", :href => "#results", :role => "tab"} Results
     .tab-content
-      #fixtures.tab-pane.active{:role => "tabpanel"}
-        .row
-          .table-responsive
-            %table.table
-              %thead.table-inverse
-                %tr
-                  %th.text-xs-center{ width: '20%' }
-                    Date
-                  %th.text-xs-right{ width: '25%' }
-                    Home
-                  %th{ width: '10%' }
-                  %th.text-xs-left{ width: '25%' }
-                    Away
-                  %th.text-xs-center{ width: '15%' }
-                    Comp.
-              - @fixtures.each do |fixture|
-                %tbody
+      - if @team
+        #fixtures.tab-pane.active{:role => "tabpanel"}
+          .row
+            .table-responsive
+              %table.table
+                %thead.table-inverse
                   %tr
-                    %td.text-xs-center
-                      = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
-                    %td.text-xs-right
-                      = fixture.home.name
-                    %td.text-xs-center
-                      = "#{fixture.home_score} - #{fixture.away_score}"
-                    %td.text-xs-left
-                      = fixture.away.name
-                    %td.text-xs-center
-                      = fixture.competition.abbreviation
+                    %th.text-xs-center{ width: '20%' }
+                      Date
+                    %th.text-xs-right{ width: '25%' }
+                      Home
+                    %th{ width: '10%' }
+                    %th.text-xs-left{ width: '25%' }
+                      Away
+                    %th.text-xs-center{ width: '15%' }
+                      Comp.
+                - @fixtures.each do |fixture|
+                  %tbody
+                    %tr
+                      %td.text-xs-center
+                        = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
+                      %td.text-xs-right
+                        = fixture.home.name
+                      %td.text-xs-center
+                        = "#{fixture.home_score} - #{fixture.away_score}"
+                      %td.text-xs-left
+                        = fixture.away.name
+                      %td.text-xs-center
+                        = fixture.competition.abbreviation
 
-      #results.tab-pane{:role => "tabpanel"}
-        .row
-          .table-responsive
-            %table.table
-              %thead.table-inverse
-                %tr
-                  %th.text-xs-center{ width: '20%' }
-                    Date
-                  %th.text-xs-right{ width: '25%' }
-                    Home
-                  %th{ width: '10%' }
-                  %th.text-xs-left{ width: '25%' }
-                    Away
-                  %th.text-xs-center{ width: '15%' }
-                    Comp.
-              - @results.each do |fixture|
-                %tbody
+        #results.tab-pane{:role => "tabpanel"}
+          .row
+            .table-responsive
+              %table.table
+                %thead.table-inverse
                   %tr
-                    %td.text-xs-center
-                      = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
-                    %td.text-xs-right
-                      = fixture.home.name
-                    %td.text-xs-center
-                      = "#{fixture.home_score} - #{fixture.away_score}"
-                    %td.text-xs-left
-                      = fixture.away.name
-                    %td.text-xs-center
-                      = fixture.competition.abbreviation
-    %br
-    - if (can? :manage, Fixture)
-      = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
-      = link_to "Add Results", team_fixtures_path(), method: :post, class: "btn btn-primary"
+                    %th.text-xs-center{ width: '20%' }
+                      Date
+                    %th.text-xs-right{ width: '25%' }
+                      Home
+                    %th{ width: '10%' }
+                    %th.text-xs-left{ width: '25%' }
+                      Away
+                    %th.text-xs-center{ width: '15%' }
+                      Comp.
+                - @results.each do |fixture|
+                  %tbody
+                    %tr
+                      %td.text-xs-center
+                        = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
+                      %td.text-xs-right
+                        = fixture.home.name
+                      %td.text-xs-center
+                        = "#{fixture.home_score} - #{fixture.away_score}"
+                      %td.text-xs-left
+                        = fixture.away.name
+                      %td.text-xs-center
+                        = fixture.competition.abbreviation
+        %br
+        - if (can? :manage, Fixture)
+          = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
+          = link_to "Add Results", team_fixtures_path(), method: :post, class: "btn btn-primary"
+      - elsif @league_table
+        #fixtures.tab-pane.active{:role => "tabpanel"}
+          .row
+            %ul.list-group
+              - @fixtures.group_by(&:date).each do |date, fixtures|
+                %li.list-group-item.dark-color.form-label.text-xs-center
+                  = date&.strftime("%a, %d %b %Y") || 'TBC'
+                  - fixtures.each do |fixture|
+                    %li.list-group-item
+                      .row
+                        .col-xs-4.col-md-5.text-xs-right
+                          = fixture.home.name
+                        .col-xs-4.col-md-2.text-xs-center
+                          = "#{fixture.home_score} - #{fixture.away_score}"
+                        .col-xs-4.col.xs-5.text-xs-left
+                          = fixture.away.name
+        #results.tab-pane{:role => "tabpanel"}
+          .row
+            %ul.list-group
+              - @results.group_by(&:date).each do |date, fixtures|
+                %li.list-group-item.dark-color.form-label.text-xs-center
+                  = date.strftime("%a, %d %B %Y")
+                  - fixtures.each do |fixture|
+                    %li.list-group-item
+                      .row
+                        .col-xs-4.col-md-5.text-xs-right
+                          = fixture.home.name
+                        .col-xs-4.col-md-2.text-xs-center
+                          = "#{fixture.home_score} - #{fixture.away_score}"
+                        .col-xs-4.col.xs-5.text-xs-left
+                          = fixture.away.name
+

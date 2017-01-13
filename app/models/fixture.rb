@@ -9,8 +9,10 @@ class Fixture < ApplicationRecord
   scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date).or(Fixture.where(date: nil)) }
   scope :results, -> { where("date < ?", Time.now.utc.to_date) }
   scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).first }
-  scope :team_results, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc) }
   scope :team_fixtures, ->(team) { where(home: team).where(home_score: nil).or(Fixture.where(away: team).where(away_score: nil)).order(date: :asc) }
+  scope :team_results, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc) }
+  scope :league_fixtures, ->(league_table) { where(competition: league_table).order(date: :asc) }
+  scope :league_results, ->(league_table) { where(competition: league_table).order(date: :desc) }
 
   class << self
     def create_fixtures(team)

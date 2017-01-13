@@ -17,8 +17,9 @@ class LeagueTablesController < ApplicationController
   end
 
   def show
-    @league_table = LeagueTable.find(params[:id])
     @teams = @league_table.seasons.ordered_on_points
+    @latest_league_results  = Fixture.results.league_results(@league_table)
+    @latest_league_fixtures = Fixture.fixtures.league_fixtures(@league_table)
   end
 
   def edit

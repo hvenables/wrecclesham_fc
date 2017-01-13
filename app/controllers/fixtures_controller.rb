@@ -3,8 +3,8 @@ class FixturesController < ApplicationController
   def index
     if params[:league_table_id]
       @league_table = LeagueTable.find(params[:league_table_id])
-      @fixtures = Fixture.fixtures.where(competition: @league_table).order(date: :asc)
-      @results = Fixture.results.where(competition: @league_table).order(date: :desc)
+      @fixtures = Fixture.fixtures.league_fixtures(@league_table)
+      @results = Fixture.results.league_results(@league_table)
     elsif params[:team_id]
       @team = Team.find(params[:team_id])
       @fixtures = Fixture.fixtures.team_fixtures(@team)
