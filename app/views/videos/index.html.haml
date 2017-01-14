@@ -2,6 +2,11 @@
   .container
     .well.well-sm
       %h3.title Latest Videos
+    .col-xs-12.col-sm-6
+      = paginate @videos
+    .col-xs-12.col-sm-6
+      .page-entries.pull-xs-left.pull-sm-right
+        = page_entries_info @videos
     .row
       .card-deck-wrapper
         .card-deck
