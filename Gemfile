@@ -38,7 +38,7 @@ gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 
 gem 'haml-rails', '~> 0.9.0'
 
-gem 'devise', :github => "plataformatec/devise"
+gem 'devise'
 
 # Adding images
 gem 'paperclip'
@@ -104,7 +104,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails', :github => 'thoughtbot/factory_girl_rails'
+  gem 'factory_girl_rails'
   gem 'coveralls', require: false
   gem 'timecop'
 end
