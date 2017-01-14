@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170108164301) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,16 +21,27 @@ ActiveRecord::Schema.define(version: 20170108164301) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cups", force: :cascade do |t|
+    t.integer  "year"
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "fixture_url"
+    t.string   "results_url"
+    t.boolean  "active",       default: true
+  end
+
   create_table "fixtures", force: :cascade do |t|
     t.date     "date"
     t.integer  "home_id"
     t.integer  "away_id"
     t.string   "home_score"
     t.string   "away_score"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "league_table_id"
-    t.index ["league_table_id"], name: "index_fixtures_on_league_table_id", using: :btree
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "competition_id"
+    t.string   "competition_type"
   end
 
   create_table "league_tables", force: :cascade do |t|
@@ -47,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170108164301) do
     t.boolean  "active_first_team_table",   default: false, null: false
     t.boolean  "active_reserve_team_table", default: false, null: false
     t.string   "results_url"
+    t.string   "abbreviation"
   end
 
   create_table "news", force: :cascade do |t|
@@ -86,6 +97,16 @@ ActiveRecord::Schema.define(version: 20170108164301) do
     t.integer  "position"
   end
 
+  create_table "team_cups", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "cup_id"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cup_id"], name: "index_team_cups_on_cup_id", using: :btree
+    t.index ["team_id"], name: "index_team_cups_on_team_id", using: :btree
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string  "name"
     t.integer "league_table_id"
@@ -116,7 +137,6 @@ ActiveRecord::Schema.define(version: 20170108164301) do
     t.string   "thumbnail"
   end
 
-  add_foreign_key "fixtures", "league_tables"
   add_foreign_key "fixtures", "teams", column: "away_id"
   add_foreign_key "fixtures", "teams", column: "home_id"
   add_foreign_key "seasons", "league_tables"

@@ -2,49 +2,54 @@ require 'open-uri'
 require 'nokogiri'
 
 class Fixture < ApplicationRecord
-  belongs_to :league_table
+  belongs_to :competition, polymorphic: true
   belongs_to :home, class_name: 'Team', foreign_key: "home_id"
   belongs_to :away, class_name: 'Team', foreign_key: "away_id"
 
-  scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date) }
+  scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date).or(Fixture.where(date: nil)) }
   scope :results, -> { where("date < ?", Time.now.utc.to_date) }
   scope :last_game, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc).first }
+  scope :team_fixtures, ->(team) { where(home: team).where(home_score: nil).or(Fixture.where(away: team).where(away_score: nil)).order(date: :asc) }
   scope :team_results, ->(team) { where(home: team).where.not(home_score: nil).or(Fixture.where(away: team).where.not(away_score: nil)).order(date: :desc) }
+  scope :league_fixtures, ->(league_table) { where(competition: league_table).order(date: :asc) }
+  scope :league_results, ->(league_table) { where(competition: league_table).order(date: :desc) }
 
   class << self
-    def create_fixtures(league_table_id)
-      league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.new(league_table.fixture_url).fixtures
-      fixtures.each do |fixture|
-        next if not_league_game?(fixture) || postponed?(fixture)
-        date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
-        home = Team.find_by(name: fixture[2])
-        away = Team.find_by(name: fixture[3])
-        next if Fixture.exists?(date: date, home: home, away: away, league_table: league_table)
-        Fixture.create!(
-          date: date,
-          home_id: home.id,
-          away_id: away.id,
-          league_table_id: league_table.id
-        )
+    def create_fixtures(team)
+      team.competitions.each do |competition|
+        fixtures = FixtureScrapper.get_fixtures_data(competition.fixture_url)
+        fixtures.each do |fixture|
+          next if postponed?(fixture)
+          date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
+          home = Team.find_or_create_by(name: fixture[2])
+          away = Team.find_or_create_by(name: fixture[3])
+          next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
+          next unless competition
+          Fixture.create!(
+            date: date,
+            home_id: home.id,
+            away_id: away.id,
+            competition: competition
+          )
+        end
       end
     end
 
-    def update_fixtures(league_table_id)
-      league_table = LeagueTable.find(league_table_id)
-      fixtures = FixtureScrapper.new(league_table.results_url).fixtures
-      fixtures.each do |fixture|
-        next if not_league_game?(fixture)
-        date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
-        home = Team.find_by(name: fixture[2])
-        away = Team.find_by(name: fixture[4])
-        current_fixture = Fixture.find_by(date: date, home: home, away: away, league_table: league_table)
-        home_score, away_score = fixture[3].split('-').map(&:strip)
-        if current_fixture
-          current_fixture.update!(home_score: home_score, away_score: away_score)
-        else
-          current_fixture = Fixture.find_or_create_by(date: date, home: home, away: away, league_table: league_table)
-          current_fixture.update!(home: home, away: away, home_score: home_score, away_score: away_score)
+    def update_fixtures(team)
+      team.competitions.each do |competition|
+        fixtures = FixtureScrapper.get_fixtures_data(competition.results_url)
+        fixtures.each do |fixture|
+          home = Team.find_or_create_by(name: fixture[2])
+          away = Team.find_or_create_by(name: fixture[4])
+          current_fixture = Fixture.find_by(home: home, away: away, competition: competition)
+          home_score, away_score = fixture[3].split('-')
+          if current_fixture
+            current_fixture.update!(home_score: home_score, away_score: away_score)
+          else
+            date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
+            current_fixture = Fixture.find_or_create_by(home: home, away: away, competition: competition)
+            current_fixture.update!(date: date, home_score: home_score, away_score: away_score)
+          end
         end
       end
     end
@@ -54,10 +59,6 @@ class Fixture < ApplicationRecord
     end
 
     private
-
-    def not_league_game?(fixture)
-      !fixture[0].match(/Div[0-9]/)
-    end
 
     def postponed?(fixture)
       fixture.any?{ |s| s.casecmp("Postponed") == 0 }

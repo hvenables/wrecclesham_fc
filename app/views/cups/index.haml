@@ -1,0 +1,19 @@
+- if @cups.nil?
+  Please Add a table
+- else
+  %table.table
+    %thead
+      %tr
+        %th
+          Year
+        %th
+          Name
+    %tbody
+      - @cups.each do |cup|
+        %tr
+          %td
+            = cup.year
+          %td
+            = link_to "#{cup.name}", cup_path(cup)
+
+= link_to "Add a Cup", new_cup_path(), class: 'btn btn-primary'

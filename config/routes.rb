@@ -12,6 +12,12 @@ Rails.application.routes.draw do
 
   resources :videos
 
+  resources :cups
+
+  resources :team, only: [] do
+    resources :fixtures
+  end
+
   resources :league_tables do
     resources :seasons
     resources :fixtures

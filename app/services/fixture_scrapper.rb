@@ -11,9 +11,12 @@ class FixtureScrapper
   end
 
   def fixtures
-    fixture_list = extract_fixtures(data)
+    fixture_list = extract_fixtures
 
     fixture_list.each{|elem| elem.gsub!(/\s\s+/,"")}.reject!(&:blank?)
+
+    #reject any element about penalties, these are not yet handled
+    fixture_list.reject!{|elem| elem.match(/Pen\s?+\d-\d/)}
 
     split_fixtures(fixture_list)
   end
@@ -28,10 +31,10 @@ class FixtureScrapper
     doc
   end
 
-  def extract_fixtures(web_data)
+  def extract_fixtures
     fixture_list = []
 
-    web_data.css('table.Table').css('td').each do |element|
+    data.css('table.Table').css('td').each do |element|
       fixture_list << element.text
     end
 
