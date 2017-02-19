@@ -3,7 +3,7 @@ FactoryGirl.define do
     date Date.new(2017, 1, 14)
     association :home, factory: :team
     association :away, factory: :team
-    association :league_table, factory: :league_table
+    association :competition, factory: :league_table
 
     factory :result do
       home_score 1
