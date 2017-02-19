@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # Serve websocket cable requests in-process
-  # mount ActionCable.server => '/cable'
   root to: "welcome#index"
 
   resource :welcome, only: :index
@@ -12,15 +9,17 @@ Rails.application.routes.draw do
 
   resources :videos
 
-  resources :cups
+  resources :cups, except: :show do
+    resource :fixtures, only: :show
+  end
 
   resources :team, only: [] do
-    resources :fixtures
+    resource :fixtures, only: [:show, :create, :update]
   end
 
   resources :league_tables do
     resources :seasons
-    resources :fixtures
+    resource :fixtures, only: :show
   end
 
   resources :about, only: [:index, :edit, :update]
