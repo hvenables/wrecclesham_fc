@@ -1,14 +1,20 @@
 - if @fixtures.nil?
   Please Add fixtures
 - else
+  - if params[:league_table_id] || params[:cup_id]
+    .container
+      .row
+        .col-xs-10.offset-md-1
+          %h2.title
+            = @subject.name + " - " + format_year(@subject.year)
   .col-xs-12.col-md-10.offset-md-1
-    %ul.nav.nav-tabs{:role => "tablist"}
+    %ul.nav.nav-tabs#myTab{:role => "tablist"}
       %li.nav-item
         %a.nav-link.active.fixture-nav{"data-toggle" => "tab", :href => "#fixtures", :role => "tab"} Fixtures
       %li.nav-item
         %a.nav-link.fixture-nav{"data-toggle" => "tab", :href => "#results", :role => "tab"} Results
     .tab-content
-      - if @team
+      - if params[:team_id]
         #fixtures.tab-pane.active{:role => "tabpanel"}
           .row
             .table-responsive
@@ -69,8 +75,8 @@
         %br
         - if (can? :manage, Fixture)
           = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
-          = link_to "Add Results", team_fixtures_path(), method: :post, class: "btn btn-primary"
-      - elsif @league_table
+          = link_to "Add Results", team_fixtures_path(), method: :put, class: "btn btn-primary"
+      - elsif params[:league_table_id] || params[:cup_id]
         #fixtures.tab-pane.active{:role => "tabpanel"}
           .row
             %ul.list-group
