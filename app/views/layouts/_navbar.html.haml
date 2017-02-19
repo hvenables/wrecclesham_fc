@@ -49,9 +49,9 @@
         %li.nav-item.dropdown
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Cups
           .dropdown-menu
-            - if @first_team_cups && @reserve_team_cups
-              = link_to 'First Team', cups_path(@first_team_cups), class: 'dropdown-item'
-              = link_to 'Reserve Team', cups_path(@reserve_team_cups), class: 'dropdown-item'
+            - if @cups
+              - @cups.each do |cup|
+                = link_to cup.name, cup_fixtures_path(cup), class: 'dropdown-item'
               .dropdown-divider
             = link_to 'Manage Cups', cups_path, class: 'dropdown-item'
 

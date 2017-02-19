@@ -4,8 +4,8 @@
       .col-xs-10
         %h2.title
           = @league_table.name + " - " + format_year(@league_table.year)
-      .col-xs-2
-        = link_to 'Fixtures and Results', league_table_fixtures_path(@league_table), class: 'btn btn-sm btn-success pull-xs-right'
+      .col-xs-2.push-down
+        = link_to 'Fixtures and Results', league_table_fixtures_path(@league_table), class: 'btn btn-success pull-xs-right'
   - if @league_table.seasons.any?
     .container
       .row
