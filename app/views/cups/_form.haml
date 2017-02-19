@@ -14,5 +14,14 @@
   .form-group
     = f.label :results_url, class: 'form-label'
     = f.text_field :results_url, class: 'form-control'
+  .form-group
+    .btn-group{ "data-toggle" => "buttons" }
+      = label_tag nil, nil, class: "btn btn-primary #{@cup.teams.include?(@first_team) ? 'active': ''}" do
+        = radio_button_tag :teams, @first_team.id
+        First Team
+      = label_tag nil, nil, class: "btn btn-primary #{@cup.teams.include?(@reserve_team) ? 'active': ''}" do
+        = radio_button_tag :teams, @reserve_team.id
+        Reserve Team
+
 
   = f.submit class: 'btn btn-success'

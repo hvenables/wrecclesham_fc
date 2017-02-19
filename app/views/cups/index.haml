@@ -8,12 +8,16 @@
           Year
         %th
           Name
+        %th
     %tbody
       - @cups.each do |cup|
         %tr
           %td
             = cup.year
           %td
-            = link_to "#{cup.name}", cup_path(cup)
+            = link_to cup.name, cup_fixtures_path(cup)
+          %td
+            = link_to 'Edit', edit_cup_path(cup)
+
 
 = link_to "Add a Cup", new_cup_path(), class: 'btn btn-primary'

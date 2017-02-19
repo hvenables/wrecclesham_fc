@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108164301) do
+ActiveRecord::Schema.define(version: 20170219214919) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170108164301) do
     t.datetime "updated_at",       null: false
     t.integer  "competition_id"
     t.string   "competition_type"
+    t.index ["competition_id"], name: "index_fixtures_on_competition_id", using: :btree
   end
 
   create_table "league_tables", force: :cascade do |t|
