@@ -34,7 +34,84 @@ class Team < ApplicationRecord
     [self.league_table] + self.cups
   end
 
+  def scheduled_fixtures
+    Fixture.fixtures.where(home: self).or(Fixture.fixtures.where(away: self))
+  end
+
+  def results
+    Fixture.results.where(home: self).or(Fixture.results.where(away: self))
+  end
+
+  def next_game
+    Fixture.where(
+      home: self,
+      home_score: nil
+    ).or(
+      Fixture.where(
+        away: self,
+        away_score: nil
+      )
+    ).order(date: :asc).first
+  end
+
+  def last_game
+    Fixture.where(
+      home: self
+    ).where.not(
+      home_score: nil
+    ).or(
+      Fixture.where(
+        away: self
+      ).where.not(
+        away_score: nil
+      )
+    ).order(date: :desc).first
+  end
+
+  def create_fixtures
+    competitions.each do |competition|
+      fixtures = FixtureScrapper.new(competition.fixture_url).fixtures
+      fixtures.each do |fixture|
+        next if postponed?(fixture)
+        date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
+        home = Team.find_or_create_by(name: fixture[2])
+        away = Team.find_or_create_by(name: fixture[3])
+        next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
+        next unless competition
+        Fixture.create(
+          date: date,
+          home_id: home.id,
+          away_id: away.id,
+          competition: competition
+        )
+      end
+    end
+  end
+
+  def update_fixtures
+    competitions.each do |competition|
+      fixtures = FixtureScrapper.new(competition.results_url).fixtures
+      fixtures.each do |fixture|
+        home = Team.find_or_create_by(name: fixture[2])
+        away = Team.find_or_create_by(name: fixture[4])
+        current_fixture = Fixture.find_by(home: home, away: away, competition: competition)
+        home_score, away_score = fixture[3].split(' - ')
+        if current_fixture
+          current_fixture.update(home_score: home_score, away_score: away_score)
+        else
+          date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
+          current_fixture = Fixture.find_or_create_by(home: home, away: away, competition: competition)
+          current_fixture.update!(date: date, home_score: home_score, away_score: away_score)
+        end
+      end
+    end
+  end
+
   private
+
+  def postponed?(fixture)
+    fixture.any?{ |s| s.casecmp("Postponed") == 0 }
+  end
 
   def calc_up_and_down(index, numbers, league_size)
     counter = index
