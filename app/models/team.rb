@@ -15,21 +15,6 @@ class Team < ApplicationRecord
     Season.find_by(team: self, league_table: self.league_table)
   end
 
-  def seven_positions_around_team
-    positions = []
-    all_teams = self.league_table.teams
-    while positions.length < 7
-      calc_up_and_down(self.current_season.position, positions, all_teams.length) if positions.empty?
-      if positions.last < all_teams.length
-        positions << positions.last + 1
-      else
-        positions << positions.first - 1
-        positions.sort!
-      end
-    end
-    Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.sort{|a,b| a.position <=> b.position}
-  end
-
   def competitions
     [self.league_table] + self.cups
   end
@@ -105,6 +90,21 @@ class Team < ApplicationRecord
         end
       end
     end
+  end
+
+  def seven_positions_around_team
+    positions = []
+    all_teams = self.league_table.teams
+    calc_up_and_down(self.current_season.position, positions, all_teams.length) if positions.empty?
+    while positions.length < 7
+      if positions.last < all_teams.length
+        positions << positions.last + 1
+      else
+        positions << positions.first - 1
+        positions.sort!
+      end
+    end
+    Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.sort{|a,b| a.position <=> b.position}
   end
 
   private
