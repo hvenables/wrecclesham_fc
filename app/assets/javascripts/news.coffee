@@ -35,7 +35,5 @@ guarded_ready ->
     ]
   })
 
-  simplemde = new SimpleMDE({ element: $(".news-content")[0] })
-
-$(document). on "turbolinks:before-cache", ->
-  $('.carousel').slick('unslick')
+  if $(".news-content").length > 0
+    simplemde = new SimpleMDE({ element: $(".news-content")[0] })

@@ -1,59 +1,62 @@
-$(document).on 'turbolinks:load', ->
-  first_pieChart = $('#first_piechart')
-  reserve_pieChart = $('#reserve_piechart')
+guarded_ready ->
+  firstPieChart = $('#first_piechart')
 
-  first_data = {
-    labels: [
-      "Win",
-      "Drawn",
-      "Lost"
-    ],
-    datasets: [
-      {
-        data: [first_pieChart.data('win'), first_pieChart.data('drawn'), first_pieChart.data('lost')],
-        backgroundColor: [
-          "#428bca",
-          "#5cb85c",
-          "#d9534f"
-        ],
-        hoverBackgroundColor: [
-          "#428bca",
-          "#5cb85c",
-          "#d9534f"
-        ]
-      }
-    ]
-  }
+  if firstPieChart.length > 0
+    firstData = {
+      labels: [
+        "Win",
+        "Drawn",
+        "Lost"
+      ],
+      datasets: [
+        {
+          data: [firstPieChart.data('win'), firstPieChart.data('drawn'), firstPieChart.data('lost')],
+          backgroundColor: [
+            "#428bca",
+            "#5cb85c",
+            "#d9534f"
+          ],
+          hoverBackgroundColor: [
+            "#428bca",
+            "#5cb85c",
+            "#d9534f"
+          ]
+        }
+      ]
+    }
 
-  reserve_data = {
-    labels: [
-      "Win",
-      "Drawn",
-      "Lost"
-    ],
-    datasets: [
-      {
-        data: [reserve_pieChart.data('win'), reserve_pieChart.data('drawn'), reserve_pieChart.data('lost')],
-        backgroundColor: [
-          "#428bca",
-          "#5cb85c",
-          "#d9534f"
-        ],
-        hoverBackgroundColor: [
-          "#428bca",
-          "#5cb85c",
-          "#d9534f"
-        ]
-      }
-    ]
-  }
+    myChart = new Chart(firstPieChart, {
+      type: 'doughnut',
+      data: firstData
+    })
 
-  myChart = new Chart(first_pieChart, {
-    type: 'doughnut',
-    data: first_data,
-  })
+  reservePieChart = $('#reserve_piechart')
 
-  myChart = new Chart(reserve_pieChart, {
-    type: 'doughnut',
-    data: reserve_data
-  })
+  if reservePieChart.length > 0
+    reserveData = {
+      labels: [
+        "Win",
+        "Drawn",
+        "Lost"
+      ],
+      datasets: [
+        {
+          data: [reservePieChart.data('win'), reservePieChart.data('drawn'), reservePieChart.data('lost')],
+          backgroundColor: [
+            "#428bca",
+            "#5cb85c",
+            "#d9534f"
+          ],
+          hoverBackgroundColor: [
+            "#428bca",
+            "#5cb85c",
+            "#d9534f"
+          ]
+        }
+      ]
+    }
+
+    myChart = new Chart(reservePieChart, {
+      type: 'doughnut',
+      data: reserveData
+    })

@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require simplemde.min
+//= require tether
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require jquery.slick
 //= require Chart.min
