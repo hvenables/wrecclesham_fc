@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddHomeAndAwayAsFoeignKeysOnFixtures < ActiveRecord::Migration[5.0]
   def change
     rename_column :fixtures, :home, :home_id

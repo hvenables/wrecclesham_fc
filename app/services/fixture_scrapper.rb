@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 require 'nokogiri'
 
 class FixtureScrapper
-
   attr_reader :url, :data
 
   def initialize(url)
@@ -13,10 +14,10 @@ class FixtureScrapper
   def fixtures
     fixture_list = extract_fixtures
 
-    fixture_list.each{|elem| elem.gsub!(/\s\s+/,"")}.reject!(&:blank?)
+    fixture_list.each { |elem| elem.gsub!(/\s\s+/, '') }.reject!(&:blank?)
 
-    #reject any element about penalties, these are not yet handled
-    fixture_list.reject!{|elem| elem.match(/Pen\s?+\d-\d/)}
+    # reject any element about penalties and half time scores, these are not yet handled
+    fixture_list.reject! { |elem| elem.match(/Pen\s?+\d-\d/) || elem.match(/HT\s?+\d-\d/) }
 
     split_fixtures(fixture_list)
   end
@@ -24,9 +25,7 @@ class FixtureScrapper
   private
 
   def scrap_website
-    doc = Nokogiri::HTML(open(url)) do |config|
-      config.noblanks
-    end
+    doc = Nokogiri::HTML(open(url), &:noblanks)
 
     doc
   end
@@ -45,7 +44,7 @@ class FixtureScrapper
     fixture_list = []
 
     fixtures.each do |fixture|
-      if fixture.match(/^[A-Z][a-zA-Z0-9]{2}[A-Z0-9]$/)
+      if fixture =~ /^[A-Z][a-zA-Z0-9]{2}[A-Z0-9]$/
         fixture_list << @current_fixture if @current_fixture
         @current_fixture = []
         @current_fixture << fixture

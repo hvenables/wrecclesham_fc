@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
@@ -17,21 +19,21 @@ RSpec.describe Team, type: :model do
   end
 
   context 'creating and updating teams fixtures and results' do
-    let!(:guildford_barbarians) { create :team, name: "Guildford Barbarians", league_table: league_table }
-    let!(:hersham) { create :team, name: "Hersham", league_table: league_table }
-    let!(:knaphill_athletic) { create :team, name: "Knaphill Athletic", league_table: league_table }
-    let!(:burpham) { create :team, name: "Burpham", league_table: league_table }
+    let!(:guildford_barbarians) { create :team, name: 'Guildford Barbarians', league_table: league_table }
+    let!(:hersham) { create :team, name: 'Hersham', league_table: league_table }
+    let!(:knaphill_athletic) { create :team, name: 'Knaphill Athletic', league_table: league_table }
+    let!(:burpham) { create :team, name: 'Burpham', league_table: league_table }
     before do
       expect_any_instance_of(FixtureScrapper).to receive(:fixtures).and_return(fixture_data)
       expect_any_instance_of(FixtureScrapper).to receive(:scrap_website)
     end
     context '#create fixtures' do
-      let(:fixture_data) {
+      let(:fixture_data) do
         [
-          ["Div4", "14/01/17 14:00", "Guildford Barbarians", "Hersham", "Christs College", "Division Four"],
-          ["Div4", "14/01/17 14:00", "Knaphill Athletic", "Burpham", "Waterer's Park #1", "Division Four"]
+          ['Div4', '14/01/17 14:00', 'Guildford Barbarians', 'Hersham', 'Christs College', 'Division Four'],
+          ['Div4', '14/01/17 14:00', 'Knaphill Athletic', 'Burpham', "Waterer's Park #1", 'Division Four']
         ]
-      }
+      end
       it 'should create the fixtures' do
         guildford_barbarians.create_fixtures
         first_fixture = Fixture.first
@@ -48,19 +50,19 @@ RSpec.describe Team, type: :model do
     end
 
     context '#update fixtures' do
-      let!(:fixture) {
+      let!(:fixture) do
         create :fixture,
-        date: Date.new(2016, 11, 19),
-        home: hersham, away: burpham,
-        competition: league_table
-      }
-      let(:fixture_data) {
-        [["Div4", "19/11/16 14:00", "Hersham", "3 - 3", "Burpham", "Division Four"]]
-      }
+               date: Date.new(2016, 11, 19),
+               home: hersham, away: burpham,
+               competition: league_table
+      end
+      let(:fixture_data) do
+        [['Div4', '19/11/16 14:00', 'Hersham', '3 - 3', 'Burpham', 'Division Four']]
+      end
       it 'should update fixtures' do
         guildford_barbarians.update_fixtures
-        expect(fixture.reload.home_score).to eq "3"
-        expect(fixture.reload.away_score).to eq "3"
+        expect(fixture.reload.home_score).to eq '3'
+        expect(fixture.reload.away_score).to eq '3'
       end
     end
   end

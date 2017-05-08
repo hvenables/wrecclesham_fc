@@ -9,13 +9,11 @@ class NewsController < ApplicationController
     @latest_news = News.latest_news(@news)
   end
 
-  def new
-  end
+  def new; end
 
   def create
-    news_params[:content].gsub!(/\n+/, "")
     if @news.save
-      flash[:notice] = "News story successfully published"
+      flash[:notice] = 'News story successfully published'
       redirect_to news_path(@news)
     else
       flash[:error] = "News story failed to save, #{@news.errors.full_messages.join(', ')}"
@@ -23,13 +21,11 @@ class NewsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    news_params[:content].gsub!(/\n+/, "")
     if @news.update(news_params)
-      flash[:notice] = "Succesfully updated the news article"
+      flash[:notice] = 'Succesfully updated the news article'
       redirect_to news_path(@news)
     else
       flash[:error] = "News story failed to update, #{@news.errors.full_messages.join(', ')}"
@@ -42,7 +38,7 @@ class NewsController < ApplicationController
       flash[:notice] = 'News article has been deleted'
       redirect_to news_index_path
     else
-      flash[:error] = "News article could not be deleted"
+      flash[:error] = 'News article could not be deleted'
       redirect_to news_index_path
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'video' do
@@ -28,7 +30,7 @@ feature 'video' do
   end
 
   context '#show' do
-    let!(:video) { create :video}
+    let!(:video) { create :video }
     scenario 'Should be able to visit a individual video' do
       visit video_path(video)
       expect(page).to have_content video.title
@@ -47,7 +49,7 @@ feature 'video' do
       end
       scenario 'should be able to add a video' do
         click_link 'New video'
-        fill_in 'Title', with: "Test Video"
+        fill_in 'Title', with: 'Test Video'
         fill_in 'Content', with: 'Test Summary'
         fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
         click_button 'Create Video'
@@ -74,7 +76,7 @@ feature 'video' do
       scenario 'should be able to edit a video' do
         visit video_path(video)
         click_link 'Edit'
-        fill_in 'Title', with: "Test Video"
+        fill_in 'Title', with: 'Test Video'
         fill_in 'Content', with: 'Test Summary'
         fill_in 'basic-url', with: 'https://www.youtube.com/embed/2iOQ053s_oM'
         click_button 'Update Video'

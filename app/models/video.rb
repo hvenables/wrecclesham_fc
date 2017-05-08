@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Video < ApplicationRecord
   before_save :add_thumbnail
 
@@ -5,19 +7,18 @@ class Video < ApplicationRecord
   validate :embedable_url
 
   def url_santizer
-    self.url.gsub(/^http.?:/im, "") if self.url[0..3] == 'http'
+    url.gsub(/^http.?:/im, '') if url[0..3] == 'http'
   end
 
   def add_thumbnail
-    video = Yt::Video.new url: self.url
+    video = Yt::Video.new url: url
     self.thumbnail = video.thumbnail_url('medium')
   end
 
   def embedable_url
     return false if url.blank?
-    unless url.include?("embed")
-      errors[:link] << "is not an embedable link please see example"
+    unless url.include?('embed')
+      errors[:link] << 'is not an embedable link please see example'
     end
   end
-
 end

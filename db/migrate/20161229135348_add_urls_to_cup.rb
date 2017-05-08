@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUrlsToCup < ActiveRecord::Migration[5.0]
   def change
     add_column :cups, :fixture_url, :string

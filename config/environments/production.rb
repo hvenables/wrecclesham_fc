@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => Rails.application.secrets.s3_bucket_name,
-      :access_key_id => Rails.application.secrets.aws_access_key_id,
-      :secret_access_key => Rails.application.secrets.aws_secret_access_key
+    storage: :s3,
+    s3_credentials: {
+      bucket: Rails.application.secrets.s3_bucket_name,
+      access_key_id: Rails.application.secrets.aws_access_key_id,
+      secret_access_key: Rails.application.secrets.aws_secret_access_key
     },
-    :s3_region => Rails.application.secrets.aws_region
+    s3_region: Rails.application.secrets.aws_region
   }
 
   Yt.configuration.api_key = Rails.application.secrets.youtube
@@ -62,13 +64,13 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   end
 

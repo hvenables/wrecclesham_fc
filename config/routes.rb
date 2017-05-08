@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "welcome#index"
+  root to: 'welcome#index'
 
   resource :welcome, only: :index
 
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :team, only: [] do
-    resource :fixtures, only: [:show, :create, :update]
+    resource :fixtures, only: %i[show create update]
   end
 
   resources :league_tables do
@@ -22,5 +24,5 @@ Rails.application.routes.draw do
     resource :fixtures, only: :show
   end
 
-  resources :about, only: [:index, :edit, :update]
+  resources :about, only: %i[index edit update]
 end

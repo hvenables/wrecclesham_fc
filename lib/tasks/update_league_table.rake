@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 desc 'Update league table'
 task update_league_tables: :environment do
   first_team_table = LeagueTable.find_by(active_first_team_table: true)

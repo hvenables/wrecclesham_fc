@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddExtraColumnsToSeason < ActiveRecord::Migration[5.0]
   def change
     add_column :seasons, :home_wins, :integer

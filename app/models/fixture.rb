@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 require 'nokogiri'
 
 class Fixture < ApplicationRecord
   belongs_to :competition, polymorphic: true
-  belongs_to :home, class_name: 'Team', foreign_key: "home_id"
-  belongs_to :away, class_name: 'Team', foreign_key: "away_id"
+  belongs_to :home, class_name: 'Team', foreign_key: 'home_id'
+  belongs_to :away, class_name: 'Team', foreign_key: 'away_id'
 
-  scope :fixtures, -> { where("date >= ?", Time.now.utc.to_date).order(date: :asc) }
-  scope :results, -> { where("date < ?", Time.now.utc.to_date).order(date: :desc) }
+  scope :fixtures, -> { where('date >= ?', Time.now.utc.to_date).order(date: :asc) }
+  scope :results, -> { where('date < ?', Time.now.utc.to_date).order(date: :desc) }
   # should probably be on competition
   scope :league_fixtures, ->(league_table) { where(competition: league_table).order(date: :asc) }
   scope :league_results, ->(league_table) { where(competition: league_table).order(date: :desc) }

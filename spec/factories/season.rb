@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :season, class: Season do
     association :team, factory: :team
-    sequence(:position){ |n| "#{n}" }
+    sequence(:position, &:to_s)
     games 6
     won 2
     drawn 2
@@ -19,7 +21,7 @@ FactoryGirl.define do
     goals_for 10
     goals_against 10
     goals_difference 0
-    points 4
+    points 8
     association :league_table, factory: :league_table
   end
 end

@@ -1,14 +1,17 @@
-class WelcomeController < ApplicationController
+# frozen_string_literal: true
 
+class WelcomeController < ApplicationController
   def index
     @carousel_articles = latest_carousel_items
     @first_team_teams = @first_team.seven_positions_around_team if @first_team_table
     @reserve_team_teams = @reserve_team.seven_positions_around_team if @reserve_team_table
     if @first_team.present?
-      @first_team_fixture, @first_team_result = @first_team.last_game, @first_team.next_game
+      @first_team_fixture = @first_team.last_game
+      @first_team_result = @first_team.next_game
     end
     if @reserve_team.present?
-      @reserve_team_fixture, @reserve_team_result = @reserve_team.next_game, @reserve_team.last_game
+      @reserve_team_fixture = @reserve_team.next_game
+      @reserve_team_result = @reserve_team.last_game
     end
     @twitter = TwitterFeed.new
   end
@@ -26,5 +29,4 @@ class WelcomeController < ApplicationController
 
     carousel_items
   end
-
 end

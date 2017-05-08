@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 require 'nokogiri'
 
@@ -5,9 +7,7 @@ class LeagueTableScrapper
   attr_reader :hello
 
   def self.get_team_data(url, number_of_teams)
-    doc = Nokogiri::HTML(open(url)) do |config|
-        config.noblanks
-    end
+    doc = Nokogiri::HTML(open(url), &:noblanks)
     table(doc, number_of_teams)
   end
 
@@ -19,7 +19,7 @@ class LeagueTableScrapper
       @table << element.text
     end
 
-    @table.each {|elem| elem.gsub!(/\s\s+/,"")}.pop(1)
+    @table.each { |elem| elem.gsub!(/\s\s+/, '') }.pop(1)
 
     split_teams(@table, number_of_teams)
   end
@@ -32,4 +32,3 @@ class LeagueTableScrapper
     table
   end
 end
-

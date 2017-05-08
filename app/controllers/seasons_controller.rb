@@ -1,14 +1,13 @@
+# frozen_string_literal: true
+
 class SeasonsController < ApplicationController
   include SeasonsHelper
 
   before_action :load_league, only: :create
 
-  def index
-  end
+  def index; end
 
-  def show
-
-  end
+  def show; end
 
   def create
     if @league_table.seasons.empty?

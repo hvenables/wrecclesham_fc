@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Season < ApplicationRecord
   belongs_to :team
   belongs_to :league_table
@@ -60,15 +62,15 @@ class Season < ApplicationRecord
           away_drawn: season[9],
           away_lost: season[10],
           away_goals_for: season[11],
-          away_goals_against: season[12],
+          away_goals_against: season[12]
         )
       else
-        Rollbar.warning("Team has been added to the league!, wtf!")
+        Rollbar.warning('Team has been added to the league!, wtf!')
         create_teams([season], current_league)
       end
     end
   rescue => e
-    Rollbar.warning("Could not update the table", e)
+    Rollbar.warning('Could not update the table', e)
     nil
   end
 end

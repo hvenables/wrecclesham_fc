@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cup < ApplicationRecord
   has_many :team_cups
   has_many :teams, through: :team_cups
@@ -12,5 +14,4 @@ class Cup < ApplicationRecord
   def results
     fixtures.results
   end
-
 end

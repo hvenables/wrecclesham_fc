@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Season, type: :model do
@@ -5,9 +7,9 @@ RSpec.describe Season, type: :model do
   let!(:wrecclesham) { create :team, name: 'Wrecclesham', league_table: league_table }
   context '#create_teams' do
     scenario 'will create a team in the db' do
-      table_data = [["1", "Wrecclesham", "18", "3", "3", "3", "31",
-                     "20", "3", "3", "3", "31", "20", "6", "6", "6", "62",
-                     "40", "", "24"]]
+      table_data = [['1', 'Wrecclesham', '18', '3', '3', '3', '31',
+                     '20', '3', '3', '3', '31', '20', '6', '6', '6', '62',
+                     '40', '', '24']]
       Season.create_teams(table_data, league_table.id)
       season = Season.first
       expect(season.team).to eq wrecclesham
@@ -26,9 +28,9 @@ RSpec.describe Season, type: :model do
   context '#update_teams' do
     let!(:season) { create :season, team: wrecclesham, league_table: league_table }
     scenario 'will update a team in the db' do
-      table_data = [["1", "Wrecclesham", "18", "3", "3", "3", "31",
-                     "20", "3", "3", "3", "31", "20", "6", "6", "6", "62",
-                     "40", "", "24"]]
+      table_data = [['1', 'Wrecclesham', '18', '3', '3', '3', '31',
+                     '20', '3', '3', '3', '31', '20', '6', '6', '6', '62',
+                     '40', '', '24']]
       Season.update_teams(table_data, league_table.id)
       current_season = Season.first
       expect(current_season.team).to eq wrecclesham

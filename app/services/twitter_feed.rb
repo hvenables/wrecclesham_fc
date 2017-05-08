@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TwitterFeed
   attr_reader :feed, :client, :user
 
@@ -21,7 +23,7 @@ class TwitterFeed
   private
 
   def retweet?(text)
-    text.start_with?("RT")
+    text.start_with?('RT')
   end
 
   def direct_message?(text)
