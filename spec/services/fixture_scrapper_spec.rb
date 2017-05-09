@@ -23,5 +23,28 @@ RSpec.describe FixtureScrapper do
       expect(fixture[13]).to eq ['Div2', '14/01/17 14:00', 'Horsley A',               'AFC Westend Reserves',      "Tom's Field",                       'Division Two']
       expect(fixture[14]).to eq ['Div2', '14/01/17 14:00', 'Merrow A',                'Deepcut Community',         'Urnfield #1',                       'Division Two']
     end
+
+    scenario 'Cup results with penalities and extra time' do
+      fixture = described_class.new(Rails.root + 'spec/fixtures/cup_results.html').fixtures
+      #                           Abbr        Date               Home                   Score     Away                        Competition
+      expect(fixture[0]).to eq  ['IntC', '29/04/17 14:00', 'Staines Lammas Reserves',   '0 - 1', 'Pirbright',                 'Intermediate Cup']
+      expect(fixture[1]).to eq  ['IntC', '01/04/17 13:30', 'Pirbright',                 '1 - 0', 'Burpham Reserves',          'Intermediate Cup']
+      expect(fixture[2]).to eq  ['IntC', '01/04/17 13:30', 'Staines Lammas Reserves',   '2 - 1', 'Laleham Athletic',          'Intermediate Cup']
+      expect(fixture[3]).to eq  ['IntC', '18/03/17 13:30', 'Laleham Reserves',          '1 - 3', 'Staines Lammas Reserves',   'Intermediate Cup']
+      expect(fixture[4]).to eq  ['IntC', '18/03/17 13:30', 'Pirbright',                 '4 - 1', 'Wrecclesham',               'Intermediate Cup']
+      expect(fixture[5]).to eq  ['IntC', '11/03/17 13:30', 'Laleham Athletic',          '1 - 0', 'AFC Westend Reserves',      'Intermediate Cup']
+      expect(fixture[6]).to eq  ['IntC', '11/03/17 13:30', 'Worplesdon Phoenix A',      '3 - 5', 'Burpham Reserves',          'Intermediate Cup']
+      expect(fixture[7]).to eq  ['IntC', '04/02/17 13:30', 'Staines Lammas Reserves',   '3 - 1', 'Windlesham & Lightwater A', 'Intermediate Cup']
+      expect(fixture[8]).to eq  ['IntC', '28/01/17 13:30', 'Deepcut Community',         '5 - 7', 'Wrecclesham',               'Intermediate Cup']
+      expect(fixture[9]).to eq  ['IntC', '28/01/17 13:30', 'Horsley A',                 '2 - 6', 'AFC Westend Reserves',      'Intermediate Cup']
+      expect(fixture[10]).to eq ['IntC', '28/01/17 13:30', 'Laleham Athletic',          '9 - 1', 'Surrey Athletic',           'Intermediate Cup']
+      expect(fixture[11]).to eq ['IntC', '28/01/17 13:30', 'Laleham Reserves',          '3 - 2', 'Byfleet',                   'Intermediate Cup']
+      expect(fixture[12]).to eq ['IntC', '17/12/16 13:30', 'Burpham Reserves',          '3 - 0', 'Merrow A',                  'Intermediate Cup']
+      expect(fixture[13]).to eq ['IntC', '17/12/16 13:30', 'Pirbright',                 '3 - 3', 'Woking & Maybury',          'Intermediate Cup']
+      expect(fixture[14]).to eq ['IntC', '10/12/16 13:30', 'Dunsfold',                  '2 - 2', 'Laleham Reserves',          'Intermediate Cup']
+      expect(fixture[15]).to eq ['IntC', '10/12/16 13:30', 'Horsley A',                 '3 - 0', 'FC Staines',                'Intermediate Cup']
+      expect(fixture[16]).to eq ['IntC', '10/12/16 13:30', 'Windlesham & Lightwater A', 'H - W', 'Virginia Water A',          'Intermediate Cup', 'Home Walkover ']
+      expect(fixture[17]).to eq ['IntC', '10/12/16 13:30', 'Woking Tigers',             'A - W', 'Deepcut Community',         'Intermediate Cup', 'Away Walkover ']
+    end
   end
 end
