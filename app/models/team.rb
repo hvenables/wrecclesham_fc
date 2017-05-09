@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Team < ApplicationRecord
   belongs_to :league_table
   has_many :team_cups
@@ -6,17 +8,22 @@ class Team < ApplicationRecord
   has_many :home_fixtures, class_name: Fixture, foreign_key: 'home_id'
   has_many :away_fixtures, class_name: Fixture, foreign_key: 'away_id'
 
-  scope :first_team, -> { find_by(name: "Wrecclesham") }
-  scope :reserve_team, -> { find_by(name: "Wrecclesham Reserves") }
+  class << self
+    def first_team
+      find_by name: 'Wrecclesham'
+    end
 
-  serialize :cups
+    def reserve_team
+      find_by name: 'Wrecclesham Reserves'
+    end
+  end
 
   def current_season
-    Season.find_by(team: self, league_table: self.league_table)
+    Season.find_by(team: self, league_table: league_table)
   end
 
   def competitions
-    [self.league_table] + self.cups
+    [league_table] + cups
   end
 
   def scheduled_fixtures
@@ -58,7 +65,11 @@ class Team < ApplicationRecord
       fixtures = FixtureScrapper.new(competition.fixture_url).fixtures
       fixtures.each do |fixture|
         next if postponed?(fixture)
-        date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
+        date = begin
+                 DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
+               rescue
+                 nil
+               end
         home = Team.find_or_create_by(name: fixture[2])
         away = Team.find_or_create_by(name: fixture[3])
         next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
@@ -84,7 +95,11 @@ class Team < ApplicationRecord
         if current_fixture
           current_fixture.update(home_score: home_score, away_score: away_score)
         else
-          date = DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date rescue nil
+          date = begin
+                   DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
+                 rescue
+                   nil
+                 end
           current_fixture = Fixture.find_or_create_by(home: home, away: away, competition: competition)
           current_fixture.update!(date: date, home_score: home_score, away_score: away_score)
         end
@@ -93,9 +108,9 @@ class Team < ApplicationRecord
   end
 
   def seven_positions_around_team
+    all_teams = league_table.teams
     positions = []
-    all_teams = self.league_table.teams
-    calc_up_and_down(self.current_season.position, positions, all_teams.length) if positions.empty?
+    calc_up_and_down(current_season.position, positions, all_teams.length) if positions.empty?
     while positions.length < 7
       if positions.last < all_teams.length
         positions << positions.last + 1
@@ -104,13 +119,13 @@ class Team < ApplicationRecord
         positions.sort!
       end
     end
-    Season.where(league_table: self.league_table).select{|season| positions.include? season.position}.sort{|a,b| a.position <=> b.position}
+    Season.where(league_table: league_table, position: positions).order(position: :asc)
   end
 
   private
 
   def postponed?(fixture)
-    fixture.any?{ |s| s.casecmp("Postponed") == 0 }
+    fixture.any? { |s| s.casecmp('Postponed') == 0 }
   end
 
   def calc_up_and_down(index, numbers, league_size)
