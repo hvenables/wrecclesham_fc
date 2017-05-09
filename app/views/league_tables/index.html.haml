@@ -1,5 +1,5 @@
-- if @league_tables.nil?
-  Please Add a table
+- if @league_tables.blank?
+  No League Tables have yet been added.
 - else
   %table.table
     %thead
@@ -8,7 +8,7 @@
           Year
         %th
           Name
-        %th
+        %th.text-center
           First Team
         %th
           Reserve Team
@@ -20,8 +20,8 @@
           %td
             = link_to "#{league_table.name}", league_table_path(league_table)
           %td
-            = league_table.active_first_team_table
+            = radio_button_tag :active_first_team_table, league_table.active_first_team_table, league_table.active_first_team_table, id: "first_team_table-#{league_table.id}", class: 'active_first_team_table'
           %td
-            = league_table.active_reserve_team_table
+            = radio_button_tag :active_reserve_team_table, league_table.active_reserve_team_table, league_table.active_reserve_team_table, id: "reserve_team_table-#{league_table.id}", class: 'active_reserve_team_table'
 
 = link_to "Add a league", new_league_table_path(), class: 'btn btn-primary'
