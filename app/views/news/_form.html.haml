@@ -5,7 +5,7 @@
   .form-group
     = f.label :content, class: "form-label"
     = f.label :Content_is_processed_using_markdown, { class: 'form-label pull-xs-right text-muted small' }
-    = f.text_area :content, { class: 'form-control news-content', rows: 15 }
+    ~ f.text_area :content, { class: 'form-control news-content', rows: 15 }
   .form-group
     = f.label :Add_an_image, class: "form-label"
     = f.file_field :image, { class: ' form-control btn btn-default btn-file' }

@@ -16,8 +16,8 @@ class FixtureScrapper
 
     fixture_list.each { |elem| elem.gsub!(/\s\s+/, '') }.reject!(&:blank?)
 
-    # reject any element about penalties and half time scores, these are not yet handled
-    fixture_list.reject! { |elem| elem.match(/Pen\s?+\d-\d/) || elem.match(/HT\s?+\d-\d/) }
+    # reject any element about penalties, half time scores and indication of extra time
+    fixture_list.reject! { |elem| elem.match(/Pen\s?+\d-\d|HT\s?+\d-\d|AET/) }
 
     split_fixtures(fixture_list)
   end

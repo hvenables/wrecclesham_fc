@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def format_year(year)
     base = year.to_s.split(//).last(2).join
@@ -5,16 +7,16 @@ module ApplicationHelper
     year.to_s + '/' + next_year
   end
 
-  def active_class(link_path)
-    current_page?(link_path) ? "active" : ""
+  def active_class(location)
+    controller_name == location ? 'active' : ''
   end
 
-  def bootstrap_class_for flash_type
+  def bootstrap_class_for(flash_type)
     {
       success: 'alert-success',
       error: 'alert-warning',
       alert: 'alert-warning',
-      notice: "alert-success"
+      notice: 'alert-success'
     }[flash_type.to_sym] || flash_type.to_s
   end
 
