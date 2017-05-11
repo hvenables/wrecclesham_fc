@@ -42,7 +42,7 @@ Metrics/ClassLength:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 199
+  Enabled: false
 
 # Offense count: 15
 # Configuration parameters: CountComments.
