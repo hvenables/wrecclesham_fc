@@ -7,6 +7,14 @@ class LeagueTable < ApplicationRecord
 
   validates :name, :year, :url, :fixture_url, :results_url, presence: true
 
+  before_destroy :check_league_not_active
+  def check_league_not_active
+    if active_first_team_table || active_reserve_team_table
+      errors.add(:league_table, 'can not be deleted when an active league table')
+      throw(:abort)
+    end
+  end
+
   validate :can_only_be_active_for_one_team
   def can_only_be_active_for_one_team
     if active_first_team_table && active_reserve_team_table

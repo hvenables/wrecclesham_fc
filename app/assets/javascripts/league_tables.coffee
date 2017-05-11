@@ -1,12 +1,12 @@
 $(document).on 'turbolinks:load', ->
   $('.active_first_team_table').click ->
     $this = $(this)
-    data = { "league_table": { "#{$this.attr("class")}": true }, table: 'first_team' }
+    data = { league_table: { "#{$this.attr("class")}": true }, table: 'first_team' }
     updateActiveLeagueTable($this, data)
 
   $('.active_reserve_team_table').click ->
     $this = $(this)
-    data = { "league_table": { "#{$this.attr("class")}": true }, table: 'reserve_team' }
+    data = { league_table: { "#{$this.attr("class")}": true }, table: 'reserve_team' }
     updateActiveLeagueTable($this, data)
 
 updateActiveLeagueTable = (element, data) ->
@@ -20,18 +20,24 @@ updateActiveLeagueTable = (element, data) ->
     success: (response) ->
       if response.errors
         flashMessage(response.errors.league_table, 'danger')
-        $("##{table_name}-#{response.table}").prop('checked', true)
+        updateCheckedLeague(table_name, response.table, element)
       else
         flashMessage('updated successfully', 'success')
     error: (jqXHR, textStatus, errorThrown) ->
       flashMessage('Could not update active league table, please try again', 'danger')
 
 flashMessage = (message, level) ->
-  $('.flash').append(
-      "<div class='container'>
-        <div class='alert alert-#{level} flash-title'>
-          <button class='close' data-dismiss='alert'>x</button>
-          League table #{message}
-        </div>
-      </div>"
-    )
+  $('.flash').html(
+    "<div class='container'>
+      <div class='alert alert-#{level} flash-title'>
+        <button class='close' data-dismiss='alert'>x</button>
+        League table #{message}
+      </div>
+    </div>"
+  )
+
+updateCheckedLeague = (table_name, table, element) ->
+  if table
+    $("##{table_name}-#{table}").prop('checked', true)
+  else
+    element.prop('checked', false)

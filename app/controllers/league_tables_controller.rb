@@ -43,7 +43,7 @@ class LeagueTablesController < ApplicationController
         format.json do
           render json: {
             errors: @league_table.errors,
-            table: LeagueTable.send("active_#{params[:table]}_table").id
+            table: LeagueTable.send("active_#{params[:table]}_table")&.id
           }
         end
       end
@@ -55,7 +55,7 @@ class LeagueTablesController < ApplicationController
     if @league_table.destroy
       flash[:notice] = 'League Table has been destroyed'
     else
-      flash[:error] = 'League cant be destroyed'
+      flash[:error] = "Could not delete, #{@league_table.errors.full_messages.join(', ')}"
     end
     redirect_to league_tables_path
   end

@@ -57,13 +57,33 @@ feature 'league table' do
         expect(league_table.reload.active_first_team_table).to eq true
       end
 
+      scenario 'Try and set active league to both first and reserve team', js: true do
+        visit league_tables_path
+        choose 'active_first_team_table'
+        choose 'active_reserve_team_table'
+        expect(page).to have_css '.alert-danger', text: 'League table can only be active for first team or reserve team'
+        expect(league_table.reload.active_first_team_table).to eq true
+        expect(league_table.active_reserve_team_table).to eq false
+      end
+
       scenario 'Can update the details of the league' do
         visit league_table_path(league_table)
         click_link 'Edit'
         fill_in 'league_table[name]', with: 'Changed Name'
         fill_in 'league_table[year]', with: '2020'
         click_button 'Update League table'
+        expect(page).to have_css '.alert-success', text: 'Succesfully updated the league table'
         expect(page).to have_css 'h2', text: 'Changed Name - 2020/21'
+        expect(current_path).to eq league_table_path(league_table)
+      end
+
+      scenario 'Bad params for update' do
+        visit league_table_path(league_table)
+        click_link 'Edit'
+        fill_in 'league_table[name]', with: ''
+        fill_in 'league_table[year]', with: '2020'
+        click_button 'Update League table'
+        expect(page).to have_css '.alert-warning', text: "Failed to update, Name can't be blank"
         expect(current_path).to eq league_table_path(league_table)
       end
 
@@ -71,6 +91,15 @@ feature 'league table' do
         visit league_table_path(league_table)
         expect { click_link 'Delete Table' }.to change { LeagueTable.count }.from(1).to(0)
         expect(page).to have_css '.alert-success', text: 'League Table has been destroyed'
+      end
+
+      context 'active league table' do
+        let!(:league_table) { create :league_table, name: 'Test League', year: 2017, active_first_team_table: true }
+        scenario 'Delete an active league table' do
+          visit league_table_path(league_table)
+          click_link 'Delete Table'
+          expect(page).to have_css '.alert-warning', text: 'Could not delete, League table can not be deleted when an active league table'
+        end
       end
     end
   end
