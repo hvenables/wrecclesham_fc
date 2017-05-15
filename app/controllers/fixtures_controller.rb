@@ -10,14 +10,20 @@ class FixturesController < ApplicationController
   end
 
   def create
-    # Good to introduce if statement here
-    @team.create_fixtures
+    if @team.create_fixtures
+      flash[:success] = 'Fixtures have been created'
+    else
+      flash[:error] = 'Something went wrong creating the fixtures, please try again later'
+    end
     redirect_to team_fixtures_path(params[:team_id])
   end
 
   def update
-    # Good to introduce if statement here
-    @team.update_fixtures
+    if @team.update_fixtures
+      flash[:success] = 'Fixtures have been updated'
+    else
+      flash[:error] = 'Something went wrong updating the fixtures, please try again later'
+    end
     redirect_to team_fixtures_path(params[:team_id])
   end
 
