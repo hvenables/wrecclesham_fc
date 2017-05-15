@@ -14,7 +14,7 @@ RSpec.describe Team, type: :model do
 
     it 'will return teams below us when in first place' do
       first_place = Team.first
-      expect(first_place.seven_positions_around_team).to eq Season.all[0..6]
+      expect(first_place.seven_teams_around_team).to eq Season.all[0..6]
     end
   end
 

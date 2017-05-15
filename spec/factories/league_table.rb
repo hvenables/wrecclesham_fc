@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :league_table, class: LeagueTable do
     year 2015
     name 'MyString'
+    abbreviation 'Div2'
     promoted 2
     relegated 2
     url 'www.test.com'
