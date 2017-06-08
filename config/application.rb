@@ -26,8 +26,6 @@ module WreccleshamFc
 
     config.middleware.use Rack::Attack
 
-    config.assets << Rails.root.join('app', 'services')
-
     initializer :regenerate_require_cache, before: :load_environment_config do
       Bootscale.regenerate
     end
