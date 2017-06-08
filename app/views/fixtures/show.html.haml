@@ -97,7 +97,7 @@
             %ul.list-group
               - @results.group_by(&:date).each do |date, fixtures|
                 %li.list-group-item.dark-color.form-label.text-xs-center
-                  = date.strftime("%a, %d %B %Y")
+                  = date.strftime("%a, %d %b %Y")
                   - fixtures.each do |fixture|
                     %li.list-group-item
                       .row

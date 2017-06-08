@@ -8,7 +8,7 @@ RSpec.describe Team, type: :model do
     before(:each) do
       12.times do |n|
         team = FactoryGirl.create :team, league_table: league_table
-        FactoryGirl.create :season, team: team, league_table: league_table, position: n
+        FactoryGirl.create :season, team: team, league_table: league_table, position: n + 1
       end
     end
 

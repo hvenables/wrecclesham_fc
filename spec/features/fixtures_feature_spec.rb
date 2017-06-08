@@ -56,7 +56,7 @@ feature 'fixtures' do
       visit league_table_fixtures_path(league)
       click_link 'Results'
       within('.active.tab-pane') do
-        expect(page).to have_css 'li.list-group-item.dark-color', text: (Date.today - 1.week).strftime('%a, %d %b %Y')
+        expect(page).to have_css 'li.list-group-item', text: (Date.today - 1.week).strftime('%a, %d %b %Y')
         expect(page).to have_css 'li.list-group-item', count: 3
       end
     end
