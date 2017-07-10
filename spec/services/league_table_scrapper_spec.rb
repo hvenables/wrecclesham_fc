@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe LeagueTableScrapper do
   scenario 'should return teams data' do
-    result = LeagueTableScrapper.get_team_data((Rails.root + 'spec/fixtures/league_table.html'), 12)
+    result = LeagueTableScrapper.get_team_data(Rails.root + 'spec/fixtures/league_table.html')
     #                         Pos    Team                       G    HW    HD   HL    HF    HA    AW   AD   AL   AF    AA     W     D    L    GF    GA    GD     P
     expect(result[0]).to eq  ['12', 'Surrey Athletic',         '9',  '0',  '0', '4',  '8',  '25', '1', '0', '4', '12', '26', '1',  '0', '8', '20', '51', '-31', '3']
     expect(result[1]).to eq  ['11', 'Farncombe Athletic',      '10', '0',  '1', '3',  '4',  '18', '2', '0', '4', '13', '27', '2',  '1', '7', '17', '45', '-28', '7']

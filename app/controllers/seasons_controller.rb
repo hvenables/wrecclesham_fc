@@ -11,9 +11,9 @@ class SeasonsController < ApplicationController
 
   def create
     if @league_table.seasons.empty?
-      Season.create_teams(LeagueTableScrapper.get_team_data(@league_table.url, @league_table.number_of_teams), params[:league_table_id])
+      Season.create_teams(LeagueTableScrapper.get_team_data(@league_table.url), @league_table)
     else
-      Season.update_teams(LeagueTableScrapper.get_team_data(@league_table.url, @league_table.number_of_teams), params[:league_table_id])
+      Season.update_teams(LeagueTableScrapper.get_team_data(@league_table.url), @league_table)
     end
     redirect_to league_table_path(@league_table)
   end

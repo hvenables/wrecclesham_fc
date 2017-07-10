@@ -4,16 +4,14 @@ require 'open-uri'
 require 'nokogiri'
 
 class LeagueTableScrapper
-  attr_reader :hello
-
-  def self.get_team_data(url, number_of_teams)
+  def self.get_team_data(url)
     doc = Nokogiri::HTML(open(url), &:noblanks)
-    table(doc, number_of_teams)
+    table(doc)
   end
 
   private
 
-  def self.table(doc, number_of_teams)
+  def self.table(doc)
     @table = []
     doc.css('table.League-TableDetail_Table.Table').css('td').each do |element|
       @table << element.text
@@ -21,14 +19,12 @@ class LeagueTableScrapper
 
     @table.each { |elem| elem.gsub!(/\s\s+/, '') }.pop(1)
 
-    split_teams(@table, number_of_teams)
+    split_teams(@table)
   end
 
-  def self.split_teams(teams, number_of_teams)
+  def self.split_teams(teams)
     table = []
-    number_of_teams.times do
-      table << teams.pop(20)
-    end
+    table << teams.pop(20) while teams.present?
     table
   end
 end
