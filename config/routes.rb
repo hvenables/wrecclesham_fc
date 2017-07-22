@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
   resources :videos
 
-  resources :cups, except: :show do
+  scope module: :competition do
+    resources :cups, except: :show
+  end
+
+  resources :cups, only: [] do
     resource :fixtures, only: :show
   end
 
@@ -19,8 +23,12 @@ Rails.application.routes.draw do
     resource :fixtures, only: %i[show create update]
   end
 
-  resources :league_tables do
-    resources :seasons
+  scope module: :competition do
+    resources :league_tables
+  end
+
+  resources :league_tables, only: [] do
+    resource :seasons
     resource :fixtures, only: :show
   end
 

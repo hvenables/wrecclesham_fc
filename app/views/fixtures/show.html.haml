@@ -15,7 +15,7 @@
         %a.nav-link.fixture-nav{"data-toggle" => "tab", :href => "#results", :role => "tab"} Results
     .tab-content
       - if params[:team_id]
-        #fixtures.tab-pane.active{:role => "tabpanel"}
+        .tab-pane.active#fixtures{:role => "tabpanel"}
           .row
             .table-responsive
               %table.table
@@ -30,21 +30,27 @@
                       Away
                     %th.text-xs-center{ width: '15%' }
                       Comp.
-                - @fixtures.each do |fixture|
-                  %tbody
+                %tbody
+                  - if @fixtures.present?
+                    - @fixtures.each do |fixture|
+                      %tr
+                        %td.text-xs-center
+                          = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
+                        %td.text-xs-right
+                          = fixture.home.name
+                        %td.text-xs-center
+                          #{fixture.home_score} - #{fixture.away_score}
+                        %td.text-xs-left
+                          = fixture.away.name
+                        %td.text-xs-center
+                          = fixture.competition.abbreviation
+                  - else
                     %tr
-                      %td.text-xs-center
-                        = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
-                      %td.text-xs-right
-                        = fixture.home.name
-                      %td.text-xs-center
-                        = "#{fixture.home_score} - #{fixture.away_score}"
-                      %td.text-xs-left
-                        = fixture.away.name
-                      %td.text-xs-center
-                        = fixture.competition.abbreviation
+                      %td.text-xs-center{ colspan: 5 }
+                        No Current Fixtures
 
-        #results.tab-pane{:role => "tabpanel"}
+
+        .tab-pane#results{:role => "tabpanel"}
           .row
             .table-responsive
               %table.table

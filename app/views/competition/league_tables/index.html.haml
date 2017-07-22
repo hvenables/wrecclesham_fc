@@ -1,0 +1,11 @@
+- if @league_tables.blank?
+  No League Tables have yet been added.
+- else
+  - if @first_team&.league_tables.present?
+    = render 'league_tables', league_tables: @first_team.league_tables, name: 'first_team_table'
+  - if @reserve_team&.league_tables.present?
+    = render 'league_tables', league_tables: @reserve_team.league_tables, name: 'reserve_team_table'
+
+  %hr
+
+= link_to "Add a league", new_league_table_path(), class: 'btn btn-primary'

@@ -1,0 +1,21 @@
+%tr
+  %td{ scope: 'row' }
+    = season.position
+  %td
+    = season.team.name
+  %td.text-xs-center
+    = season.games
+  %td.hidden-sm-down.text-xs-center
+    = season.won
+  %td.hidden-sm-down.text-xs-center
+    = season.drawn
+  %td.hidden-sm-down.text-xs-center
+    = season.lost
+  %td.hidden-md-down.text-xs-center
+    = season.goals_for
+  %td.hidden-md-down.text-xs-center
+    = season.goals_against
+  %td.text-xs-center
+    = season.goals_difference
+  %td.text-xs-center
+    = season.points

@@ -35,33 +35,12 @@
                   %th.text-xs-center
                     Points
               %tbody
-                - @teams.each_with_index do |season, index|
-                  %tr
-                    %td{ scope: 'row' }
-                      = index + 1
-                    %td
-                      = season.team.name
-                    %td.text-xs-center
-                      = season.games
-                    %td.hidden-sm-down.text-xs-center
-                      = season.won
-                    %td.hidden-sm-down.text-xs-center
-                      = season.drawn
-                    %td.hidden-sm-down.text-xs-center
-                      = season.lost
-                    %td.hidden-md-down.text-xs-center
-                      = season.goals_for
-                    %td.hidden-md-down.text-xs-center
-                      = season.goals_against
-                    %td.text-xs-center
-                      = season.goals_difference
-                    %td.text-xs-center
-                      = season.points
+                = render partial: 'competition/league_tables/season', collection: @seasons
   - else
     Add teams to the league
 
-  - if can? :manage, LeagueTable
-    = link_to "#{ @teams.nil? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => :post, class: 'btn btn-sm btn-success'
+  - if can? :manage, Competition::LeagueTable
+    = link_to "#{ @seasons.blank? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => (@seasons.blank? ? :post : :patch), class: 'btn btn-sm btn-success'
     = link_to "Edit", edit_league_table_path(@league_table), class: 'btn btn-sm btn-primary'
 
     = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-sm btn-danger'

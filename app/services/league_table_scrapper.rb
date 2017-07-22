@@ -23,8 +23,10 @@ class LeagueTableScrapper
   end
 
   def self.split_teams(teams)
-    table = []
-    table << teams.pop(20) while teams.present?
-    table
+    teams.each_slice(20).each_with_object({}) do |team_data, hash|
+      next if team_data[1].blank?
+      team_name = team_data.delete_at(1)
+      hash[team_name] = team_data
+    end
   end
 end

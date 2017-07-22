@@ -35,8 +35,8 @@ class FixturesController < ApplicationController
 
   def load_subject
     @subject = Team.find_by(id: params[:team_id])
-    @subject ||= LeagueTable.find_by(id: params[:league_table_id])
-    @subject ||= Cup.find_by(id: params[:cup_id])
+    @subject ||= Competition::LeagueTable.find_by(id: params[:league_table_id])
+    @subject ||= Competition::Cup.find_by(id: params[:cup_id])
   end
 
   def fixture_params

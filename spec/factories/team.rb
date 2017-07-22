@@ -3,6 +3,13 @@
 FactoryGirl.define do
   factory :team, class: Team do
     sequence(:name) { |n| "Team #{n}" }
-    league_table
+
+    factory :first_team do
+      name 'Wrecclesham'
+    end
+
+    factory :reserve_team do
+      name 'Wrecclesham Reserves'
+    end
   end
 end
