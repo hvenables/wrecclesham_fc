@@ -19,6 +19,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'pygments.rb'
+
 gem 'redcarpet'
 
 # Use jquery as the JavaScript library
@@ -102,6 +103,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano3-puma', require: false
   gem 'rubocop', require: false
+  gem 'rack-mini-profiler'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

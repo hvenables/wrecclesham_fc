@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   def load_league
-    @first_team_table = LeagueTable.active_first_team_table
-    @reserve_team_table = LeagueTable.active_reserve_team_table
+    @first_team_table = Competition::LeagueTable.active_first_team_table
+    @reserve_team_table = Competition::LeagueTable.active_reserve_team_table
   end
 
   def load_cups
-    @cups = Cup.active
+    @cups = Competition::Cup.active
   end
 end

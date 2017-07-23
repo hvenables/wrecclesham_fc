@@ -1,12 +1,12 @@
 $(document).on 'turbolinks:load', ->
   $('.active_first_team_table').click ->
     $this = $(this)
-    data = { league_table: { "#{$this.attr("class")}": true }, table: 'first_team' }
+    data = { competition_league_table: { active: true }, table: 'first_team' }
     updateActiveLeagueTable($this, data)
 
   $('.active_reserve_team_table').click ->
     $this = $(this)
-    data = { league_table: { "#{$this.attr("class")}": true }, table: 'reserve_team' }
+    data = { competition_league_table: { active: true }, table: 'reserve_team' }
     updateActiveLeagueTable($this, data)
 
 updateActiveLeagueTable = (element, data) ->

@@ -1,0 +1,14 @@
+%h4.title
+  #{name.humanize.pluralize}
+%table.table
+  %thead
+    %tr
+      %th
+        Year
+      %th
+        Name
+      %th
+        Active
+  %tbody
+    - league_tables.each do |league_table|
+      = render 'league_table_summary', league_table: league_table, name: name

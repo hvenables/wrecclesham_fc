@@ -3,17 +3,26 @@
 class SeasonsController < ApplicationController
   include SeasonsHelper
 
-  before_action :load_league, only: :create
+  before_action :load_league, only: [:create, :update]
 
   def index; end
 
   def show; end
 
   def create
-    if @league_table.seasons.empty?
-      Season.create_teams(LeagueTableScrapper.get_team_data(@league_table.url, @league_table.number_of_teams), params[:league_table_id])
+    if Season.create_teams(LeagueTableScrapper.get_team_data(@league_table.url), @league_table)
+      flash[:notice] = 'League Tables seasons created'
     else
-      Season.update_teams(LeagueTableScrapper.get_team_data(@league_table.url, @league_table.number_of_teams), params[:league_table_id])
+      flash[:error] = 'Something went wrong'
+    end
+    redirect_to league_table_path(@league_table)
+  end
+
+  def update
+    if Season.update_teams(LeagueTableScrapper.get_team_data(@league_table.url), @league_table)
+      flash[:notice] = 'League Table has been updated'
+    else
+      flash[:error] = 'Something went wrong'
     end
     redirect_to league_table_path(@league_table)
   end
@@ -21,6 +30,6 @@ class SeasonsController < ApplicationController
   private
 
   def load_league
-    @league_table = LeagueTable.find(params[:league_table_id])
+    @league_table = Competition::LeagueTable.find(params[:league_table_id])
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Cup do
+RSpec.describe Competition::Cup do
   let(:cup) { create :cup }
 
   describe '#scheduled_fixtures' do

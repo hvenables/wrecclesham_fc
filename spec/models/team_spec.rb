@@ -7,8 +7,9 @@ RSpec.describe Team, type: :model do
   context '#teams_around_team' do
     before(:each) do
       12.times do |n|
-        team = FactoryGirl.create :team, league_table: league_table
+        team = FactoryGirl.create :team
         FactoryGirl.create :season, team: team, league_table: league_table, position: n + 1
+        league_table.teams << team
       end
     end
 
@@ -19,13 +20,14 @@ RSpec.describe Team, type: :model do
   end
 
   context 'creating and updating teams fixtures and results' do
-    let!(:guildford_barbarians) { create :team, name: 'Guildford Barbarians', league_table: league_table }
-    let!(:hersham) { create :team, name: 'Hersham', league_table: league_table }
-    let!(:knaphill_athletic) { create :team, name: 'Knaphill Athletic', league_table: league_table }
-    let!(:burpham) { create :team, name: 'Burpham', league_table: league_table }
+    let!(:guildford_barbarians) { create :team, name: 'Guildford Barbarians' }
+    let!(:hersham) { create :team, name: 'Hersham' }
+    let!(:knaphill_athletic) { create :team, name: 'Knaphill Athletic' }
+    let!(:burpham) { create :team, name: 'Burpham' }
     before do
       expect_any_instance_of(FixtureScrapper).to receive(:fixtures).and_return(fixture_data)
       expect_any_instance_of(FixtureScrapper).to receive(:scrap_website)
+      league_table.teams = [guildford_barbarians, hersham, knaphill_athletic, burpham]
     end
     context '#create fixtures' do
       let(:fixture_data) do

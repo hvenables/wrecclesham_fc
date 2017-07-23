@@ -43,10 +43,10 @@
             = link_to 'First Team', league_table_path(@first_team_table), {class: 'dropdown-item'}
           - if @reserve_team_table
             = link_to 'Reserve Team', league_table_path(@reserve_team_table), {class: 'dropdown-item'}
-          -if can? :manage, LeagueTable
+          -if can? :manage, Competition::LeagueTable
             .dropdown-divider
             = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
-      - if can? :manage, Cup
+      - if can? :manage, Competition::Cup
         %li.nav-item.dropdown{class: active_class('cups')}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Cups
           .dropdown-menu

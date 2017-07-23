@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CupsController < ApplicationController
+class Competition::CupsController < ApplicationController
   load_and_authorize_resource
 
   def index; end
