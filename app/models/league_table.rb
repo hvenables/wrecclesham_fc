@@ -1,0 +1,2 @@
+class LeagueTable < ApplicationRecord
+end

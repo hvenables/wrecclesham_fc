@@ -1,0 +1,3 @@
+class Cup < ApplicationRecord
+
+end
