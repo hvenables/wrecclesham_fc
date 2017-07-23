@@ -1,0 +1,12 @@
+- binding.pry
+%tr
+  %td.text-xs-center
+    = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
+  %td.text-xs-right
+    = fixture.home.name
+  %td.text-xs-center
+    #{fixture.home_score} - #{fixture.away_score}
+  %td.text-xs-left
+    = fixture.away.name
+  %td.text-xs-center
+    = fixture.competition.abbreviation
