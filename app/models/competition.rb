@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Competition < ApplicationRecord
-  has_many :fixtures, as: :competition
+  has_many :fixtures
   has_many :teams, through: :team_competitions
   has_many :team_competitions
 
