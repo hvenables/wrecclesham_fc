@@ -17,6 +17,6 @@
       = render 'team_fixtures', fixtures: @fixtures, active: true, id: 'fixtures'
       = render 'team_fixtures', fixtures: @results, active: false, id: 'results'
 
-    - if (can? :manage, Fixture) && params[:id]
+    - if (can? :manage, Fixture) && params[:team_id]
       = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
       = link_to "Add Results", team_fixtures_path(), method: :put, class: "btn btn-primary"
