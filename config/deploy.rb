@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '3.8.2'
 
 server '95.172.20.122', roles: %i[web app db], primary: true
 
