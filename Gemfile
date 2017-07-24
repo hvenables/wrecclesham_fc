@@ -38,7 +38,7 @@ gem 'chartjs-ror'
 
 gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 
-gem 'haml-rails', '~> 0.9.0'
+gem 'haml-rails', '~> 1.0.0'
 
 gem 'devise'
 
