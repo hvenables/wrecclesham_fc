@@ -98,9 +98,9 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 3.0'
   gem 'capistrano', require: false
+  gem 'rvm1-capistrano3', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
-  gem 'capistrano-rvm', require: false
   gem 'capistrano3-puma', require: false
   gem 'rubocop', require: false
   gem 'rack-mini-profiler'
