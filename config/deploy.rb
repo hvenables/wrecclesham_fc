@@ -8,10 +8,9 @@ set :repo_url, 'git@github.com:hvenables/wrecclesham_fc.git'
 
 # Load branch/tag/commit from REF env var, otherwise use master
 set :branch, ENV['REF'] || 'master'
-set :user,   'deploy'
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, 'apps/wrecclesham'
+set :deploy_to, '/var/www/wrecclesham'
 
 # Symlink files and dirs
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
