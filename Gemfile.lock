@@ -239,7 +239,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.8.2)
     pygments.rb (1.1.2)
       multi_json (>= 1.0.0)
     rack (2.0.3)
@@ -451,7 +451,7 @@ DEPENDENCIES
   poltergeist
   pry
   pry-rails
-  puma
+  puma (~> 3.8.1)
   pygments.rb
   rack-attack
   rack-mini-profiler
