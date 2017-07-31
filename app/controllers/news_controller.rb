@@ -9,7 +9,9 @@ class NewsController < ApplicationController
     @latest_news = News.latest_news(@news)
   end
 
-  def new; end
+  def new
+    @news.images << Image.new
+  end
 
   def create
     if @news.save
@@ -17,6 +19,7 @@ class NewsController < ApplicationController
       redirect_to news_path(@news)
     else
       flash[:error] = "News story failed to save, #{@news.errors.full_messages.join(', ')}"
+      @news.images << Image.new
       render :new
     end
   end
@@ -36,16 +39,15 @@ class NewsController < ApplicationController
   def destroy
     if @news.destroy
       flash[:notice] = 'News article has been deleted'
-      redirect_to news_index_path
     else
       flash[:error] = 'News article could not be deleted'
-      redirect_to news_index_path
     end
+    redirect_to news_index_path
   end
 
   private
 
   def news_params
-    params.require(:news).permit(:title, :content, :image)
+    params.require(:news).permit(:title, :content, images_attributes: [:image])
   end
 end

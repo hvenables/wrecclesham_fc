@@ -4,6 +4,8 @@ FactoryGirl.define do
   factory :news, class: News do
     title 'Title'
     content 'Content'
-    image { File.new("#{Rails.root}/spec/support/fixtures/image.png") }
+    after(:build) do |news|
+      news.images << FactoryGirl.create(:image)
+    end
   end
 end

@@ -1,6 +1,6 @@
 = link_to news, class: "video-link news-link #{width}" do
   .card.green-hover.news-article
-    %img.card-img-top.news-img{:alt => "", :src => "#{news.try(:image)&.url(:large) || news.thumbnail}"}/
+    %img.card-img-top.news-img{:alt => "", :src => "#{news.try(:images)&.first&.image&.url(:large) || news.thumbnail}"}/
     .card-block.news-block
       .card-text
         .row.news-info

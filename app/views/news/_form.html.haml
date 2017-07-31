@@ -7,6 +7,7 @@
     = f.label :Content_is_processed_using_markdown, { class: 'form-label pull-xs-right text-muted small' }
     ~ f.text_area :content, { class: 'form-control news-content', rows: 15 }
   .form-group
-    = f.label :Add_an_image, class: "form-label"
-    = f.file_field :image, { class: ' form-control btn btn-default btn-file' }
+    = f.fields_for :images do |image_fields|
+      = image_fields.label :Add_an_image, class: "form-label"
+      = image_fields.file_field :image, { class: ' form-control btn btn-default btn-file' }
   = f.submit class: 'btn btn-success'

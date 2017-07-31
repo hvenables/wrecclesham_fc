@@ -4,7 +4,7 @@
       .card-block
         %h4.card-title
           = @news.title
-      %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.image.url(:large)}"}/
+      %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.images.first.image.url(:large)}"}/
       .card-block
         %p.card-text
           = preserve gfm(@news.content)

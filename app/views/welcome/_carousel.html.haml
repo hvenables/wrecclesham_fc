@@ -2,7 +2,7 @@
   - carousel_articles.each do |news|
     = link_to news, class: 'video-link' do
       .card.carousel-item
-        %img.carousel-img{:alt => "", :src => "#{news.try(:image)&.url(:large) || news.thumbnail}"}/
+        %img.carousel-img{:alt => "", :src => "#{news.try(:images)&.first&.image&.url(:large) || news.thumbnail}"}/
         .card-block
           .card-text
             .row.news-info

@@ -3,11 +3,11 @@
 class Team < ApplicationRecord
   has_many :team_competitions
   has_many :competitions, through: :team_competitions
-  has_many :league_tables, through: :team_competitions, source: :competition, class_name: Competition::LeagueTable
-  has_many :cups, through: :team_competitions, source: :competition, class_name: Competition::Cup
+  has_many :league_tables, through: :team_competitions, source: :competition, class_name: 'Competition::LeagueTable'
+  has_many :cups, through: :team_competitions, source: :competition, class_name: 'Competition::Cup'
   has_many :seasons
-  has_many :home_fixtures, class_name: Fixture, foreign_key: 'home_id'
-  has_many :away_fixtures, class_name: Fixture, foreign_key: 'away_id'
+  has_many :home_fixtures, class_name: 'Fixture', foreign_key: 'home_id'
+  has_many :away_fixtures, class_name: 'Fixture', foreign_key: 'away_id'
 
   class << self
     def first_team

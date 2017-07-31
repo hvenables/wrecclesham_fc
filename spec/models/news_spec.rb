@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe News do
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:content) }
-  it { is_expected.to validate_presence_of(:image) }
 
   context '#latest_news' do
     6.times do |n|
