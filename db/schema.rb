@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729154708) do
+ActiveRecord::Schema.define(version: 20170809194711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,14 @@ ActiveRecord::Schema.define(version: 20170729154708) do
     t.integer "position"
   end
 
+  create_table "shop_items", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "team_competitions", id: :serial, force: :cascade do |t|
     t.integer "team_id"
     t.integer "competition_id"
@@ -132,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170729154708) do
     t.string "thumbnail"
   end
 
+  add_foreign_key "fixtures", "competitions"
   add_foreign_key "fixtures", "teams", column: "away_id"
   add_foreign_key "fixtures", "teams", column: "home_id"
   add_foreign_key "seasons", "teams"
