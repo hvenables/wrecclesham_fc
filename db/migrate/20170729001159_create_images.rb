@@ -4,6 +4,6 @@ class CreateImages < ActiveRecord::Migration[5.1]
       t.string :title
     end
 
-    execute("ALTER TABLE tbl AUTO_INCREMENT = 20")
+    execute('ALTER SEQUENCE images_id_seq RESTART 20')
   end
 end
