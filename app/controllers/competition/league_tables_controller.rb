@@ -66,6 +66,7 @@ class Competition
     def league_table_params
       params.require(:competition_league_table).permit(
         :name,
+        :abbreviation,
         :year,
         :url,
         :fixture_url,

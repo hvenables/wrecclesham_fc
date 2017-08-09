@@ -10,7 +10,7 @@ class Season < ApplicationRecord
 
   def self.create_teams(table_data, current_league)
     table_data.each do |team_name, season|
-      current_team = Team.find_by(name: team_name)
+      current_team = Team.find_or_create_by(name: team_name)
       season = Season.create!(season_attributes(season, current_team, current_league))
       season.team.league_tables << current_league unless season.team.league_tables.include? current_league
     end
