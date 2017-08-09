@@ -9,7 +9,7 @@ gem 'rails', '5.1.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
-gem 'puma'
+gem 'puma', '~> 3.8.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -98,9 +98,9 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 3.0'
   gem 'capistrano', require: false
+  gem 'rvm1-capistrano3', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
-  gem 'capistrano-rvm', require: false
   gem 'capistrano3-puma', require: false
   gem 'rubocop', require: false
   gem 'rack-mini-profiler'
