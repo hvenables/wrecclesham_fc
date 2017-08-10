@@ -31,6 +31,6 @@ every :day, at: '4am' do
   rake 'get_fixtures'
 end
 
-every '30 2 * * 4' do
-  rake 'delete_cancelled'
-end
+# every '30 2 * * 4' do
+#   rake 'delete_cancelled'
+# end
