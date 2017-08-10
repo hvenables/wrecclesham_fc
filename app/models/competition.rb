@@ -5,6 +5,8 @@ class Competition < ApplicationRecord
   has_many :team_competitions
   has_many :teams, through: :team_competitions
 
+  scope :active, (-> { where(active: true) })
+
   before_destroy :cannot_delete_active_competition
   def cannot_delete_active_competition
     return unless active?

@@ -5,8 +5,8 @@ class FixturesController < ApplicationController
   before_action :load_subject, only: :show
 
   def show
-    @fixtures = @subject.scheduled_fixtures
-    @results = @subject.results
+    @fixtures = @subject.scheduled_fixtures.active_competition
+    @results = @subject.results.active_competition
   end
 
   def create
