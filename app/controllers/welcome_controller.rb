@@ -6,8 +6,8 @@ class WelcomeController < ApplicationController
     @first_team_teams = @first_team.seven_teams_around_team if @first_team_table
     @reserve_team_teams = @reserve_team.seven_teams_around_team if @reserve_team_table
     if @first_team.present?
-      @first_team_fixture = @first_team.last_game
-      @first_team_result = @first_team.next_game
+      @first_team_fixture = @first_team.next_game
+      @first_team_result = @first_team.last_game
     end
     if @reserve_team.present?
       @reserve_team_fixture = @reserve_team.next_game
