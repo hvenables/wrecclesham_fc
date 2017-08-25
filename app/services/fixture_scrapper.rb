@@ -25,9 +25,7 @@ class FixtureScrapper
   private
 
   def scrap_website
-    doc = Nokogiri::HTML(open(url), &:noblanks)
-
-    doc
+    Nokogiri::HTML(open(url), &:noblanks)
   end
 
   def extract_fixtures
@@ -44,7 +42,7 @@ class FixtureScrapper
     fixture_list = []
 
     fixtures.each do |fixture|
-      if fixture =~ /^[A-Z][a-zA-Z0-9]{2}[A-Z0-9]$/
+      if fixture =~ /^[A-Z][a-zA-Z0-9]{2}[A-Z0-9]*$/ && fixture != 'TBC'
         fixture_list << @current_fixture if @current_fixture
         @current_fixture = []
         @current_fixture << fixture

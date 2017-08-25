@@ -59,6 +59,7 @@ class Team < ApplicationRecord
 
   def create_fixtures
     competitions.each do |competition|
+      next unless competition.active?
       fixtures = FixtureScrapper.new(competition.fixture_url).fixtures
       fixtures.each do |fixture|
         next if postponed?(fixture)
