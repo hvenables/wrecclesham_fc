@@ -1,111 +1,134 @@
-.container-fluid
-  .row
-    - if @first_team_table && @reserve_team_table
-      .container.col-lg-4.col-md-12.pull-lg-right.welcome-table-container
-        %h4.newsheading.title
-          League Tables
-        .card
-          .card-header
-            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-              %li.nav-item
-                %a.nav-link.active{ href: "#first_team_table", role: "tab", data: { toggle: "tab" } }
-                  First Team
-              %li.nav-item
-                %a.nav-link{ href: "#reserve_team_table", role: "tab", data: { toggle: "tab" } }
-                  Reserve Team
-          .tab-content
-            .tab-pane.active#first_team_table{ role: "tabpanel" }
-              .container.welcome-tables
-                = render 'table', team_table: @first_team_table, table_teams: @first_team_teams
-            .tab-pane#reserve_team_table{ role: "tabpanel" }
-              .container.welcome-tables
-                = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
-    - if @first_team.present? && @reserve_team.present?
-      .container.col-lg-4.col-md-6.col-sm-12
-        %h4.newsheading.title
-          Recent Form
-        .card
-          .card-header
-            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-              %li.nav-item
-                %a.nav-link.active{ href: "#first_team_form", role: "tab", data: { toggle: "tab" } }
-                  First Team
-              %li.nav-item
-                %a.nav-link{ href: "#reserve_team_form", role: "tab", data: { toggle: "tab" } }
-                  Reserve Team
-          .tab-content
-            .tab-pane.active#first_team_form{ role: "tabpanel" }
-              = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
-            .tab-pane#reserve_team_form{ role: "tabpanel" }
-              = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
-    - if @first_team_fixture.present? && @reserve_team_fixture.present?
-      .container.col-lg-4.col-md-6.col-sm-12
-        %h4.newsheading.title
-          Next Fixture
-        .card
-          .card-header
-            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-              %li.nav-item
-                %a.nav-link.active{ href: "#first_team_fixture", role: "tab", data: { toggle: "tab" } }
-                  First Team
-              %li.nav-item
-                %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
-                  Reserve Team
-          .tab-content
-            - if @first_team_fixture
-              .tab-pane.active#first_team_fixture{ role: "tabpanel" }
-                = render 'next_fixture', team_fixture: @first_team_fixture
-            - if @reserve_team_fixture
-              .tab-pane#reserve_team_fixture{ role: "tabpanel" }
-                = render 'next_fixture', team_fixture: @reserve_team_fixture
-    - if @first_team_result.present? && @reserve_team_result.present?
-      .container.col-lg-4.col-md-6.col-sm-12
-        %h4.newsheading.title
-          Previous Result
-        .card
-          .card-header
-            %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
-              %li.nav-item
-                %a.nav-link.active{ href: "#first_team_result", role: "tab", data: { toggle: "tab" } }
-                  First Team
-              %li.nav-item
-                %a.nav-link{ href: "#reserve_team_result", role: "tab", data: { toggle: "tab" } }
-                  Reserve Team
-          .tab-content
-            .tab-pane.active#first_team_result{ role: "tabpanel" }
-              = render 'last_result', team_result: @first_team_result
-            .tab-pane#reserve_team_result{ role: "tabpanel" }
-              = render 'last_result', team_result: @reserve_team_result
-    - if @twitter.client
-      .col-xs-12
-        .row
-          .col-xs-10
-            %h4.newsheading.title
-              Twitter Feed
-          .col-xs-2
-            %a.btn.btn-primary.pull-xs-right{href: @twitter.user.url, target: "_blank"}
-              %i.fa.fa-twitter{"aria-hidden" => "true"}
-              Twitter
-        %ul.list-group
-          - @twitter.own_tweets[0..5].each do |tweet|
-            %li.list-group-item
-              .row
-                .col-xs-3.col-sm-2.col-lg-1
-                  = image_tag('transparent_logo.png', class: 'twitter-icon')
-                %span.col-xs-9.col-sm-10.col-lg-11
-                  = simple_format(auto_link(tweet.text))
-              .row
-                .col-xs-9.col-sm-10.col-lg-11.offset-xs-3.offset-sm-2.offset-lg-1
-                  %a.twitter-link{href: tweet.url, target: "_blank"}
-                    %span
-                      %i.fa.fa-eye{"aria-hidden" => "true"}
-                      View
-                  %a.twitter-link{href: tweet.url, target: "_blank"}
-                    %span
-                      %i.fa.fa-heart{"aria-hidden" => "true"}
-                      = tweet.favorite_count
-                  %a.twitter-link{href: tweet.url, target: "_blank"}
-                    %span
-                      %i.fa.fa-retweet{"aria-hidden" => "true"}
-                      = tweet.retweet_count
+%section.latest-news
+  .main-article.homepage-article.col-sm-12.col-md-9
+    = link_to news_path(@main_article) do
+      .overlay
+      %img{:alt => "", :src => "#{@main_article.images.first.image.url(:large)}"}/
+      .homepage-title
+        %span
+          #{@main_article.class}
+        %h2
+          #{@main_article.title}
+        %span
+          #{@main_article.created_at.to_formatted_s(:month_and_year)}
 
+  - @supporting_articles.each do |article|
+    .supporting-article.homepage-article.col-md-3.col-sm-4
+      = link_to news_path(article) do
+        .overlay
+        %img{:alt => "", :src => "#{article.images.first.image.url(:large)}"}/
+        .homepage-title
+          %span
+            #{article.class}
+          %h5
+            #{article.title}
+          %span
+            #{article.created_at.to_formatted_s(:month_and_year)}
+
+- if @first_team_table && @reserve_team_table
+  .container.col-lg-4.col-md-12.pull-lg-right
+    %h4.newsheading.title
+      League Tables
+    .card
+      .card-header
+        %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+          %li.nav-item
+            %a.nav-link.active{ href: "#first_team_table", role: "tab", data: { toggle: "tab" } }
+              First Team
+          %li.nav-item
+            %a.nav-link{ href: "#reserve_team_table", role: "tab", data: { toggle: "tab" } }
+              Reserve Team
+      .tab-content
+        .tab-pane.active#first_team_table{ role: "tabpanel" }
+          .container.welcome-tables
+            = render 'table', team_table: @first_team_table, table_teams: @first_team_teams
+        .tab-pane#reserve_team_table{ role: "tabpanel" }
+          .container.welcome-tables
+            = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
+- if @first_team.present? && @reserve_team.present?
+  .container.col-lg-4.col-md-6.col-sm-12
+    %h4.newsheading.title
+      Recent Form
+    .card
+      .card-header
+        %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+          %li.nav-item
+            %a.nav-link.active{ href: "#first_team_form", role: "tab", data: { toggle: "tab" } }
+              First Team
+          %li.nav-item
+            %a.nav-link{ href: "#reserve_team_form", role: "tab", data: { toggle: "tab" } }
+              Reserve Team
+      .tab-content
+        .tab-pane.active#first_team_form{ role: "tabpanel" }
+          = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
+        .tab-pane#reserve_team_form{ role: "tabpanel" }
+          = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
+- if @first_team_fixture.present? && @reserve_team_fixture.present?
+  .container.col-lg-4.col-md-6.col-sm-12
+    %h4.newsheading.title
+      Next Fixture
+    .card
+      .card-header
+        %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+          %li.nav-item
+            %a.nav-link.active{ href: "#first_team_fixture", role: "tab", data: { toggle: "tab" } }
+              First Team
+          %li.nav-item
+            %a.nav-link{ href: "#reserve_team_fixture", role: "tab", data: { toggle: "tab" } }
+              Reserve Team
+      .tab-content
+        - if @first_team_fixture
+          .tab-pane.active#first_team_fixture{ role: "tabpanel" }
+            = render 'next_fixture', team_fixture: @first_team_fixture
+        - if @reserve_team_fixture
+          .tab-pane#reserve_team_fixture{ role: "tabpanel" }
+            = render 'next_fixture', team_fixture: @reserve_team_fixture
+- if @first_team_result.present? && @reserve_team_result.present?
+  .container.col-lg-4.col-md-6.col-sm-12
+    %h4.newsheading.title
+      Previous Result
+    .card
+      .card-header
+        %ul.nav.nav-tabs.card-header-tabs.pull-xs-left
+          %li.nav-item
+            %a.nav-link.active{ href: "#first_team_result", role: "tab", data: { toggle: "tab" } }
+              First Team
+          %li.nav-item
+            %a.nav-link{ href: "#reserve_team_result", role: "tab", data: { toggle: "tab" } }
+              Reserve Team
+      .tab-content
+        .tab-pane.active#first_team_result{ role: "tabpanel" }
+          = render 'last_result', team_result: @first_team_result
+        .tab-pane#reserve_team_result{ role: "tabpanel" }
+          = render 'last_result', team_result: @reserve_team_result
+-#   -# - if @twitter.client
+-#   -#   .col-xs-12
+-#   -#     .row
+-#   -#       .col-xs-10
+-#   -#         %h4.newsheading.title
+-#   -#           Twitter Feed
+-#   -#       .col-xs-2
+-#   -#         %a.btn.btn-primary.pull-xs-right{href: @twitter.user.url, target: "_blank"}
+-#   -#           %i.fa.fa-twitter{"aria-hidden" => "true"}
+-#   -#           Twitter
+-#   -#     %ul.list-group
+-#   -#       - @twitter.own_tweets[0..5].each do |tweet|
+-#   -#         %li.list-group-item
+-#   -#           .row
+-#   -#             .col-xs-3.col-sm-2.col-lg-1
+-#   -#               = image_tag('transparent_logo.png', class: 'twitter-icon')
+-#   -#             %span.col-xs-9.col-sm-10.col-lg-11
+-#   -#               = simple_format(auto_link(tweet.text))
+-#   -#           .row
+-#   -#             .col-xs-9.col-sm-10.col-lg-11.offset-xs-3.offset-sm-2.offset-lg-1
+-#   -#               %a.twitter-link{href: tweet.url, target: "_blank"}
+-#   -#                 %span
+-#   -#                   %i.fa.fa-eye{"aria-hidden" => "true"}
+-#   -#                   View
+-#   -#               %a.twitter-link{href: tweet.url, target: "_blank"}
+-#   -#                 %span
+-#   -#                   %i.fa.fa-heart{"aria-hidden" => "true"}
+-#   -#                   = tweet.favorite_count
+-#   -#               %a.twitter-link{href: tweet.url, target: "_blank"}
+-#   -#                 %span
+-#   -#                   %i.fa.fa-retweet{"aria-hidden" => "true"}
+-#   -#                   = tweet.retweet_count

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class WelcomeController < ApplicationController
+  before_action :load_articles
+
   def index
-    @carousel_articles = latest_carousel_items
     @first_team_teams = @first_team.seven_teams_around_team if @first_team_table
     @reserve_team_teams = @reserve_team.seven_teams_around_team if @reserve_team_table
     if @first_team.present?
@@ -18,15 +19,11 @@ class WelcomeController < ApplicationController
 
   private
 
-  def latest_carousel_items
-    news = News.order(created_at: :desc).limit(6).to_a
-    videos = Video.order(created_at: :desc).limit(2).to_a
-    carousel_items = news + videos
+  def load_articles
+    @latest_articles     = News.order(id: :desc).limit(4)
 
-    carousel_items.sort! do |first_item, second_item|
-      second_item.created_at <=> first_item.created_at
-    end
-
-    carousel_items
+    @main_article        = @latest_articles.first
+    @supporting_articles = @latest_articles[1..3]
   end
+
 end
