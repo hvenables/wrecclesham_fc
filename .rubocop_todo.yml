@@ -11,9 +11,3 @@
 # URISchemes: http, https
 Metrics/LineLength:
   Max: 106
-
-# Offense count: 58
-# Cop supports --auto-correct.
-Style/SpaceInsideArrayPercentLiteral:
-  Exclude:
-    - 'spec/services/league_table_scrapper_spec.rb'
