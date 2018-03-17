@@ -44,8 +44,8 @@
               = render 'recent_form', team: @first_team, piechart_id: 'first_piechart'
             .tab-pane#reserve_team_form{ role: "tabpanel" }
               = render 'recent_form', team: @reserve_team, piechart_id: 'reserve_piechart'
-    - if @first_team_fixture.present? && @reserve_team_fixture.present?
-      .col-sm-4
+    .col-sm-4
+      - if @first_team_fixture.present? && @reserve_team_fixture.present?
         %h4.newsheading.title
           Next Fixture
         .card
@@ -64,8 +64,7 @@
             - if @reserve_team_fixture
               .tab-pane#reserve_team_fixture{ role: "tabpanel" }
                 = render 'next_fixture', team_fixture: @reserve_team_fixture
-    - if @first_team_result.present? && @reserve_team_result.present?
-      .col-sm-4
+      - if @first_team_result.present? && @reserve_team_result.present?
         %h4.newsheading.title
           Previous Result
         .card

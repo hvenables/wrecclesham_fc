@@ -4,8 +4,8 @@ class WelcomeController < ApplicationController
   before_action :load_articles
 
   def index
-    @first_team_teams = @first_team.seven_teams_around_team if @first_team_table
-    @reserve_team_teams = @reserve_team.seven_teams_around_team if @reserve_team_table
+    @first_team_teams = @first_team.current_league_table.seasons.ordered_on_points
+    @reserve_team_teams = @reserve_team.current_league_table.seasons.ordered_on_points
     if @first_team.present?
       @first_team_fixture = @first_team.next_game
       @first_team_result = @first_team.last_game
@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
       @reserve_team_fixture = @reserve_team.next_game
       @reserve_team_result = @reserve_team.last_game
     end
-    @twitter = TwitterFeed.new
+    # @twitter = TwitterFeed.new
   end
 
   private
