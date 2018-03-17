@@ -33,4 +33,8 @@ Rails.application.routes.draw do
   end
 
   resources :about, only: %i[index edit update]
+
+  namespace :charts do
+    resource :recent_form, only: :show, controller: :recent_form
+  end
 end

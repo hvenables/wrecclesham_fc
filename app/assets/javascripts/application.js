@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require turbolinks
 //= require jquery.slick
-//= require Chart.min
+//= require Chart.bundle
+//= require simple_chartjs
 //= require guarded_ready
 //= require_tree .
