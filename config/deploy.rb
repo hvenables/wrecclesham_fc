@@ -17,5 +17,5 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 
 ## RVM settings
-set :rvm1_ruby_version, '2.3.1'
+set :rvm1_ruby_version, '2.5.0'
 set :rvm1_map_bins, fetch(:rvm1_map_bins) + %w[gem bundle ruby rake]

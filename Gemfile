@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.1.2'
@@ -38,7 +38,7 @@ gem 'simple_chartjs'
 
 gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 
-gem 'haml-rails', '~> 1.0.0'
+gem 'haml-rails'
 
 gem 'devise'
 
