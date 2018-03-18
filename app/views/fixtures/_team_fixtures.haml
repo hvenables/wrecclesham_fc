@@ -1,22 +1,11 @@
 .tab-pane{ class: (active ? 'active' : ''), id: id, :role => "tabpanel"}
-  .row
+  .wrapper
     .table-responsive
-      %table.table
-        %thead.table-inverse
-          %tr
-            %th.text-xs-center{ width: '20%' }
-              Date
-            %th.text-xs-right{ width: '25%' }
-              Home
-            %th{ width: '10%' }
-            %th.text-xs-left{ width: '25%' }
-              Away
-            %th.text-xs-center{ width: '15%' }
-              Comp.
+      %table.table.fixture-table.m-0
         %tbody
           - if fixtures.present?
             = render partial: 'fixtures/fixture', collection: fixtures
           - else
             %tr
-              %td.text-xs-center{ colspan: 5 }
+              %td.text-center{ colspan: 5 }
                 No Current #{id.capitalize}

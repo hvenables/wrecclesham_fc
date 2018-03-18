@@ -2,23 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.dark-color {
-  background-color: #373A3C !important;
-}
-
-.list-group-item {
-  border-left: none !important;
-  border-right: none !important;
-}
-.list-group-item:first-child {
-  border-top: none !important;
-}
-.fixture-nav {
-  color: white;
-}
-.fixture-nav:hover {
-  color: gray;
-}
 .nav-tabs {
   border-bottom: none !important;
+}
+
+.fixture-table > tbody > tr > td {
+  border: none;
+  overflow: hidden;
+}
+
+.fixture-table > tbody > tr {
+  border-top: 1px solid #dee2e6;
+  &:last-child {
+    border-bottom: 1px solid #dee2e6;
+  }
 }
