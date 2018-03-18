@@ -4,8 +4,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.0'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.2'
+gem 'rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -111,6 +110,7 @@ group :development do
 end
 
 group :test do
+  gem 'rack-test', '~> 0.7.0'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
