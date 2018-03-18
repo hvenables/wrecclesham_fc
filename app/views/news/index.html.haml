@@ -1,17 +1,17 @@
 - if @news.any?
-  .container
+  .container-fluid
     .well.well-sm
-      %h3.title All News
-    .col-xs-12.col-sm-6
-      = paginate @news
-    .col-xs-12.col-sm-6
-      .page-entries.pull-xs-left.pull-sm-right
-        = page_entries_info @news
-    .clearfix
+      %h1.title News
     .row
-      .card-deck-wrapper
-        .card-deck
-          - @news.each do |news|
-            = render 'shared/card', news: news, width: 'col-md-4'
+      .col-12.col-sm-6
+        = paginate @news
+      .col-12.col-sm-6
+        .page-entries.ml-auto.text-left.text-sm-right
+          = page_entries_info @news
+    .clearfix
+    .card-deck-wrapper
+      .card-deck
+        - @news.each do |news|
+          = render 'shared/card', news: news, width: 'col-sm-6 col-md-4 col-xl-3'
 - else
   No News has been added yet

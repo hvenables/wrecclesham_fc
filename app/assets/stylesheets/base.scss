@@ -18,3 +18,18 @@ html, body {
 .nav-tabs > li > a {
   color: $wrecclesham-green;
 }
+
+.pagination {
+  .page-item.active > .page-link {
+    background-color: $wrecclesham-green;
+    border-color: $wrecclesham-green;
+  }
+  .page-item:not(.active) > .page-link {
+    color: $wrecclesham-green;
+  }
+}
+
+.nav-item > .dropdown-menu > .dropdown-item:active {
+  background-color: #ffffff;
+  color: black;
+}

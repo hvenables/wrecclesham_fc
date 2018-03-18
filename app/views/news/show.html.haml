@@ -1,7 +1,7 @@
 .container.col-xs-12.col-lg-8
   .row
     .card
-      .card-block
+      .card-body
         %h4.card-title
           = @news.title
       %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.images.first.image.url(:large)}"}/
