@@ -29,10 +29,10 @@ feature 'news' do
         fill_in 'news[content]', with: 'Test Content'
         attach_file 'news[images_attributes][0][image]', File.join(Rails.root, 'spec', 'fixtures', 'test.png')
         click_button 'Create News'
-        expect(page).to have_css 'h4.card-title',     text: 'Test Article'
-        expect(page).to have_css 'p',                 text: 'Test Content'
+        expect(page).to have_css 'h4.card-title',  text: 'Test Article'
+        expect(page).to have_css 'p',              text: 'Test Content'
         expect(page).to have_css '.alert-success', text: 'News story successfully published'
-        expect(page).to have_css 'img.img-fluid'
+        expect(page).to have_css 'img.headline-img'
       end
 
       scenario 'Cant create an invalid news story' do
@@ -53,10 +53,10 @@ feature 'news' do
         fill_in 'news[content]', with: 'Test Content'
         attach_file 'news[images_attributes][0][image]', File.join(Rails.root, 'spec', 'fixtures', 'test.png')
         click_button 'Update News'
-        expect(page).to have_css 'h4.card-title',     text: 'Test Title'
-        expect(page).to have_css 'p',                 text: 'Test Content'
-        expect(page).to have_css '.alert-success',    text: 'Succesfully updated the news article'
-        expect(page).to have_css 'img.img-fluid'
+        expect(page).to have_css 'h4.card-title',   text: 'Test Title'
+        expect(page).to have_css 'p',               text: 'Test Content'
+        expect(page).to have_css '.alert-success',  text: 'Succesfully updated the news article'
+        expect(page).to have_css 'img.headline-img'
       end
 
       scenario 'Cant change to an invalid news story' do

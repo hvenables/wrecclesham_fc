@@ -1,22 +1,28 @@
 - if @fixtures.nil?
   Please Add fixtures
 - else
-  - if params[:league_table_id] || params[:cup_id]
-    .container
-      .row
+  .container-fluid
+    - if params[:league_table_id] || params[:cup_id]
+      .row.title
         .col-xs-10.offset-md-1
           %h2.title
             = @subject.name + " - " + format_year(@subject.year)
-  .col-xs-12.col-md-10.offset-md-1
-    %ul.nav.nav-tabs#myTab{:role => "tablist"}
-      %li.nav-item
-        %a.nav-link.active.fixture-nav{"data-toggle" => "tab", :href => "#fixtures", :role => "tab"} Fixtures
-      %li.nav-item
-        %a.nav-link.fixture-nav{"data-toggle" => "tab", :href => "#results", :role => "tab"} Results
-    .tab-content
-      = render 'team_fixtures', fixtures: @fixtures, active: true, id: 'fixtures'
-      = render 'team_fixtures', fixtures: @results, active: false, id: 'results'
+    - else
+      .row.title
+        .col-xs-10.offset-md-1
+          %h1
+            = 'Fixtures & Results'
+    .row
+      .col-12.col-md-10.offset-md-1
+        %ul.nav.nav-tabs#myTab{:role => "tablist"}
+          %li.nav-item
+            %a.nav-link.active.fixture-nav{"data-toggle" => "tab", :href => "#fixtures", :role => "tab"} Fixtures
+          %li.nav-item
+            %a.nav-link.fixture-nav{"data-toggle" => "tab", :href => "#results", :role => "tab"} Results
+        .tab-content
+          = render 'team_fixtures', fixtures: @fixtures, active: true, id: 'fixtures'
+          = render 'team_fixtures', fixtures: @results, active: false, id: 'results'
 
-    - if (can? :manage, Fixture) && params[:team_id]
-      = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
-      = link_to "Add Results", team_fixtures_path(), method: :put, class: "btn btn-primary"
+        - if (can? :manage, Fixture) && params[:team_id]
+          = link_to "Add Fixtures", team_fixtures_path(fixtures: true), method: :post, class: "btn btn-success"
+          = link_to "Add Results", team_fixtures_path(), method: :put, class: "btn btn-primary"

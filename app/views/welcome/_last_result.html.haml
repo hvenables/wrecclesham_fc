@@ -1,13 +1,12 @@
-.card-block
+.card-body
   .card-text
+    .col-xs-12
+      = team_result.date.strftime("%a, %d %B %Y")
+    %hr
     .row
-      .col-xs-12.text-xs-left
-        = team_result.date.strftime("%a, %d %B %Y")
-    %hr.underline
-    .row
-      .col-xs-5
+      .col-5.text-left
         = team_result.home.name
-      .col-xs-2.no-padding.text-xs-center
+      .col-2.text-center
         = "#{team_result.home_score} - #{team_result.away_score}"
-      .col-xs-5
+      .col-5.text-right
         = team_result.away.name

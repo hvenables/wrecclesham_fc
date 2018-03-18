@@ -21,6 +21,6 @@
           .alert.flash-title{ :class => bootstrap_class_for(key) }
             %button.close{ :data => { :dismiss => "alert" } } x
             = value
-      .container.center-panel
-        = yield
+      = yield
+      .push
     = render 'layouts/footer'

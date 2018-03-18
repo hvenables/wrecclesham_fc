@@ -1,11 +1,11 @@
 %tr
-  %td.text-xs-center
+  %td.text-center
     = fixture.date&.strftime("%a, %d %b %Y") || 'TBC'
-  %td.text-xs-right
+  %td.text-center.text-md-right.d-block.d-md-table-cell.pt-1.px-0.pb-0.p-md-2
     = fixture.home.name
-  %td.text-xs-center
+  %td.text-center.text-md-center.d-block.d-md-table-cell.p-0.p-md-2
     #{fixture.home_score} - #{fixture.away_score}
-  %td.text-xs-left
+  %td.text-center.text-md-left.d-block.d-md-table-cell.pb-1.px-0.pt-0.p-md-2
     = fixture.away.name
-  %td.text-xs-center
+  %td.text-center
     = fixture.competition.abbreviation

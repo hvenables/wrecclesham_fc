@@ -1,13 +1,13 @@
 = link_to news, class: "video-link news-link #{width}" do
   .card.green-hover.news-article
-    %img.card-img-top.news-img{:alt => "", :src => "#{news.try(:images)&.first&.image&.url(:large) || news.thumbnail}"}/
-    .card-block.news-block
+    = image_tag(news.try(:images)&.first&.image&.url(:large) || news.thumbnail, class: 'card-img-top news-img')
+    .card-body.news-block
       .card-text
         .row.news-info
-          .col-xs-6
+          .col-6
             = news.class.to_s
-          .col-xs-6
-            %small.text-muted.pull-right
+          .col-6
+            %small.text-muted.float-right
               = news.created_at.to_formatted_s(:month_and_year)
       %h5.card-title
         = news.title

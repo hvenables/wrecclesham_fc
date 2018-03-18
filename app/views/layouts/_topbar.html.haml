@@ -1,14 +1,13 @@
-.topbar
-  %nav.navbar.navbar-dark.topbar
-    .container
-      = link_to root_path do
-        = image_tag('transparent_logo.png', class: 'logo navbar-brand')
-      %ul.nav.navbar-nav
-        - if user_signed_in?
-          %li.nav-item.join.log-in.pull-xs-right
-            = link_to "Sign out", destroy_user_session_path, {method: :delete, class: "nav-link"}
-        - else
-          %li.nav-item.join.log-in.pull-xs-right
-            = link_to "Log in", new_user_session_path, {class: "nav-link"}
-          %li.nav-item.join.sign-up.pull-xs-right
-            = link_to "Sign up", new_user_registration_path, {class: "nav-link"}
+%nav.navbar.navbar-light.navbar-expand.main-menu.topbar{ style: 'background-color: #146614;' }
+  = link_to root_path do
+    = image_tag('transparent_logo.png', class: 'logo navbar-brand')
+  = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand'
+  %ul.navbar-nav.ml-auto
+    - if user_signed_in?
+      %li.nav-item
+        = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link'
+    - else
+      %li.nav-item
+        = link_to 'Log in', new_user_session_path, class: 'nav-link'
+      %li.nav-item.d-sm-block.d-none
+        = link_to 'Sign up', new_user_registration_path, class: 'nav-link'

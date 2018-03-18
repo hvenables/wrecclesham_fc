@@ -3,7 +3,7 @@
 class News < ApplicationRecord
   has_many :images, as: :subject, inverse_of: :subject
 
-  paginates_per 9
+  paginates_per 12
 
   validates :title, :content, :images, presence: true
 

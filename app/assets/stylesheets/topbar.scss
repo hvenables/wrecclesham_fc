@@ -1,26 +1,14 @@
 .topbar {
   height: 60px;
   background-color: $wrecclesham-green;
-  .container ul li .nav-link {
-    padding-bottom: 0px;
-  }
 }
 
 .logo {
   max-width: 200px;
-  margin-right: 0px !important;
   max-height: 105px;
-  z-index:1;
-  position:relative;
-}
-.join {
-  padding-bottom: 2px;
-  margin-left: 10px;
-  border-bottom: 2px solid white;
-  &:hover {
-    padding-bottom: 0px;
-    border-bottom: 5px solid white;
-  }
+  position: relative;
+  top: 30px;
+  z-index: 10000;
 }
 
 .footer-nav .footer-list {

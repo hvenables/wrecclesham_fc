@@ -1,16 +1,17 @@
 - if @videos.any?
-  .container
+  .container-fluid
     .well.well-sm
-      %h3.title Latest Videos
-    .col-xs-12.col-sm-6
-      = paginate @videos
-    .col-xs-12.col-sm-6
-      .page-entries.pull-xs-left.pull-sm-right
-        = page_entries_info @videos
+      %h1.title Videos
     .row
-      .card-deck-wrapper
-        .card-deck
-          - @videos.each do |video|
-            = render 'shared/card', news: video, width: 'col-md-4'
+      .col-xs-12.col-sm-6
+        = paginate @videos
+      .col-xs-12.col-sm-6
+        .page-entries.ml-auto.text-left.text-right
+          = page_entries_info @videos
+    .clearfix
+    .card-deck-wrapper
+      .card-deck
+        - @videos.each do |video|
+          = render 'shared/card', news: video, width: 'col-sm-6 col-md-4 col-xl-3'
 - else
   No videos have been added

@@ -9,12 +9,8 @@
   margin-right: 10px;
 }
 
-.news-article {
-  height: 420px;
-}
-
 .news-block {
-  height: 210px;
+  height: 230px;
 }
 
 .news-info {
@@ -32,8 +28,7 @@
   width: 100%;
   object-fit: cover;
 }
-.page-entries {
-  height: 80px;
-  padding-top: 25px;
-  color: white;
+
+.headline-img {
+  object-fit: cover;
 }

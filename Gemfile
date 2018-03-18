@@ -32,9 +32,9 @@ gem 'jbuilder', '~> 2.0'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'chartjs-ror'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'simple_chartjs'
 
 gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 
@@ -42,7 +42,8 @@ gem 'haml-rails', '~> 1.0.0'
 
 gem 'devise'
 
-gem 'bootstrap', '= 4.0.0.alpha4'
+gem 'bootstrap'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
@@ -92,8 +93,6 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'erb2haml', '~> 0.1.5'
   gem 'listen', '~> 3.0.5'
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 3.0'
@@ -104,9 +103,11 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'rubocop', require: false
   gem 'rack-mini-profiler'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'haml_lint', require: false
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do
@@ -123,6 +124,3 @@ group :test do
   gem 'timecop'
   gem 'webmock'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

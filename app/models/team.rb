@@ -58,7 +58,7 @@ class Team < ApplicationRecord
   end
 
   def create_fixtures
-    competitions.each do |competition|
+    competitions.active.each do |competition|
       next unless competition.active?
       fixtures = FixtureScrapper.new(competition.fixture_url).fixtures
       fixtures.each do |fixture|
@@ -86,7 +86,7 @@ class Team < ApplicationRecord
   end
 
   def update_fixtures
-    competitions.each do |competition|
+    competitions.active.each do |competition|
       fixtures = FixtureScrapper.new(competition.result_url).fixtures
       fixtures.each do |fixture|
         home = Team.find_or_create_by(name: fixture[2])

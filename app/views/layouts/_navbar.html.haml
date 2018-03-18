@@ -1,42 +1,41 @@
-%nav.navbar.navbar-light.main-menu{role: "navigation", style: "background-color: #146614;"}
-  %button.navbar-toggler.hidden-lg-up.pull-xs-right{"data-target" => "#collapsing-navbar", "data-toggle" => "collapse", type: "button"}
-    \☰
-  = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand nav-title'
-  .collapse.navbar-toggleable-md#collapsing-navbar
-    %ul.nav.navbar-nav.pull-xs-right.pull-lg-left.text-xs-right.navbar-list
+%nav.navbar.navbar-light.navbar-expand-lg.sticky-top.main-menu{ style: "background-color: #146614;" }
+  %button.navbar-toggler.ml-auto{ type: 'button', data: { toggle: 'collapse', target: '#navbarNavDropdown' } }
+    %span.navbar-toggler-icon
+  #navbarNavDropdown.collapse.navbar-collapse
+    %ul.navbar-nav.main-nav
       - if can? :manage, News
-        %li.nav-item{class: "#{active_class('news')} dropdown"}
-          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} News
-          .dropdown-menu.pull-xs-right
+        %li.nav-item.ml-auto.text-right{class: "#{active_class('news')} dropdown"}
+          %a.nav-link.dropdown-toggle#news-dropdown{ href: '#', role: 'button', data: { toggle: 'dropdown' } }
+            News
+          .dropdown-menu
             = link_to 'News', news_index_path(), {class: 'dropdown-item'}
             .dropdown-divider
             = link_to 'New article', new_news_path(), {class: 'dropdown-item'}
       - else
-        %li.nav-item{class: active_class('news')}
+        %li.nav-item.ml-auto.text-right{class: active_class('news')}
           = link_to 'News', news_index_path, {class: 'nav-link'}
-      %li.nav-item
       - if About.any?
         - if can? :manage, About
-          %li.nav-item{class: "#{active_class('about')} dropdown"}
+          %li.nav-item.ml-auto.text-right{class: "#{active_class('about')} dropdown"}
             %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} About
             .dropdown-menu.pull-xs-right
               = link_to 'About', about_index_path(), {class: 'dropdown-item'}
               .dropdown-divider
               = link_to 'Edit About', edit_about_path(About.last), {class: 'dropdown-item'}
         - else
-          %li.nav-item{class: active_class('about')}
+          %li.nav-item.ml-auto.text-right{class: active_class('about')}
             = link_to 'About', about_index_path, {class: 'nav-link'}
       - if can? :manage, Video
-        %li.nav-item{class: "#{active_class('videos')} dropdown"}
+        %li.nav-item.ml-auto.text-right{class: "#{active_class('videos')} dropdown"}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Videos
           .dropdown-menu
             = link_to 'Videos', videos_path(), {class: 'dropdown-item'}
             .dropdown-divider
             = link_to 'New video', new_video_path(), {class: 'dropdown-item'}
       - else
-        %li.nav-item{class: active_class('videos')}
+        %li.nav-item.ml-auto.text-right{class: active_class('videos')}
           = link_to "Videos", videos_path(), { class: 'nav-link' }
-      %li.nav-item{class: "#{active_class('league_tables')} dropdown"}
+      %li.nav-item.ml-auto.text-right{class: "#{active_class('league_tables')} dropdown"}
         %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} League Tables
         .dropdown-menu
           - if @first_team_table
@@ -47,7 +46,7 @@
             .dropdown-divider
             = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
       - if can? :manage, Competition::Cup
-        %li.nav-item.dropdown{class: active_class('cups')}
+        %li.nav-item.dropdown.ml-auto.text-right{class: active_class('cups')}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Cups
           .dropdown-menu
             - if @cups
@@ -57,7 +56,7 @@
             = link_to 'Manage Cups', cups_path, class: 'dropdown-item'
 
       - if @first_team_table && @reserve_team_table
-        %li.nav-item{class: "#{active_class('fixtures')} dropdown"}
+        %li.nav-item.ml-auto.text-right{class: "#{active_class('fixtures')} dropdown"}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}= "Fixtures & Results"
           .dropdown-menu
             = link_to 'First Team', team_fixtures_path(@first_team), class: 'dropdown-item'

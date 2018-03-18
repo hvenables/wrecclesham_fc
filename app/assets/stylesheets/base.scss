@@ -3,57 +3,33 @@ nav {
 }
 
 body {
-  background-color: #000000 !important;
+  background-color: #F5F5F5;
 }
 
-*{
+* {
   font-family: futura;
 }
 
-.table {
-  background-color: white;
-}
-
-.center-panel {
-  padding-top: 15px;
-}
-
-.title {
-  color: white;
-}
-
-.form-label {
-  color: #E7E7E7;
-}
-
-.no-padding {
-  padding: 0 !important;
-}
-
-.underline {
-  margin-top: 0 !important;
-}
-
-html,
-body {
+html, body {
   height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
+  margin: 0;
 }
 
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
+.nav-tabs > li > a {
+  color: $wrecclesham-green;
 }
 
-/* Set the fixed height of the footer here */
-.footer {
-  height: 60px;
-  background-color: #146614;
-  margin-top: 10px;
-  border-top: 2px solid white;
+.pagination {
+  .page-item.active > .page-link {
+    background-color: $wrecclesham-green;
+    border-color: $wrecclesham-green;
+  }
+  .page-item:not(.active) > .page-link {
+    color: $wrecclesham-green;
+  }
+}
+
+.nav-item > .dropdown-menu > .dropdown-item:active {
+  background-color: #ffffff;
+  color: black;
 }

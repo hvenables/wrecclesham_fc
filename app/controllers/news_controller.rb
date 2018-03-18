@@ -2,7 +2,7 @@ class NewsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @news = News.all.order(created_at: :desc).page(params[:page]).per(params[:per])
+    @news = News.all.order(created_at: :desc).page(params[:page])
   end
 
   def show
