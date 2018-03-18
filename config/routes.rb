@@ -37,4 +37,8 @@ Rails.application.routes.draw do
   namespace :charts do
     resource :recent_form, only: :show, controller: :recent_form
   end
+
+  namespace :api do
+    resource :twitter
+  end
 end

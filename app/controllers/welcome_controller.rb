@@ -14,7 +14,6 @@ class WelcomeController < ApplicationController
       @reserve_team_fixture = @reserve_team.next_game
       @reserve_team_result = @reserve_team.last_game
     end
-    # @twitter = TwitterFeed.new
   end
 
   private

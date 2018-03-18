@@ -101,6 +101,22 @@
             .tab-pane#reserve_team_table{ role: "tabpanel" }
               .container.welcome-tables
                 = render 'table', team_table: @reserve_team_table, table_teams: @reserve_team_teams
+%section.container-fluid
+  .row
+    .col-10
+      %h4.newsheading.title
+        Twitter Feed
+    .col-2
+      = link_to 'https://twitter.com/WreccleshamFC', class: 'btn btn-success pull-right', target: '_blank' do
+        %i.fa.fa-twitter{"aria-hidden" => "true"}
+        Twitter
+    .twitter.col-12
+      .card
+        .card-body.text-center
+          .col-12
+            Loading...
+
+
 -#   -# - if @twitter.client
 -#   -#   .col-xs-12
 -#   -#     .row
@@ -116,7 +132,7 @@
 -#   -#         %li.list-group-item
 -#   -#           .row
 -#   -#             .col-xs-3.col-sm-2.col-lg-1
--#   -#               = image_tag('transparent_logo.png', class: 'twitter-icon')
+-#   -#               = image_tag(, class: 'twitter-icon')
 -#   -#             %span.col-xs-9.col-sm-10.col-lg-11
 -#   -#               = simple_format(auto_link(tweet.text))
 -#   -#           .row
