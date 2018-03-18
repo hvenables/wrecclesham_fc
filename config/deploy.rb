@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-# config valid only for Capistrano 3.1
-lock '3.8.2'
+lock '3.10.1'
 
 set :application, 'wrecclesham'
 set :repo_url, 'git@github.com:hvenables/wrecclesham_fc.git'
@@ -15,6 +14,7 @@ set :deploy_to, '/var/www/wrecclesham'
 # Symlink files and dirs
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+append :linked_dirs, '.bundle'
 
 ## RVM settings
 set :rvm1_ruby_version, '2.5.0'
