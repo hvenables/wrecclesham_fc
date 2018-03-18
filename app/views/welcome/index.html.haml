@@ -1,28 +1,30 @@
 %section.latest-news
   .main-article.homepage-article.col-sm-12.col-md-9
-    = link_to news_path(@main_article) do
-      .overlay
-      %img{:alt => "", :src => "#{@main_article.images.first.image.url(:large)}"}/
-      .homepage-title
-        %span
-          #{@main_article.class}
-        %h2
-          #{@main_article.title}
-        %span
-          #{@main_article.created_at.to_formatted_s(:month_and_year)}
-
-  - @supporting_articles.each do |article|
-    .supporting-article.homepage-article.col-md-3.col-sm-4
-      = link_to news_path(article) do
+    - if @main_article.present?
+      = link_to news_path(@main_article) do
         .overlay
-        %img{:alt => "", :src => "#{article.images.first.image.url(:large)}"}/
+        %img{:alt => "", :src => "#{@main_article.images.first.image.url(:large)}"}/
         .homepage-title
           %span
-            #{article.class}
-          %h5
-            #{article.title}
+            #{@main_article.class}
+          %h2
+            #{@main_article.title}
           %span
-            #{article.created_at.to_formatted_s(:month_and_year)}
+            #{@main_article.created_at.to_formatted_s(:month_and_year)}
+
+  - if @supporting_articles.present?
+    - @supporting_articles.each do |article|
+      .supporting-article.homepage-article.col-md-3.col-sm-4
+        = link_to news_path(article) do
+          .overlay
+          %img{:alt => "", :src => "#{article.images.first.image.url(:large)}"}/
+          .homepage-title
+            %span
+              #{article.class}
+            %h5
+              #{article.title}
+            %span
+              #{article.created_at.to_formatted_s(:month_and_year)}
 .clearfix
 %section.club-info.container-fluid
   .row
@@ -115,37 +117,3 @@
         .card-body.text-center
           .col-12
             Loading...
-
-
--#   -# - if @twitter.client
--#   -#   .col-xs-12
--#   -#     .row
--#   -#       .col-xs-10
--#   -#         %h4.newsheading.title
--#   -#           Twitter Feed
--#   -#       .col-xs-2
--#   -#         %a.btn.btn-primary.pull-xs-right{href: @twitter.user.url, target: "_blank"}
--#   -#           %i.fa.fa-twitter{"aria-hidden" => "true"}
--#   -#           Twitter
--#   -#     %ul.list-group
--#   -#       - @twitter.own_tweets[0..5].each do |tweet|
--#   -#         %li.list-group-item
--#   -#           .row
--#   -#             .col-xs-3.col-sm-2.col-lg-1
--#   -#               = image_tag(, class: 'twitter-icon')
--#   -#             %span.col-xs-9.col-sm-10.col-lg-11
--#   -#               = simple_format(auto_link(tweet.text))
--#   -#           .row
--#   -#             .col-xs-9.col-sm-10.col-lg-11.offset-xs-3.offset-sm-2.offset-lg-1
--#   -#               %a.twitter-link{href: tweet.url, target: "_blank"}
--#   -#                 %span
--#   -#                   %i.fa.fa-eye{"aria-hidden" => "true"}
--#   -#                   View
--#   -#               %a.twitter-link{href: tweet.url, target: "_blank"}
--#   -#                 %span
--#   -#                   %i.fa.fa-heart{"aria-hidden" => "true"}
--#   -#                   = tweet.favorite_count
--#   -#               %a.twitter-link{href: tweet.url, target: "_blank"}
--#   -#                 %span
--#   -#                   %i.fa.fa-retweet{"aria-hidden" => "true"}
--#   -#                   = tweet.retweet_count

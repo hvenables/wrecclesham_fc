@@ -4,8 +4,8 @@ class WelcomeController < ApplicationController
   before_action :load_articles
 
   def index
-    @first_team_teams = @first_team.current_league_table.seasons.ordered_on_points
-    @reserve_team_teams = @reserve_team.current_league_table.seasons.ordered_on_points
+    @first_team_teams = @first_team&.current_league_table&.seasons&.ordered_on_points
+    @reserve_team_teams = @reserve_team&.current_league_table&.seasons&.ordered_on_points
     if @first_team.present?
       @first_team_fixture = @first_team.next_game
       @first_team_result = @first_team.last_game
