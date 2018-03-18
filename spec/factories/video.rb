@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :video, class: Video do
     title 'Video Title'
     content 'Video Summary'
