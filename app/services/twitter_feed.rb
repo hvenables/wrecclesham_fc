@@ -11,7 +11,7 @@ class TwitterFeed
       config.access_token_secret = Rails.application.secrets.access_secret
     end
     @user = @client&.user(user)
-    @feed = @client&.user_timeline(user)
+    @feed = @client&.user_timeline(user) || []
   end
 
   def own_tweets

@@ -18,7 +18,7 @@ feature 'fixtures' do
     team.competitions << league
   end
 
-  context 'Display team fixtures and results', js: true do
+  xcontext 'Display team fixtures and results', js: true do
     scenario 'display results for only wrecclesham' do
       visit team_fixtures_path(team)
       click_link 'Fixtures'
@@ -41,7 +41,7 @@ feature 'fixtures' do
     end
   end
 
-  context 'Display league fixtures and results' do
+  xcontext 'Display league fixtures and results' do
     let!(:league_fixture) { create :fixture, date: (Date.today + 1.week), competition: league }
     let!(:league_result) { create :fixture, date: (Date.today - 1.week), home_score: '2', away_score: '0', competition: league }
 
@@ -67,7 +67,7 @@ feature 'fixtures' do
     end
   end
 
-  context 'Create and Update fixtures' do
+  xcontext 'Create and Update fixtures' do
     let!(:guildford_barbarians) { create :team, name: 'Guildford Barbarians' }
     let!(:hersham) { create :team, name: 'Hersham' }
     let!(:knaphill_athletic) { create :team, name: 'Knaphill Athletic' }
