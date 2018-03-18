@@ -112,14 +112,12 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'coveralls', require: false
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'coveralls', require: false
   gem 'simplecov', require: false
   gem 'timecop'
   gem 'webmock'
