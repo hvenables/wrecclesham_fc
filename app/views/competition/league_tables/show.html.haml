@@ -1,46 +1,43 @@
 -if @league_table
-  .container
-    .row
-      .col-xs-10
-        %h2.title
-          = @league_table.name + " - " + format_year(@league_table.year)
-      .col-xs-2.push-down
+  .container-fluid
+    %h2.title
+      .float-right
         = link_to 'Fixtures and Results', league_table_fixtures_path(@league_table), class: 'btn btn-success pull-xs-right'
+      = @league_table.name + " - " + format_year(@league_table.year)
   - if @league_table.seasons.any?
-    .container
-      .row
-        .wrapper
-          .table-responsive
-            %table.table
-              %thead.thead-inverse
-                %tr
-                  %th
-                    Pos
-                  %th
-                    Team
-                  %th.text-xs-center
-                    Played
-                  %th.hidden-sm-down.text-xs-center
-                    Won
-                  %th.hidden-sm-down.text-xs-center
-                    Drawn
-                  %th.hidden-sm-down.text-xs-center
-                    Lost
-                  %th.hidden-md-down.text-xs-center
-                    For
-                  %th.hidden-md-down.text-xs-center
-                    Against
-                  %th.text-xs-center
-                    Diff
-                  %th.text-xs-center
-                    Points
-              %tbody
-                = render partial: 'competition/league_tables/season', collection: @seasons
+    .container-fluid
+      .wrapper
+        .table-responsive-md
+          %table.table
+            %thead.thead-dark
+              %tr
+                %th
+                  Pos
+                %th
+                  Team
+                %th.text-center
+                  Played
+                %th.d-sm-table-cell.d-none.text-center
+                  Won
+                %th.d-sm-table-cell.d-none.text-center
+                  Drawn
+                %th.d-sm-table-cell.d-none.text-center
+                  Lost
+                %th.d-md-table-cell.d-none.text-center
+                  For
+                %th.d-md-table-cell.d-none.text-center
+                  Against
+                %th.text-center
+                  Diff
+                %th.text-center
+                  Points
+            %tbody
+              = render partial: 'competition/league_tables/season', collection: @seasons
   - else
     Add teams to the league
-
   - if can? :manage, Competition::LeagueTable
-    = link_to "#{ @seasons.blank? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => (@seasons.blank? ? :post : :patch), class: 'btn btn-sm btn-success'
-    = link_to "Edit", edit_league_table_path(@league_table), class: 'btn btn-sm btn-primary'
+    .container-fluid
+      = link_to "#{ @seasons.blank? ? 'Add Teams' : 'Update Table'}", league_table_seasons_path(@league_table), :method => (@seasons.blank? ? :post : :patch), class: 'btn btn-sm btn-success'
+      = link_to "Edit", edit_league_table_path(@league_table), class: 'btn btn-sm btn-primary'
 
-    = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-sm btn-danger'
+      = link_to "Delete Table", league_table_path(@league_table), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-sm btn-danger'
