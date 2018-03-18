@@ -1,25 +1,24 @@
-.container.col-xs-12.col-lg-8
+.container-fluid
   .row
-    .card
-      .card-body
-        %h4.card-title
-          = @news.title
-      %img.img-fluid.m-x-auto.d-block{:alt => "", :src => "#{@news.images.first.image.url(:large)}"}/
-      .card-block
-        %p.card-text
-          = preserve gfm(@news.content)
-        %p.card-text
-          %small.text-muted
-            = "Last updated #{time_ago_in_words(@news.updated_at)} ago"
-          - if can? :manage, News
-            = link_to 'Delete', news_path(@news), method: :delete, class: 'pull-xs-right btn btn-sm btn-danger'
-            = link_to 'Edit', edit_news_path(@news), class: 'pull-xs-right btn btn-sm btn-success edit-button'
-.container.col-xs-12.col-lg-4
-  %h4.form-label
-    Latest News
-.container.col-xs-12.col-md-8.offset-md-2.offset-lg-0.col-lg-4
-  .card-deck-wrapper
-    .card-deck
-      .row
-        - @latest_news.each do |news|
-          = render 'shared/card', news: news, width: 'col-xs-12'
+    .col-12.col-lg-8.pt-3
+      .card
+        .card-body
+          %h4.card-title
+            = @news.title
+        = image_tag(@news.images.first.image.url(:large), class: 'headline-img')
+        .card-body
+          %p.card-text
+            = preserve gfm(@news.content)
+          %p.card-text
+            %small.text-muted
+              = "Last updated #{time_ago_in_words(@news.updated_at)} ago"
+            - if can? :manage, News
+              = link_to 'Delete', news_path(@news), method: :delete, class: 'float-right btn btn-sm btn-danger'
+              = link_to 'Edit', edit_news_path(@news), class: 'float-right btn btn-sm btn-success edit-button'
+    .col-12.col-lg-4.pt-3
+      %h4.form-label
+        Latest News
+      .card-deck-wrapper
+        .card-deck
+          - @latest_news.each do |news|
+            = render 'shared/card', news: news, width: 'col-12 col-md-6 col-lg-12'
