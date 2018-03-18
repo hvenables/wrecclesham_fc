@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  let(:league_table) { FactoryGirl.create :league_table }
+  let(:league_table) { create :league_table }
   context '#teams_around_team' do
     before(:each) do
       12.times do |n|
-        team = FactoryGirl.create :team
-        FactoryGirl.create :season, team: team, league_table: league_table, position: n + 1
+        team = create :team
+        create :season, team: team, league_table: league_table, position: n + 1
         league_table.teams << team
       end
     end

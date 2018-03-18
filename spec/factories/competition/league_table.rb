@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :league_table, class: Competition::LeagueTable do
     year 2015
     name 'MyString'

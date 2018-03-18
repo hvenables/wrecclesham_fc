@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :fixture, class: Fixture do
     date Date.new(2017, 1, 14)
     association :home, factory: :team

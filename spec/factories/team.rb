@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team, class: Team do
     sequence(:name) { |n| "Team #{n}" }
 
