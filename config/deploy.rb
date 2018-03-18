@@ -5,10 +5,8 @@ lock '3.10.1'
 set :application, 'wrecclesham'
 set :repo_url, 'git@github.com:hvenables/wrecclesham_fc.git'
 
-# Load branch/tag/commit from REF env var, otherwise use master
 set :branch, ENV['REF'] || 'master'
 
-# Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/wrecclesham'
 
 # Symlink files and dirs

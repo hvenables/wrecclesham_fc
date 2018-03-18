@@ -52,7 +52,7 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'paperclip'
 
 # Adding aws storage
-gem 'aws-sdk'
+gem 'aws-sdk-s3'
 
 # Calculating time differences
 gem 'time_difference'
