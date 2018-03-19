@@ -1,8 +1,8 @@
-.container
+.container.mt-2
   .card
     .embed-responsive.embed-responsive-16by9.card-img-top
       %iframe.embed-responsive-item{:allowfullscreen => "", :src => "#{@video.url_santizer}"}
-    .card-block
+    .card-body
       %h4.card-title
         = @video.title
       %p.card-text
