@@ -19,7 +19,7 @@ describe Season do
   end
 
   context 'when no seasons exist' do
-    it 'Will allow you to create seasons', js: true do
+    it 'Will allow you to create seasons' do
       visit root_path
       click_link 'League Tables'
       click_link 'First Team'
@@ -37,7 +37,7 @@ describe Season do
   context 'when a season exists' do
     let!(:season) { FactoryBot.create :season, league_table: league, team: team }
 
-    it 'Will update existing seasons', js: true do
+    it 'Will update existing seasons' do
       visit root_path
       click_link 'League Tables'
       click_link 'First Team'
