@@ -1,7 +1,7 @@
 %nav.navbar.navbar-light.navbar-expand.main-menu.topbar{ style: 'background-color: #146614;' }
   = link_to root_path do
     = image_tag('transparent_logo.png', class: 'logo navbar-brand')
-  = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand'
+  = link_to 'Wrecclesham FC', root_path, class: 'navbar-brand m-0'
   %ul.navbar-nav.ml-auto
     - if user_signed_in?
       %li.nav-item
