@@ -100,7 +100,8 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano3-puma', require: false
-  gem 'rubocop', require: false
+  gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'rack-mini-profiler'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
