@@ -11,7 +11,7 @@ require 'support/database_cleaner'
 require 'capybara/rails'
 
 WebMock.disable_net_connect!(allow_localhost: true)
-Capybara.javascript_driver = :chrome
+Capybara.javascript_driver = :headless_chrome
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
