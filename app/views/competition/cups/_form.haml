@@ -1,27 +1,26 @@
-= form_for @cup do |f|
-  .form-group
-    = f.label :name, class: "form-label"
-    = f.text_field :name, class: "form-control"
-  .form-group
-    = f.label :abbreviation, class: "form-label"
-    = f.text_field :abbreviation, class: "form-control"
-  .form-group
-    = f.label :year, class: "form-label"
-    = f.text_field :year, class: "form-control"
-  .form-group
-    = f.label :fixture_url, class: 'form-label'
-    = f.text_field :fixture_url, class: 'form-control'
-  .form-group
-    = f.label :results_url, class: 'form-label'
-    = f.text_field :results_url, class: 'form-control'
-  .form-group
-    .btn-group{ "data-toggle" => "buttons" }
-      = label_tag nil, nil, class: "btn btn-primary #{@cup.teams.include?(@first_team) ? 'active': ''}" do
-        = radio_button_tag :teams, @first_team.id
-        First Team
-      = label_tag nil, nil, class: "btn btn-primary #{@cup.teams.include?(@reserve_team) ? 'active': ''}" do
-        = radio_button_tag :teams, @reserve_team.id
-        Reserve Team
-
-
-  = f.submit class: 'btn btn-success'
+.col-12
+  = form_for @cup, url: path do |f|
+    .form-group
+      = f.label :name, class: "form-label"
+      = f.text_field :name, class: "form-control"
+    .form-group
+      = f.label :abbreviation, class: "form-label"
+      = f.text_field :abbreviation, class: "form-control"
+    .form-group
+      = f.label :year, class: "form-label"
+      = f.text_field :year, class: "form-control"
+    .form-group
+      = f.label :fixture_url, class: 'form-label'
+      = f.text_field :fixture_url, class: 'form-control'
+    .form-group
+      = f.label :result_url, class: 'form-label'
+      = f.text_field :result_url, class: 'form-control'
+    .form-group
+      .btn-group{ "data-toggle" => "buttons" }
+        = label_tag nil, nil, class: "btn btn-primary #{@cup.teams.include?(@first_team) ? 'active': ''}" do
+          = radio_button_tag :teams, @first_team.id
+          First Team
+        = label_tag nil, nil, class: "btn btn-primary #{@cup.teams.include?(@reserve_team) ? 'active': ''}" do
+          = radio_button_tag :teams, @reserve_team.id
+          Reserve Team
+      = f.submit class: 'btn btn-success'
