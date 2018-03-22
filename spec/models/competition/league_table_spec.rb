@@ -28,4 +28,24 @@ RSpec.describe Competition::LeagueTable do
 
     it { is_expected.to eq reserve_team_table }
   end
+
+  context '#active_first_team_table?' do
+    subject { first_team_table.active_first_team_table? }
+
+    before do
+      first_team_table.teams << first_team
+    end
+
+    it { is_expected.to eq true }
+  end
+
+  context '#active_reserve_team_table?' do
+    subject { reserve_team_table.active_reserve_team_table? }
+
+    before do
+      reserve_team_table.teams << reserve_team
+    end
+
+    it { is_expected.to eq true }
+  end
 end

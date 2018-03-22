@@ -17,7 +17,7 @@ RSpec.describe 'Recent Form' do
 
       expect(json_response['datasets'][0]['data']).to eq [2, 2, 2]
       expect(json_response['datasets'][0]['background_color']).to eq ['#28a745', '#007bff', '#dc3545']
-      expect(json_response['datasets'][0]['hoverBackgroundColor']).to eq ['#28a745', '#007bff', '#dc3545']
+      expect(json_response['datasets'][0]['hover_background_color']).to eq ['#28a745', '#007bff', '#dc3545']
     end
   end
 end

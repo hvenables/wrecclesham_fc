@@ -1,26 +1,27 @@
 .card-body
-  .card-text
-    .goals.mb-3
-      .text-xs-left#goals_for
-        %small
-          = "#{team.seasons.last.goals_for} Goals scored"
-      .progress
-        .progress-bar.bg-success{ style: "width: #{(team.current_season.goals_for * 100) / (team.current_season.goals_difference >= 0 ? team.current_season.goals_for : team.current_season.goals_against)}%;"  }
-          -# { value: "#{team.seasons.last.goals_for}", max: "#{}", aria: { describedby: "goals_for" } }
-      .text-xs-left#goals_against
-        %small
-          = "#{team.seasons.last.goals_against} Goals conceded"
-      .progress
-        .progress-bar.bg-danger{ style: "width: #{(team.current_season.goals_against * 100) / (team.current_season.goals_difference >= 0 ? team.current_season.goals_for : team.current_season.goals_against)}%;"  }
-    .row
-      .col-4
-        %small
-          Current Position
-        %h2
-          = "#{team.seasons.last.position.ordinalize}"
-        %small
-          Games Played
-        %h2
-          = "#{team.seasons.last.games}"
-      .col-8
-        = doughnut_chart charts_recent_form_path(team_id: team.id)
+  - if team.current_season.present?
+    .card-text
+      .goals.mb-3
+        .text-xs-left#goals_for
+          %small
+            = "#{team.current_season&.goals_for} Goals scored"
+        .progress
+          .progress-bar.bg-success{ style: "width: #{(team.current_season&.goals_for * 100) / (team.current_season&.goals_difference >= 0 ? team.current_season&.goals_for : team.current_season&.goals_against)}%;"  }
+            -# { value: "#{team.seasons.last.goals_for}", max: "#{}", aria: { describedby: "goals_for" } }
+        .text-xs-left#goals_against
+          %small
+            = "#{team.current_season&.goals_against} Goals conceded"
+        .progress
+          .progress-bar.bg-danger{ style: "width: #{(team.current_season&.goals_against * 100) / (team.current_season&.goals_difference >= 0 ? team.current_season&.goals_for : team.current_season&.goals_against)}%;"  }
+      .row
+        .col-4
+          %small
+            Current Position
+          %h2
+            = "#{team.current_season&.position&.ordinalize}"
+          %small
+            Games Played
+          %h2
+            = "#{team.current_season&.games}"
+        .col-8
+          = doughnut_chart charts_recent_form_path(team_id: team.id)

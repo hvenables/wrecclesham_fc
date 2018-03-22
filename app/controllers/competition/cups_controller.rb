@@ -35,6 +35,6 @@ class Competition::CupsController < ApplicationController
   private
 
   def cup_params
-    params.require(:cup).permit(:name, :abbreviation, :year, :fixture_url, :results_url, :active)
+    params.require(:competition_cup).permit(:name, :abbreviation, :year, :fixture_url, :results_url, :active)
   end
 end
