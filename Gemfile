@@ -18,7 +18,6 @@ gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'pygments.rb'
-
 gem 'redcarpet'
 
 # Use jquery as the JavaScript library
@@ -31,8 +30,6 @@ gem 'jbuilder', '~> 2.0'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 gem 'simple_chartjs'
 
 gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
@@ -43,9 +40,6 @@ gem 'devise'
 
 gem 'bootstrap'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 
 # Adding images
@@ -60,23 +54,23 @@ gem 'time_difference'
 # permissions
 gem 'cancancan', '~> 1.15'
 
+# youtube
 gem 'yt'
 
 # caching storage
 gem 'dalli'
 
 # Error reporting
-gem 'jquery-slick-rails'
 gem 'rollbar'
+
 # running cron jobs
 gem 'whenever', require: false
 
 # pagination
 gem 'kaminari'
 
+# twitter api
 gem 'twitter', '~> 5.16'
-
-gem 'rails_autolink'
 
 # Speeds up boot time by caching require calls
 gem 'bootscale'
@@ -85,10 +79,8 @@ gem 'bootscale'
 gem 'rack-attack'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'pry-rails'
-  gem 'rb-readline'
 end
 
 group :development do
