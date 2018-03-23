@@ -3,12 +3,14 @@
 class Competition::CupsController < ApplicationController
   load_and_authorize_resource
 
+  before_action :load_team, only: %i[create update]
+
   def index; end
 
   def new; end
 
   def create
-    @cup.teams << Team.find_by(id: params[:teams])
+    @cup.teams << @team
     if @cup.save
       flash[:notice] = 'Cup successfully created'
       redirect_to cups_path
@@ -21,11 +23,15 @@ class Competition::CupsController < ApplicationController
   def edit; end
 
   def update
-    team = Team.find_by(id: params[:teams])
-    @cup.teams << team unless @cup.teams.include?(team)
+    @cup.teams << team if @team && !@cup.teams.include?(@team)
     if @cup.update(cup_params)
-      flash[:notice] = 'Cup successfully updated'
-      redirect_to cups_path
+      respond_to do |format|
+        format.html do
+          flash[:notice] = 'Cup successfully updated'
+          redirect_to cups_path
+        end
+        format.json { render json: { success: true } }
+      end
     else
       flash[:error] = 'Error updating cup'
       render :edit
@@ -36,5 +42,9 @@ class Competition::CupsController < ApplicationController
 
   def cup_params
     params.require(:competition_cup).permit(:name, :abbreviation, :year, :fixture_url, :results_url, :active)
+  end
+
+  def load_team
+    @team = Team.find_by(id: params[:teams])
   end
 end

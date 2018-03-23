@@ -31,4 +31,8 @@ describe Competition::Cup do
       expect(page).to have_css '.alert-success', text: 'Cup successfully created'
     end
   end
+
+  context 'with existing cups' do
+
+  end
 end

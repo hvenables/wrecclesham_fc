@@ -1,24 +1,36 @@
-- if @cups.blank?
-  %p
-    Please Add a Cup
-- else
-  %table.table
-    %thead
-      %tr
-        %th
-          Year
-        %th
-          Name
-        %th
-    %tbody
-      - @cups.each do |cup|
+.col-12
+  - if @cups.blank?
+    %p
+      Please Add a Cup
+  - else
+    %table.table
+      %thead
         %tr
-          %td
-            = cup.year
-          %td
-            = link_to cup.name, cup_fixtures_path(cup)
-          %td
-            = link_to 'Edit', edit_cup_path(cup)
+          %th
+            Year
+          %th
+            Name
+          %th
+          %th
+      %tbody
+        - @cups.each do |cup|
+          %tr
+            %td
+              = cup.year
+            %td
+              = link_to cup.name, cup_fixtures_path(cup)
+            %td
+              = link_to 'Edit', edit_cup_path(cup)
+            %td
+              .cup-activity
+                .btn-group.btn-group-toggle{ data: { toggle: 'buttons' } }
+                  = label_tag 'active', class: "btn btn-sm btn-secondary #{'active' if cup.active?} toggle-cup-activity", data: { id: cup.id, active: 1 } do
+                    = radio_button_tag 'active', true, false, class: 'toggle-cup-activity'
+                    Active
+                  = label_tag 'active', class: "btn btn-sm btn-secondary #{'active' unless cup.active?} toggle-cup-activity", data: { id: cup.id, active: 0 } do
+                    = radio_button_tag 'active', false, true
+                    Inactive
 
 
-= link_to "Add a Cup", new_cup_path(), class: 'btn btn-primary'
+
+  = link_to "Add a Cup", new_cup_path(), class: 'btn btn-primary'

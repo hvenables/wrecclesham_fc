@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   def load_cups
-    @cups = Competition::Cup.active
+    @active_cups = Competition::Cup.active
   end
 end

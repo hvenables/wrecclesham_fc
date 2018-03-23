@@ -2,6 +2,5 @@
 
 class Competition
   class Cup < Competition
-    scope :active, (-> { where(active: true) })
   end
 end
