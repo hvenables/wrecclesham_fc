@@ -1,4 +1,4 @@
-$(document).on 'turbolinks:load', ->
+guarded_ready ->
   $('.active_first_team_table').click ->
     $this = $(this)
     data = { competition_league_table: { active: true }, table: 'first_team' }
@@ -22,19 +22,9 @@ updateActiveLeagueTable = (element, data) ->
         flashMessage(response.errors.league_table, 'danger')
         updateCheckedLeague(table_name, response.table, element)
       else
-        flashMessage('updated successfully', 'success')
+        flashMessage('League Table updated successfully', 'success')
     error: (jqXHR, textStatus, errorThrown) ->
-      flashMessage('Could not update active league table, please try again', 'danger')
-
-flashMessage = (message, level) ->
-  $('.flash').html(
-    "<div class='container'>
-      <div class='alert alert-#{level} flash-title'>
-        <button class='close' data-dismiss='alert'>x</button>
-        League table #{message}
-      </div>
-    </div>"
-  )
+      flashMessage('League Table could not update active league table, please try again', 'danger')
 
 updateCheckedLeague = (table_name, table, element) ->
   if table
