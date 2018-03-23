@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809194711) do
+ActiveRecord::Schema.define(version: 20180323214027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20170809194711) do
     t.string "url"
     t.string "fixture_url"
     t.string "result_url"
-    t.boolean "active"
+    t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,6 +92,14 @@ ActiveRecord::Schema.define(version: 20170809194711) do
     t.integer "away_goals_for", default: 0
     t.integer "away_goals_against", default: 0
     t.integer "position"
+  end
+
+  create_table "shop_items", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_competitions", id: :serial, force: :cascade do |t|
