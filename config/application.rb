@@ -25,9 +25,5 @@ module WreccleshamFc
     # -- all .rb files in that directory are automatically loaded.
 
     config.middleware.use Rack::Attack
-
-    initializer :regenerate_require_cache, before: :load_environment_config do
-      Bootscale.regenerate
-    end
   end
 end

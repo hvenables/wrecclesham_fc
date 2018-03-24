@@ -6,6 +6,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'support/devise/test_helpers'
 require 'support/video_helpers'
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 require 'webmock/rspec'
 require 'support/database_cleaner'
 require 'capybara/rails'
@@ -40,6 +41,7 @@ RSpec.configure do |config|
 
   config.include DeviseTestHelpers
   config.include VideoHelper
+  config.include FeatureMatchers
 
   config.include FactoryBot::Syntax::Methods
 end

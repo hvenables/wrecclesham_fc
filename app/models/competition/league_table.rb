@@ -3,7 +3,8 @@
 class Competition
   class LeagueTable < Competition
     has_many :seasons, dependent: :destroy
-    validates :name, :year, :url, :fixture_url, :result_url, presence: true
+
+    validates :url, :fixture_url, presence: true
 
     def self.active_first_team_table
       joins(:teams).find_by(active: true, teams: { name: 'Wrecclesham' })

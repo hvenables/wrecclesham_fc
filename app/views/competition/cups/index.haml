@@ -1,4 +1,6 @@
 .col-12
+  %h3.title
+    Cups
   - if @cups.blank?
     %p
       Please Add a Cup
@@ -20,7 +22,7 @@
             %td
               = link_to cup.name, cup_fixtures_path(cup)
             %td
-              = link_to 'Edit', edit_cup_path(cup)
+              = link_to 'Edit', edit_cup_path(cup), class: 'btn btn-primary btn-sm'
             %td
               .cup-activity
                 .btn-group.btn-group-toggle{ data: { toggle: 'buttons' } }

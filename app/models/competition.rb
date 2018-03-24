@@ -7,6 +7,8 @@ class Competition < ApplicationRecord
 
   scope :active, (-> { where(active: true) })
 
+  validates :name, :year, :result_url, presence: true
+
   before_destroy :cannot_delete_active_competition
   def cannot_delete_active_competition
     return unless active?

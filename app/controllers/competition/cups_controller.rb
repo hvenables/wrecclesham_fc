@@ -3,19 +3,19 @@
 class Competition::CupsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :load_team, only: %i[create update]
+  before_action :load_cup_teams, only: %i[create update]
 
   def index; end
 
   def new; end
 
   def create
-    @cup.teams << @team
+    @cup_teams.each { |team| @cup.teams << team unless @cup.teams.include?(team) }
     if @cup.save
       flash[:notice] = 'Cup successfully created'
       redirect_to cups_path
     else
-      flash[:error] = 'Error creating cup'
+      flash[:error] = "Failed to create cup, #{@cup.errors.full_messages.join(', ')}"
       render :new
     end
   end
@@ -23,7 +23,7 @@ class Competition::CupsController < ApplicationController
   def edit; end
 
   def update
-    @cup.teams << team if @team && !@cup.teams.include?(@team)
+    @cup_teams.each { |team| @cup.teams << team unless @cup.teams.include?(team) }
     if @cup.update(cup_params)
       respond_to do |format|
         format.html do
@@ -33,18 +33,25 @@ class Competition::CupsController < ApplicationController
         format.json { render json: { success: true } }
       end
     else
-      flash[:error] = 'Error updating cup'
-      render :edit
+      respond_to do |format|
+        format.html do
+          flash[:error] = "Failed to update, #{@cup.errors.full_messages.join(', ')}"
+          render :edit
+        end
+        format.json do
+          render json: { errors: @cup.errors }
+        end
+      end
     end
   end
 
   private
 
   def cup_params
-    params.require(:competition_cup).permit(:name, :abbreviation, :year, :fixture_url, :results_url, :active)
+    params.require(:competition_cup).permit(:name, :abbreviation, :year, :fixture_url, :result_url, :active)
   end
 
-  def load_team
-    @team = Team.find_by(id: params[:teams])
+  def load_cup_teams
+    @cup_teams = Team.where(id: params[:teams])
   end
 end

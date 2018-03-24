@@ -60,16 +60,16 @@ class Team < ApplicationRecord
   def create_fixtures
     competitions.active.each do |competition|
       next unless competition.active?
-      fixtures = FixtureScrapper.new(competition.fixture_url).fixtures
-      fixtures.each do |fixture|
+      fixtures = FixtureScrapper.new(competition.fixture_url).fixtures if competition.fixture_url?
+      fixtures&.each do |fixture|
         next if postponed?(fixture)
         date = begin
-                DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
+                DateTime.strptime(fixture[0][0..7], '%d/%m/%y').to_date
               rescue
                 nil
               end
-        home = Team.find_or_create_by(name: fixture[2])
-        away = Team.find_or_create_by(name: fixture[3])
+        home = Team.find_or_create_by(name: fixture[1])
+        away = Team.find_or_create_by(name: fixture[2])
         next if Fixture.exists?(date: date, home: home, away: away, competition: competition)
         next unless competition
         Fixture.create(
@@ -87,17 +87,17 @@ class Team < ApplicationRecord
 
   def update_fixtures
     competitions.active.each do |competition|
-      fixtures = FixtureScrapper.new(competition.result_url).fixtures
-      fixtures.each do |fixture|
-        home = Team.find_or_create_by(name: fixture[2])
-        away = Team.find_or_create_by(name: fixture[4])
+      fixtures = FixtureScrapper.new(competition.result_url).fixtures if competition.result_url?
+      fixtures&.each do |fixture|
+        home = Team.find_or_create_by(name: fixture[1])
+        away = Team.find_or_create_by(name: fixture[3])
         current_fixture = Fixture.find_by(home: home, away: away, competition: competition)
-        home_score, away_score = fixture[3].split(' - ')
+        home_score, away_score = fixture[2].split(' - ')
         if current_fixture
           current_fixture.update(home_score: home_score, away_score: away_score)
         else
           date = begin
-                  DateTime.strptime(fixture[1][0..7], '%d/%m/%y').to_date
+                  DateTime.strptime(fixture[0][0..7], '%d/%m/%y').to_date
                 rescue
                   nil
                 end

@@ -13,11 +13,8 @@ class FixtureScrapper
 
   def fixtures
     fixture_list = extract_fixtures
-
-    fixture_list.each { |elem| elem.gsub!(/\s\s+/, '') }.reject!(&:blank?)
-
-    # reject any element about penalties, half time scores and indication of extra time
-    fixture_list.reject! { |elem| elem.match(/Pen\s?+\d-\d|HT\s?+\d-\d|AET/) }
+    fixture_list = fixture_list.each { |elem| elem.gsub!(/\s\s+/, '') }.reject(&:blank?)
+    fixture_list = fixture_list.reject { |elem| elem.match(/Pen\s?+\d-\d|HT\s?+\d-\d|AET/) }
 
     split_fixtures(fixture_list)
   end
@@ -29,30 +26,12 @@ class FixtureScrapper
   end
 
   def extract_fixtures
-    fixture_list = []
-
-    data.css('table.Table').css('td').each do |element|
+    data.css('table.Table').css('td').each_with_object([]) do |element, fixture_list|
       fixture_list << element.text
     end
-
-    fixture_list
   end
 
   def split_fixtures(fixtures)
-    fixture_list = []
-
-    fixtures.each do |fixture|
-      if fixture =~ /^[A-Z][a-zA-Z0-9]{2}[A-Z0-9]*$/ && fixture != 'TBC'
-        fixture_list << @current_fixture if @current_fixture
-        @current_fixture = []
-        @current_fixture << fixture
-      else
-        @current_fixture << fixture
-      end
-    end
-
-    fixture_list << @current_fixture if @current_fixture
-
-    fixture_list
+    fixtures[1..-1].split { |elem| elem.match(fixtures[0]) }
   end
 end

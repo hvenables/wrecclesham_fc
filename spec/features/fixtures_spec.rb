@@ -83,8 +83,8 @@ feature 'fixtures' do
     context 'Create Fixtures' do
       let(:fixture_data) do
         [
-          ['Div4', (Date.today.beginning_of_week(:saturday) + 1.week).strftime('%d/%m/%y %H:%M'), 'Guildford Barbarians', 'Hersham', 'Christs College', 'Division Two'],
-          ['Div4', (Date.today.beginning_of_week(:saturday) + 1.week).strftime('%d/%m/%y %H:%M'), 'Knaphill Athletic', 'Burpham', "Waterer's Park #1", 'Division Two']
+          [(Date.today.beginning_of_week(:saturday) + 1.week).strftime('%d/%m/%y %H:%M'), 'Guildford Barbarians', 'Hersham', 'Christs College', 'Division Two'],
+          [(Date.today.beginning_of_week(:saturday) + 1.week).strftime('%d/%m/%y %H:%M'), 'Knaphill Athletic', 'Burpham', "Waterer's Park #1", 'Division Two']
         ]
       end
       scenario 'Can create new fixtures', js: true do
@@ -102,20 +102,20 @@ feature 'fixtures' do
       let!(:fixture) do
         create(
           :fixture,
-          date: Date.today.beginning_of_week(:saturday),
+          date: (Time.zone.today + 1.week),
           home: guildford_barbarians,
           away: burpham,
           competition: league
         )
       end
       let(:fixture_data) do
-        [['Div4', Date.today.beginning_of_week(:saturday).strftime('%d/%m/%y %H:%M'), 'Guildford Barbarians', '3 - 3', 'Burpham', 'Division Four']]
+        [[(Time.zone.today + 1.week).strftime('%d/%m/%y %H:%M'), 'Guildford Barbarians', '3 - 3', 'Burpham', 'Division Four']]
       end
 
       scenario 'Can update existing fixtures' do
         visit team_fixtures_path(guildford_barbarians)
         click_link 'Add Results'
-        expect(page).to have_css 'td', text: Date.today.beginning_of_week(:saturday).strftime('%a, %d %b %Y')
+        expect(page).to have_css 'td', text: (Time.zone.today + 1.week).strftime('%a, %d %b %Y')
         expect(page).to have_css 'td', text: 'Guildford Barbarians'
         expect(page).to have_css 'td', text: '3 - 3'
         expect(page).to have_css 'td', text: 'Div2'

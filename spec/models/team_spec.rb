@@ -32,8 +32,8 @@ RSpec.describe Team, type: :model do
     context '#create fixtures' do
       let(:fixture_data) do
         [
-          ['Div4', '14/01/17 14:00', 'Guildford Barbarians', 'Hersham', 'Christs College', 'Division Four'],
-          ['Div4', '14/01/17 14:00', 'Knaphill Athletic', 'Burpham', "Waterer's Park #1", 'Division Four']
+          ['14/01/17 14:00', 'Guildford Barbarians', 'Hersham', 'Christs College', 'Division Four'],
+          ['14/01/17 14:00', 'Knaphill Athletic', 'Burpham', "Waterer's Park #1", 'Division Four']
         ]
       end
       it 'should create the fixtures' do
@@ -59,7 +59,7 @@ RSpec.describe Team, type: :model do
                competition: league_table
       end
       let(:fixture_data) do
-        [['Div4', '19/11/16 14:00', 'Hersham', '3 - 3', 'Burpham', 'Division Four']]
+        [['19/11/16 14:00', 'Hersham', '3 - 3', 'Burpham', 'Division Four']]
       end
       it 'should update fixtures' do
         guildford_barbarians.update_fixtures
