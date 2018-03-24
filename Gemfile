@@ -72,9 +72,6 @@ gem 'kaminari'
 # twitter api
 gem 'twitter', '~> 5.16'
 
-# Speeds up boot time by caching require calls
-gem 'bootscale'
-
 # Prodection from bad clients
 gem 'rack-attack'
 
