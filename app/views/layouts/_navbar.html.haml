@@ -45,14 +45,14 @@
           -if can? :manage, Competition::LeagueTable
             .dropdown-divider
             = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }
-      - if can? :manage, Competition::Cup
-        %li.nav-item.dropdown.ml-auto.text-right{class: active_class('cups')}
-          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Cups
-          .dropdown-menu
-            - if @active_cups
-              - @active_cups.each do |cup|
-                = link_to cup.name, cup_fixtures_path(cup), class: 'dropdown-item'
-              .dropdown-divider
+      %li.nav-item.dropdown.ml-auto.text-right{class: active_class('cups')}
+        %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Cups
+        .dropdown-menu
+          - if @active_cups
+            - @active_cups.each do |cup|
+              = link_to cup.name, cup_fixtures_path(cup), class: 'dropdown-item'
+          - if can? :manage, Competition::Cup
+            .dropdown-divider
             = link_to 'Manage Cups', cups_path, class: 'dropdown-item'
 
       - if @first_team_table && @reserve_team_table
