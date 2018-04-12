@@ -2,38 +2,5 @@
 # All this logic will automatically be available in application.js.
 
 guarded_ready ->
-
-  $('.carousel').not('.slick-initialized').slick({
-    infinite: true,
-    speed: 300,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1220,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 990,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  })
-
   if $(".news-content").length > 0
     simplemde = new SimpleMDE({ element: $(".news-content")[0] })

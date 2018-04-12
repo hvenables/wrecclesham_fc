@@ -1,13 +1,14 @@
-= form_for @news, html: {multipart: true} do |f|
-  .form-group
-    = f.label :title, class: "form-label"
-    = f.text_field :title, { class: "form-control" }
-  .form-group
-    = f.label :content, class: "form-label"
-    = f.label :Content_is_processed_using_markdown, { class: 'form-label pull-xs-right text-muted small' }
-    ~ f.text_area :content, { class: 'form-control news-content', rows: 15 }
-  .form-group
-    = f.fields_for :images do |image_fields|
-      = image_fields.label :Add_an_image, class: "form-label"
-      = image_fields.file_field :image, { class: ' form-control btn btn-default btn-file' }
-  = f.submit class: 'btn btn-success'
+.container-fluid
+  = form_for @news, html: {multipart: true} do |f|
+    .form-group
+      = f.label :title, class: "form-label"
+      = f.text_field :title, { class: "form-control" }
+    .form-group
+      = f.label :content, class: "form-label"
+      = f.label :Content_is_processed_using_markdown, { class: 'form-label pull-right text-muted small' }
+      ~ f.text_area :content, { class: 'form-control news-content', rows: 15 }
+    .form-group
+      = f.fields_for :images do |image_fields|
+        = image_fields.label :Add_an_image, class: "form-label"
+        = image_fields.file_field :image, { class: ' form-control btn btn-default btn-file' }
+    = f.submit class: 'btn btn-success'
