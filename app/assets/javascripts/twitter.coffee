@@ -9,7 +9,7 @@ guarded_ready ->
             <div class='col-1 wrecclesham-logo d-none d-md-block'>
             </div>"
         tweet += "<div class='col-12 col-md-11'>
-          #{value.text}
+          #{value}
         </div>"
         tweet += '</div></li>'
 

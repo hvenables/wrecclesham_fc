@@ -2,6 +2,6 @@
 
 class Api::TwittersController < ApplicationController
   def show
-    render json: TwitterFeed.new.own_tweets
+    render json: TwitterFeed.own_tweets
   end
 end

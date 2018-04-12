@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 guarded_ready ->
-  console.log('test')
   $('.toggle-cup-activity').click ->
     data = $(this).data()
     cup_data = { competition_cup: { active: data.active }, id: data.id }

@@ -75,6 +75,8 @@ gem 'twitter', '~> 5.16'
 # Prodection from bad clients
 gem 'rack-attack'
 
+gem 'rails_autolink'
+
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
