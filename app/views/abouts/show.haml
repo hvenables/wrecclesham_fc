@@ -1,0 +1,16 @@
+.col-12
+  %h1
+    Wrecclesham Football Club
+  .row
+    .col-12.col-md-6
+      - if @about.present?
+        = preserve gfm(@about.content)
+      - else
+        No current About section
+    .col-12.col-md-6
+      %iframe{allowfullscreen: "", frameborder: "0", height: "450", src: "https://www.google.com/maps/embed/v1/place?key=AIzaSyDuCB_nwNNmgVyD1qT2R0TXUJ9hNJ7GLo4&q=Wrecclesham+Sports+%26+Social+Club", style: "border:0", width: "100%"}
+  - if can?(:manage, About)
+    - if About.any?
+      = link_to 'Edit About', edit_about_path(About.last), class: 'btn btn-success'
+    - else
+      = link_to 'Create About', new_about_path(About.last), class: 'btn btn-success'

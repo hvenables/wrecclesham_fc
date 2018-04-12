@@ -14,17 +14,19 @@
       - else
         %li.nav-item.ml-auto.text-right{class: active_class('news')}
           = link_to 'News', news_index_path, {class: 'nav-link'}
-      - if About.any?
-        - if can? :manage, About
-          %li.nav-item.ml-auto.text-right{class: "#{active_class('about')} dropdown"}
-            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} About
-            .dropdown-menu.pull-xs-right
-              = link_to 'About', about_index_path(), {class: 'dropdown-item'}
-              .dropdown-divider
+      - if can? :manage, About
+        %li.nav-item.ml-auto.text-right{class: "#{active_class('about')} dropdown"}
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} About
+          .dropdown-menu.pull-xs-right
+            = link_to 'About', about_path(), { class: 'dropdown-item' }
+            .dropdown-divider
+            - if About.any?
               = link_to 'Edit About', edit_about_path(About.last), {class: 'dropdown-item'}
-        - else
-          %li.nav-item.ml-auto.text-right{class: active_class('about')}
-            = link_to 'About', about_index_path, {class: 'nav-link'}
+            - else
+              = link_to 'New About', new_about_path(About.last), {class: 'dropdown-item'}
+      - else
+        %li.nav-item.ml-auto.text-right{class: active_class('about')}
+          = link_to 'About', about_path, {class: 'nav-link'}
       - if can? :manage, Video
         %li.nav-item.ml-auto.text-right{class: "#{active_class('videos')} dropdown"}
           %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Videos
