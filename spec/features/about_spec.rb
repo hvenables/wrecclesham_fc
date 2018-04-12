@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe About do
-  let(:admin) { create :admin }
+  let(:admin) { FactoryBot.create :admin }
 
   context 'when no about exists' do
     it 'will prompt display no about and only display button to admin' do
@@ -25,7 +25,7 @@ describe About do
 
     it 'will be able to add about' do
       visit about_path
-      click_link 'New About'
+      click_link 'Create About'
       fill_in 'about[content]', with: 'Test About'
       click_button 'Create About'
       expect(page).to have_css 'p', text: 'Test About'
@@ -36,10 +36,35 @@ describe About do
     it 'will not allow invalid about' do
       visit about_path
       click_link 'Create About'
-      fill_in 'about[content]', with: 'Test About'
+      fill_in 'about[content]', with: ''
       click_button 'Create About'
-      expect(page).to have_css 'p', text: 'Test About'
-      expect(page).to have_css 'alert-success', text: 'About successfully created'
+      expect(page).to have_css '.alert-warning', text: "About failed to save, Content can't be blank"
+    end
+
+    context 'when about already exists' do
+      let!(:about) { FactoryBot.create :about }
+
+      it 'will show the about' do
+        visit about_path
+        expect(page).to have_css 'p', text: about.content
+      end
+
+      it 'will allow admin to edit about' do
+        visit about_path
+        click_link 'Edit About'
+        fill_in 'about[content]', with: 'New About'
+        click_button 'Update About'
+        expect(page).to have_css 'p', text: 'New About'
+        expect(page).to have_css '.alert-success', text: 'About successfully updated'
+      end
+
+      it 'wont allow you to update about to invalid state' do
+        visit about_path
+        click_link 'Edit About'
+        fill_in 'about[content]', with: ''
+        click_button 'Update About'
+        expect(page).to have_css '.alert-warning', text: "About failed to save, Content can't be blank"
+      end
     end
   end
 end

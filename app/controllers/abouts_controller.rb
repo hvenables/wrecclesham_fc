@@ -26,7 +26,7 @@ class AboutsController < ApplicationController
 
   def update
     if @about.update(about_params)
-      flash[:notice] = 'About successfully published'
+      flash[:notice] = 'About successfully updated'
       redirect_to about_path
     else
       flash[:error] = "About failed to save, #{@about.errors.full_messages.join(', ')}"
