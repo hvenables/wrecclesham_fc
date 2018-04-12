@@ -100,7 +100,7 @@ group :development do
 end
 
 group :test do
-  gem 'rack-test', '~> 0.7.0'
+  gem 'rack-test'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'

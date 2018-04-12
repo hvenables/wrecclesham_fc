@@ -21,7 +21,6 @@ class NewsController < ApplicationController
       redirect_to news_path(@news)
     else
       flash[:error] = "News story failed to save, #{@news.errors.full_messages.join(', ')}"
-      @news.images << Image.new
       render :new
     end
   end
