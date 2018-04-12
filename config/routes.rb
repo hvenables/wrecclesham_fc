@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resource :fixtures, only: :show
   end
 
-  resources :about, only: %i[index edit update]
+  resource :about
 
   namespace :charts do
     resource :recent_form, only: :show, controller: :recent_form
