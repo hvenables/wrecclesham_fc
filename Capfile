@@ -16,7 +16,7 @@ install_plugin Capistrano::Puma::Nginx
 
 require 'whenever/capistrano'
 
-require "capistrano/scm/git"
+require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined

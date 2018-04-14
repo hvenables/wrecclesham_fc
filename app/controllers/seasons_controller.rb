@@ -3,7 +3,7 @@
 class SeasonsController < ApplicationController
   include SeasonsHelper
 
-  before_action :load_league, only: [:create, :update]
+  before_action :load_league, only: %i[create update]
 
   def index; end
 

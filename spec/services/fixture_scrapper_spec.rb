@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe FixtureScrapper do
   context 'Fixtures' do
-    scenario 'Will return an array of fixtures' do
-      fixture = FixtureScrapper.new(Rails.root + 'spec/fixtures/test_fixtures.html').fixtures
+    it 'Will return an array of fixtures' do
+      fixture = described_class.new(Rails.root + 'spec/fixtures/test_fixtures.html').fixtures
       #                             Date                   Home                       Away                             Venue                   Competition
       expect(fixture[0]).to eq  ['24/03/18 14:00', 'Deepcut Community',       'West Byfleet Albion',     'Deepcut Community Football Club',   'Division 1']
       expect(fixture[1]).to eq  ['24/03/18 14:00', 'Elstead',                 'Chertsey Old Salesians',  'Thursley Recreation Ground',        'Division 1']
@@ -26,7 +26,7 @@ RSpec.describe FixtureScrapper do
       expect(fixture[16]).to eq ['05/05/18 14:00', 'Wrecclesham',             'Deepcut Community',       'Wrecclesham Recreation Ground',     'Division 1']
     end
 
-    scenario 'Cup results with penalities and extra time' do
+    it 'Cup results with penalities and extra time' do
       fixture = described_class.new(Rails.root + 'spec/fixtures/cup_results.html').fixtures
       #                                Date               Home                   Score     Away                        Competition
       expect(fixture[0]).to eq  ['29/04/17 14:00', 'Staines Lammas Reserves',   '0 - 1', 'Pirbright',                 'Intermediate Cup']

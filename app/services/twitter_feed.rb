@@ -24,8 +24,10 @@ class TwitterFeed
     feed
       .reject { |tweet| retweet?(tweet.text) || direct_message?(tweet.text) }
       .map do |tweet|
-        ActionController::Base.helpers.simple_format(tweet.text)
-          .yield_self { |it|  ActionController::Base.helpers.auto_link(it) }
+        ActionController::Base
+          .helpers
+          .simple_format(tweet.text)
+          .yield_self { |text| ActionController::Base.helpers.auto_link(text) }
       end
   end
 

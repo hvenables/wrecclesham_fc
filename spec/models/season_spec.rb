@@ -10,7 +10,7 @@ RSpec.describe Season, type: :model do
   end
 
   context '#create_teams' do
-    scenario 'will create a team in the db' do
+    it 'will create a team in the db' do
       Season.create_teams(table_data, league_table)
       season = Season.first
       expect(season.team).to eq wrecclesham
@@ -33,7 +33,8 @@ RSpec.describe Season, type: :model do
     end
 
     let!(:season) { create :season, team: wrecclesham, league_table: league_table }
-    scenario 'will update a team in the db' do
+
+    it 'will update a team in the db' do
       Season.update_teams(table_data, league_table)
       current_season = Season.first
       expect(current_season.team).to eq wrecclesham

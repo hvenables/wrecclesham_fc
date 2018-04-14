@@ -13,8 +13,8 @@ class Charts::RecentFormController < ApplicationController
     {
       datasets: [{
         data: [@team.current_season.won, @team.current_season.drawn, @team.current_season.lost],
-        background_color: ['#28a745','#007bff',  '#dc3545'],
-        hover_background_color: ['#28a745', '#007bff','#dc3545']
+        background_color: %w[#28a745 #007bff #dc3545],
+        hover_background_color: %w[#28a745 #007bff #dc3545]
       }],
       labels: %w[Won Drawn Lost]
     }

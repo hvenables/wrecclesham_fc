@@ -2,23 +2,12 @@
 
 class AddDefaultsToSeasons < ActiveRecord::Migration[5.0]
   def change
-    change_column :seasons, :games, :integer, default: 0
-    change_column :seasons, :won, :integer, default: 0
-    change_column :seasons, :drawn, :integer, default: 0
-    change_column :seasons, :lost, :integer, default: 0
-    change_column :seasons, :goals_for, :integer, default: 0
-    change_column :seasons, :goals_against, :integer, default: 0
-    change_column :seasons, :goals_difference, :integer, default: 0
-    change_column :seasons, :points, :integer, default: 0
-    change_column :seasons, :home_wins, :integer, default: 0
-    change_column :seasons, :home_drawn, :integer, default: 0
-    change_column :seasons, :home_lost, :integer, default: 0
-    change_column :seasons, :home_goals_for, :integer, default: 0
-    change_column :seasons, :home_goals_against, :integer, default: 0
-    change_column :seasons, :away_wins, :integer, default: 0
-    change_column :seasons, :away_drawn, :integer, default: 0
-    change_column :seasons, :away_lost, :integer, default: 0
-    change_column :seasons, :away_goals_for, :integer, default: 0
-    change_column :seasons, :away_goals_against, :integer, default: 0
+    %i[
+      games won drawn lost goals_for goals_against goals_difference points
+      home_wins home_drawn home_lost home_goals_for home_goals_against away_wins
+      away_drawn away_lost away_goals_for away_goals_against
+    ].each do |table_column|
+      change_column :seasons, table_column, :integer, default: 0
+    end
   end
 end

@@ -18,7 +18,7 @@ RSpec.describe TwitterFeed, type: :service do
     allow_any_instance_of(TwitterFeed).to receive(:feed).and_return(twitter_feed)
   end
 
-  scenario "Will only return tweets; no retweets or DM's" do
+  it "Will only return tweets; no retweets or DM's" do
     expect(wrecclesham_tweets.length).to eq 2
     expect(wrecclesham_tweets[0]).to eq '<p>Two good results and 17 goals across two games this afternoon! Keep an eye out for those match reports</p>'
     expect(wrecclesham_tweets[1]).to eq "<p>Match Report vs Bourne Blades (League Invitational Cup)</p>\n\n<p>Remember to like and share... <a href=\"https://t.co/PzNiKUZtxg\">https://t.co/PzNiKUZtxg</a></p>"

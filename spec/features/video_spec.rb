@@ -2,52 +2,54 @@
 
 require 'rails_helper'
 
-feature 'video' do
-  before(:each) do
+describe Video do
+  let(:admin) { create :admin }
+
+  before do
     allow_any_instance_of(Yt::Video).to receive(:thumbnail_url).and_return('https://i.ytimg.com/vi/2iOQ053s_oM/mqdefault.jpg')
   end
-  let(:admin) { create :admin }
-  context '#index' do
-    context 'No Videos have been added' do
-      scenario 'should display that their is no videos' do
+
+  context 'when non admin user' do
+    context 'when no videos have been added' do
+      it 'will display that their is no videos' do
         visit root_path
         click_link 'Videos'
         expect(page).to have_content 'No videos have been added'
-        expect(page).to_not have_link 'Add Video'
+        expect(page).not_to have_link 'Add Video'
       end
     end
 
-    context 'Videos have been added' do
+    context 'when videos have been added' do
       let!(:video) { create :video }
-      scenario 'should display videos in a list' do
+
+      it 'will display videos in a list' do
         visit root_path
         click_link 'Videos'
         expect(page).to have_content video.title
         expect(page).to have_content video.content
         expect(page).to have_css("img[src*='#{video.thumbnail}']")
       end
+
+      it 'will be able to visit an individual video' do
+        visit video_path(video)
+        expect(page).to have_content video.title
+        expect(page).to have_content video.content
+        expect(page).to have_css("iframe[src*='#{video.url_santizer}']")
+      end
     end
   end
 
-  context '#show' do
-    let!(:video) { create :video }
-    scenario 'Should be able to visit a individual video' do
-      visit video_path(video)
-      expect(page).to have_content video.title
-      expect(page).to have_content video.content
-      expect(page).to have_css("iframe[src*='#{video.url_santizer}']")
-    end
-  end
-
-  context 'Specs you need to be admin for' do
-    before(:each) do
+  context 'when admin user signed in' do
+    before do
       sign_in(admin)
     end
-    context '#new/#create' do
-      before(:example) do
+
+    context 'when no video exists' do
+      before do
         stub_yt
       end
-      scenario 'should be able to add a video' do
+
+      it 'will allow you to add a new video' do
         click_link 'New video'
         fill_in 'Title', with: 'Test Video'
         fill_in 'Content', with: 'Test Summary'
@@ -58,7 +60,7 @@ feature 'video' do
         expect(page).to have_css("iframe[src*='//www.youtube.com/embed/2iOQ053s_oM']")
       end
 
-      scenario 'not be able to add a video' do
+      it 'will not allow you to make invalid video' do
         click_link 'New video'
         fill_in 'Title', with: ''
         fill_in 'Content', with: ''
@@ -68,12 +70,14 @@ feature 'video' do
       end
     end
 
-    context '#edit/#update' do
+    context 'when video has been added' do
       let(:video) { create :video }
-      before(:example) do
+
+      before do
         stub_yt
       end
-      scenario 'should be able to edit a video' do
+
+      it 'will allow you to edit a video' do
         visit video_path(video)
         click_link 'Edit'
         fill_in 'Title', with: 'Test Video'
@@ -85,7 +89,7 @@ feature 'video' do
         expect(page).to have_css("iframe[src*='//www.youtube.com/embed/2iOQ053s_oM']")
       end
 
-      scenario 'cant edit a video and make it invalid' do
+      it 'will not allow you to invalidate a video' do
         visit video_path(video)
         click_link 'Edit'
         fill_in 'Title', with: ''
@@ -94,20 +98,14 @@ feature 'video' do
         click_button 'Update Video'
         expect(page).to have_css '.alert.alert-warning.flash-title', text: "Video failed to update, Title can't be blank, Content can't be blank, Url can't be blank"
       end
-    end
 
-    context '#destroy' do
-      let!(:video) { create :video }
-      before(:example) do
-        stub_yt
-      end
-      scenario 'should be able to delete a video' do
+      it 'will allow you to delete a video' do
         visit video_path(video)
         click_link 'Delete'
-        expect(current_path).to eq videos_path
-        expect(page).to_not have_content 'Video Title'
-        expect(page).to_not have_content 'Video Summary'
+        expect(page).not_to have_content 'Video Title'
+        expect(page).not_to have_content 'Video Summary'
         expect(page).to have_content 'Video has been deleted'
+        expect(page).to have_current_path videos_path
       end
     end
   end

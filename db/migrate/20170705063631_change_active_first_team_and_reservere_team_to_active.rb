@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeActiveFirstTeamAndReservereTeamToActive < ActiveRecord::Migration[5.0]
   def change
     remove_column :league_tables, :active_first_team_table
