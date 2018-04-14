@@ -111,32 +111,9 @@ class Team < ApplicationRecord
     false
   end
 
-  def seven_teams_around_team
-    Season.where(league_table: current_league_table, position: seven_positions_around_team).order(position: :asc)
-  end
-
   private
 
   def postponed?(fixture)
-    fixture.any? { |s| s.casecmp('Postponed') == 0 }
-  end
-
-  def seven_positions_around_team
-    current_position = current_season.position
-    number_of_teams  = current_season.league_table.teams.count
-
-    start = current_position - 3 < 1 ? 1 : current_position - 3
-    finish = current_position + 3 > number_of_teams ? number_of_teams : current_position + 3
-    positions = (start..finish).to_a
-
-    while positions.length < 7
-      if positions.last < number_of_teams
-        positions.push(positions.last + 1)
-      else
-        positions.unshift(positions.first - 1)
-      end
-    end
-
-    positions
+    fixture.any? { |s| s.casecmp('Postponed').zero? }
   end
 end

@@ -3,7 +3,7 @@
 class Rack::Attack
   safelist('allow from localhost') do |req|
     # Requests are allowed if the return value is truthy
-    '127.0.0.1' == req.ip || '::1' == req.ip
+    req.ip == '127.0.0.1' || req.ip == '::1'
   end
 
   throttle('logins/ip', limit: 5, period: 20.seconds) do |req|

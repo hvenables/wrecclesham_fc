@@ -7,17 +7,15 @@ RSpec.describe Video do
   it { is_expected.to validate_presence_of(:content) }
   it { is_expected.to validate_presence_of(:url) }
 
-  context '#url_santizer' do
-    it 'will remove http from url' do
-      subject.url = 'https://www.youtube.com/embed/2iOQ053s_oM'
-      expect(subject.url_santizer).to eq '//www.youtube.com/embed/2iOQ053s_oM'
-    end
+  context 'when valid url' do
+    subject { described_class.new(url: 'https://www.youtube.com/embed/2iOQ053s_oM').url_santizer }
+
+    it { is_expected.to eq '//www.youtube.com/embed/2iOQ053s_oM' }
   end
 
-  context '#embedable_url' do
-    it 'will raise error if url is not embedable' do
-      subject.url = 'https://www.youtube.com/2iOQ053s_oM'
-      expect(subject).not_to be_valid
-    end
+  context 'when invalid url' do
+    subject { described_class.new(url: 'https://www.youtube.com/2iOQ053s_oM') }
+
+    it { is_expected.not_to be_valid }
   end
 end

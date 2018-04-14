@@ -1,2 +1,59 @@
 require: rubocop-rspec
 inherit_from: .rubocop_todo.yml
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ExpectInHook:
+  Enabled: false
+
+Lint/LiteralInInterpolation:
+  Enabled: false
+
+Security/Open:
+  Exclude:
+    - 'app/services/league_table_scrapper.rb'
+    - 'app/services/fixture_scrapper.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/schema.rb'
+
+Layout/SpaceInsideArrayPercentLiteral:
+  Exclude:
+    - 'spec/services/league_table_scrapper_spec.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+RSpec/ContextWording:
+  Include:
+    - 'spec/features/**/*_spec.rb'
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/setup'
+    - 'bin/update'

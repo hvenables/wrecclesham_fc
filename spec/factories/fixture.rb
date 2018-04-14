@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :fixture, class: Fixture do
-    date Date.new(2017, 1, 14)
+    date { Date.new(2017, 1, 14) }
     association :home, factory: :team
     association :away, factory: :team
     association :competition, factory: :league_table

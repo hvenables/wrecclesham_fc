@@ -18,8 +18,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.before(:each) do
+  config.before do
     allow(Twitter::REST::Client).to receive(:new)
   end
-
 end

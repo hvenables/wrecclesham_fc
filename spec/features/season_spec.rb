@@ -10,11 +10,13 @@ describe Season do
     { 'Wrecclesham' => %W[1 18 3 3 3 31 20 3 3 3 31 20 6 6 6 52 40 #{''} 24] }
   end
 
-  before(:each) do
+  before do
     sign_in(admin)
     team.competitions << league
 
-    expect(LeagueTableScrapper).to receive(:get_team_data).with(league.url)
+    expect(LeagueTableScrapper)
+      .to receive(:get_team_data)
+      .with(league.url)
       .and_return(table_data)
   end
 
