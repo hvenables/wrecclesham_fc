@@ -5,10 +5,12 @@ class NewsController < ApplicationController
 
   def index
     @news = News.all.order(created_at: :desc).page(params[:page])
+    fresh_when(@news)
   end
 
   def show
     @latest_news = News.latest_news(@news)
+    fresh_when(@news)
   end
 
   def new

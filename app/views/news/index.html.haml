@@ -12,6 +12,7 @@
     .card-deck-wrapper
       .card-deck
         - @news.each do |news|
-          = render 'shared/card', news: news, width: 'col-sm-6 col-md-4 col-xl-3'
+          - cache news do
+            = render 'shared/card', news: news, width: 'col-sm-6 col-md-4 col-xl-3'
 - else
   No News has been added yet
