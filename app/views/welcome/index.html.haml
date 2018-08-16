@@ -28,8 +28,8 @@
 .clearfix
 %section.club-info.container-fluid
   .row
-    - if @first_team.present? && @reserve_team.present?
-      .col-md-4.col-sm-6
+    .col-md-4.col-sm-6
+      - if @first_team_table.results.present? && @reserve_team_table.results.present?
         %h4.newsheading.title
           Recent Form
         .card
