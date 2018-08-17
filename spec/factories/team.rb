@@ -5,11 +5,11 @@ FactoryBot.define do
     sequence(:name) { |n| "Team #{n}" }
 
     factory :first_team do
-      name 'Wrecclesham'
+      name { 'Wrecclesham' }
     end
 
     factory :reserve_team do
-      name 'Wrecclesham Reserves'
+      name { 'Wrecclesham Reserves' }
     end
   end
 end

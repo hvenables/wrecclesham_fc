@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :about, class: About do
-    content 'Test About'
+    content { 'Test About' }
   end
 end

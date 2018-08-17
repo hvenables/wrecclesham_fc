@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :news, class: News do
-    title 'Title'
-    content 'Content'
+    title { 'Title' }
+    content { 'Content' }
     after(:build) do |news|
       news.images << FactoryBot.create(:image)
     end

@@ -8,8 +8,8 @@ FactoryBot.define do
     association :competition, factory: :league_table
 
     factory :result do
-      home_score 1
-      away_score 2
+      home_score { 1 }
+      away_score { 2 }
     end
   end
 end
