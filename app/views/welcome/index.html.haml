@@ -29,7 +29,7 @@
 %section.club-info.container-fluid
   .row
     .col-md-4.col-sm-6
-      - if @first_team_table.results.present? && @reserve_team_table.results.present?
+      - if @first_team_table&.results.present? && @reserve_team_table&.results.present?
         %h4.newsheading.title
           Recent Form
         .card
