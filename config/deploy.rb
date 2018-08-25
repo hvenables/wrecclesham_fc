@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lock '3.10.1'
+lock '3.11.0'
 
 set :application, 'wrecclesham'
 set :repo_url, 'git@github.com:hvenables/wrecclesham_fc.git'
