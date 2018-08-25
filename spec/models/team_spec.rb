@@ -12,10 +12,10 @@ RSpec.describe Team, type: :model do
     let!(:burpham) { create :team, name: 'Burpham' }
 
     before do
-      expect_any_instance_of(FixtureScrapper).to receive(:fixtures).and_return(fixture_data)
-      expect_any_instance_of(FixtureScrapper).to receive(:scrap_website)
+      expect(FixtureScrapper).to receive(:fixtures).and_return(fixture_data)
       league_table.teams = [guildford_barbarians, hersham, knaphill_athletic, burpham]
     end
+
     context '#create fixtures' do
       let(:fixture_data) do
         [

@@ -60,7 +60,7 @@ class Team < ApplicationRecord
   def create_fixtures
     competitions.active.each do |competition|
       next unless competition.active?
-      fixtures = FixtureScrapper.new(competition.fixture_url).fixtures if competition.fixture_url?
+      fixtures = FixtureScrapper.fixtures(competition.fixture_url) if competition.fixture_url?
       fixtures&.each do |fixture|
         next if postponed?(fixture)
         date = begin
@@ -87,7 +87,7 @@ class Team < ApplicationRecord
 
   def update_fixtures
     competitions.active.each do |competition|
-      fixtures = FixtureScrapper.new(competition.result_url).fixtures if competition.result_url?
+      fixtures = FixtureScrapper.fixtures(competition.result_url) if competition.result_url?
       fixtures&.each do |fixture|
         home = Team.find_or_create_by(name: fixture[1])
         away = Team.find_or_create_by(name: fixture[3])
