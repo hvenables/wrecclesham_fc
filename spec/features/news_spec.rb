@@ -23,6 +23,7 @@ describe News do
     before do
       sign_in(admin)
     end
+
     context 'when adding a news story' do
       it 'will prompt the admin to fill in a form' do
         click_link 'New article'
