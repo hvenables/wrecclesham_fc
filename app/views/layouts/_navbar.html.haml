@@ -30,9 +30,9 @@
         %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} League Tables
         .dropdown-menu
           - if @first_team_table
-            = link_to 'First Team', league_table_path(@first_team_table), {class: 'dropdown-item'}
+            = link_to 'First Team', league_table_path(@first_team_table), { class: 'dropdown-item', id: 'first_team_table_nav' }
           - if @reserve_team_table
-            = link_to 'Reserve Team', league_table_path(@reserve_team_table), {class: 'dropdown-item'}
+            = link_to 'Reserve Team', league_table_path(@reserve_team_table), { class: 'dropdown-item', id: 'reserve_team_table_nav' }
           -if can? :manage, Competition::LeagueTable
             .dropdown-divider
             = link_to "Manage League Tables", league_tables_path(), { class: "dropdown-item" }

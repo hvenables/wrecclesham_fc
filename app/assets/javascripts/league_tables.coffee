@@ -22,6 +22,7 @@ updateActiveLeagueTable = (element, data) ->
         flashMessage(response.errors.league_table, 'danger')
         updateCheckedLeague(table_name, response.table, element)
       else
+        updateNavbarLeagueTable(id, data.table)
         flashMessage('League Table updated successfully', 'success')
     error: (jqXHR, textStatus, errorThrown) ->
       flashMessage('League Table could not update active league table, please try again', 'danger')
@@ -31,3 +32,6 @@ updateCheckedLeague = (table_name, table, element) ->
     $("##{table_name}-#{table}").prop('checked', true)
   else
     element.prop('checked', false)
+
+updateNavbarLeagueTable = (id, team) ->
+  $("##{team}_table_nav").prop('href', -> this.href.replace(/league_tables.[\d]+/, "league_tables/#{id}"))
