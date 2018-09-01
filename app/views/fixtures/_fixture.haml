@@ -8,4 +8,4 @@
   %td.text-center.text-md-left.d-block.d-md-table-cell.pb-1.px-0.pt-0.p-md-2
     = fixture.away.name
   %td.text-center
-    = fixture.competition.abbreviation
+    = link_to fixture.competition.abbreviation, competition_path(fixture.competition)
