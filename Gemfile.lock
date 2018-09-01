@@ -125,7 +125,6 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
     dalli (2.7.8)
-    database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     devise (4.5.0)
       bcrypt (~> 3.0)
@@ -453,7 +452,6 @@ DEPENDENCIES
   coffee-rails
   coveralls
   dalli
-  database_cleaner
   devise
   factory_bot_rails
   font-awesome-rails (~> 4.7, >= 4.7.0.1)
