@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
   let!(:dummy_class) { (Class.new { include ApplicationHelper }).new }

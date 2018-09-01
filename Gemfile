@@ -61,7 +61,6 @@ end
 group :test do
   gem 'capybara'
   gem 'coveralls', require: false
-  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rack-test'
   gem 'rspec-rails'
