@@ -48,6 +48,6 @@ class FixtureScrapper
   end
 
   def split_fixtures(fixtures)
-    fixtures[1..-1].split { |elem| elem.match(fixtures[0]) }
+    fixtures[1..-1]&.split { |elem| elem.match(fixtures[0]) }
   end
 end
