@@ -6,13 +6,12 @@
           %small
             = "#{team.current_season&.goals_for} Goals scored"
         .progress
-          .progress-bar.bg-success{ style: "width: #{(team.current_season&.goals_for * 100) / (team.current_season&.goals_difference >= 0 ? team.current_season&.goals_for : team.current_season&.goals_against)}%;"  }
-            -# { value: "#{team.seasons.last.goals_for}", max: "#{}", aria: { describedby: "goals_for" } }
+          .progress-bar.bg-success{ style: "width: #{goals_for_progress_bar(team)}%;"  }
         .text-xs-left#goals_against
           %small
             = "#{team.current_season&.goals_against} Goals conceded"
         .progress
-          .progress-bar.bg-danger{ style: "width: #{(team.current_season&.goals_against * 100) / (team.current_season&.goals_difference >= 0 ? team.current_season&.goals_for : team.current_season&.goals_against)}%;"  }
+          .progress-bar.bg-danger{ style: "width: #{goals_against_progress_bar(team)}%;"  }
       .row
         .col-4
           %small

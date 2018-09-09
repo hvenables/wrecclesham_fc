@@ -30,4 +30,12 @@ module ApplicationHelper
     )
     @markdown.render(string).html_safe
   end
+
+  def goals_for_progress_bar(team)
+    (team.current_season.goals_for * 100) / (team.current_season.goals_difference.positive? ? team.current_season.goals_for : team.current_season.goals_against)
+  end
+
+  def goals_against_progress_bar(team)
+    (team.current_season.goals_against * 100) / (team.current_season.goals_difference.positive? ? team.current_season.goals_for : team.current_season.goals_against)
+  end
 end
