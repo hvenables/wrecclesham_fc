@@ -17,19 +17,31 @@ class Season < ApplicationRecord
   end
 
   def self.update_teams(table_data, current_league)
+    teams_to_update = current_league.teams.to_a
+
     table_data.each do |team_name, season|
       current_team = Team.find_by(name: team_name)
-      if current_team
-        current_season = Season.find_by(team: current_team, league_table: current_league)
+      current_season = Season.find_by(team: current_team, league_table: current_league)
+      if current_team && current_season
         current_season.update!(season_attributes(season, current_team, current_league))
+        teams_to_update.delete(current_team)
       else
         Rollbar.warning('Team has been added to the league!, wtf!')
-        create_teams([season], current_league)
+        create_teams({ team_name => season }, current_league)
       end
     end
+
+    remove_teams_from_league(teams_to_update, current_league)
   rescue => e
     Rollbar.warning('Could not update the table', e)
     nil
+  end
+
+  def self.remove_teams_from_league(teams, current_league)
+    teams.each do |team|
+      team.current_season.delete
+      team.team_competitions.find_by(competition: current_league).delete
+    end
   end
 
   def self.season_attributes(season_data, team, league_table)
