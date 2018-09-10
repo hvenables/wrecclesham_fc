@@ -11,11 +11,11 @@ class FixtureScrapper
   private_class_method :new
   def initialize(url)
     @url = url
-    @data = scrap_website
   end
 
   def fixtures
-    @data
+    @url
+      .yield_self(&method(:scrap_website))
       .yield_self(&method(:extract_fixtures))
       .yield_self(&method(:remove_white_space))
       .yield_self(&method(:reject_blank))
@@ -25,8 +25,8 @@ class FixtureScrapper
 
   private
 
-  def scrap_website
-    Nokogiri::HTML(open(@url), &:noblanks)
+  def scrap_website(url)
+    Nokogiri::HTML(open(url), &:noblanks)
   end
 
   def extract_fixtures(fixtures)

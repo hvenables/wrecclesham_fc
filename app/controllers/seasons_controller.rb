@@ -10,7 +10,7 @@ class SeasonsController < ApplicationController
   def show; end
 
   def create
-    if Season.create_teams(LeagueTableScrapper.get_team_data(@league_table.url), @league_table)
+    if Season.create_teams(LeagueTableScrapper.seasons(@league_table.url), @league_table)
       flash[:notice] = 'League Tables seasons created'
     else
       flash[:error] = 'Something went wrong'
@@ -19,7 +19,7 @@ class SeasonsController < ApplicationController
   end
 
   def update
-    if Season.update_teams(LeagueTableScrapper.get_team_data(@league_table.url), @league_table)
+    if Season.update_teams(LeagueTableScrapper.seasons(@league_table.url), @league_table)
       flash[:notice] = 'League Table has been updated'
     else
       flash[:error] = 'Something went wrong'
