@@ -15,7 +15,7 @@ describe Season do
     team.competitions << league
 
     expect(LeagueTableScrapper)
-      .to receive(:get_team_data)
+      .to receive(:seasons)
       .with(league.url)
       .and_return(table_data)
   end
