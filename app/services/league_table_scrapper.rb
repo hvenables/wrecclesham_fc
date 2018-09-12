@@ -34,9 +34,10 @@ class LeagueTableScrapper
     seasons.each_with_object({}).with_index do |(element, table), index|
       next if index < 2 || index == seasons.length - 1
       team_data = element.text
-                         .gsub(/\s\s+/, ' ')
+                         .gsub(/\s+/, ' ')
                          .squish
-                         .split(/(?<=[\w])\s(?=[\d])|(?<=[\d])\s/)
+                         .split(/\s(?![a-zA-Z])|\A(\d*)\s/)
+                         .reject(&:blank?)
 
       team_name = team_data.delete_at(1)
 
