@@ -9,6 +9,8 @@ class Team < ApplicationRecord
   has_many :home_fixtures, class_name: 'Fixture', foreign_key: 'home_id'
   has_many :away_fixtures, class_name: 'Fixture', foreign_key: 'away_id'
 
+  scope :wrecclesham, -> { where('teams.name LIKE ?', 'Wrecclesham%') }
+
   class << self
     def first_team
       find_by name: 'Wrecclesham'

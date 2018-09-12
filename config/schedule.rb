@@ -5,12 +5,9 @@ every :day, at: '2am' do
 end
 
 every :day, at: '3am' do
-  rake 'get_results'
-end
-every :day, at: '4am' do
-  rake 'get_fixtures'
+  runner 'FixtureUpdateJob.perform_now'
 end
 
-# every '30 2 * * 4' do
-#   rake 'delete_cancelled'
-# end
+every :day, at: '4am' do
+  runner 'ResultUpdateJob.perform_now'
+end
